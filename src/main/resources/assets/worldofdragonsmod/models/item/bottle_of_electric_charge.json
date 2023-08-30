@@ -1,0 +1,6 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "worldofdragonsmod:item/bottle_of_electric_charge"
+  }
+}

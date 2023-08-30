@@ -1,0 +1,44 @@
+{
+  "schemaVersion": 1,
+  "id": "worldofdragonsmod",
+  "version": "${version}",
+
+  "name": "The World Of Dragons Mod",
+  "description": "Mod for The World Of Dragons map!",
+  "authors": [
+    "Sn0wix_",
+    "BubbaGump7"
+  ],
+  "contact": {
+    "homepage": "https://modrinth.com/mod/the-world-of-dragons-mod",
+    "issues": "https://github.com/Sn0wix/World-Of-Dragons-mod/issues",
+    "sources": "https://github.com/Sn0wix/World-Of-Dragons-mod"
+  },
+
+  "license": "MIT",
+  "icon": "assets/worldofdragonsmod/icon.png",
+
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "net.sn0wix_.worldofdragonsmod.WorldOfDragonsMod"
+    ],
+    "client": [
+      "net.sn0wix_.worldofdragonsmod.WorldOfDragonsClient"
+    ]
+  },
+  "mixins": [
+    "worldofdragonsmod.mixins.json"
+  ],
+
+  "depends": {
+    "fabricloader": ">=0.14.8",
+    "fabric": "*",
+    "minecraft": "~1.19.4",
+    "java": ">=17",
+    "geckolib": ">=4.2"
+  },
+  "suggests": {
+    "geckolib": "https://modrinth.com/mod/geckolib"
+  }
+}

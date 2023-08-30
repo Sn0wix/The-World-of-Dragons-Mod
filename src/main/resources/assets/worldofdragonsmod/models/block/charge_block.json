@@ -1,0 +1,6 @@
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "worldofdragonsmod:block/charge_block"
+  }
+}

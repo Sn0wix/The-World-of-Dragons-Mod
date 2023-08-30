@@ -1,0 +1,20 @@
+{
+  "item.worldofdragonsmod.armor_upgrade": "§8§lVylepení odolnosti",
+  "item.worldofdragonsmod.damage_upgrade": "§c§lVylepšení útoku",
+  "item.worldofdragonsmod.speed_upgrade": "§b§lVylepšení rychlosti",
+  "item.worldofdragonsmod.fire_upgrade": "§6§lVylepšení střelby ohně",
+  "item.worldofdragonsmod.common_chest_generator": "§7§lGenerátor Běžné truhly",
+  "item.worldofdragonsmod.rare_chest_generator": "§b§lGenerátor Vzácné truhly",
+  "item.worldofdragonsmod.common_loot": "§lBěžná kořist",
+  "item.worldofdragonsmod.rare_loot": "§e§lVzácná kořist",
+  "item.worldofdragonsmod.scrap": "§6§lŠrot",
+  "item.worldofdragonsmod.big_emerald": "§a§lVelký smaragd",
+  "item.worldofdragonsmod.charge_battery": "§lNabíjecí Baterie",
+
+  "block.worldofdragonsmod.xray_block": "§dRentgenový blok",
+
+  "itemGroup.worldofdragonsmod.world_of_dragons_item_group": "§4§lVěci z módu World of Dragons",
+
+  "item.worldofdragonsmod.chestGenerator.hasShiftDown": "§7Klikněte pravým tlačítkem na truhlu nebo barel pro vygenerování věcí",
+  "item.worldofdragonsmod.chestGenerator": "§8Pro více informací stiskněte §7SHIFT§8"
+}
