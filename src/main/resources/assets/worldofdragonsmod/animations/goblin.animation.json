@@ -1,7 +1,7 @@
 {
 	"format_version": "1.8.0",
 	"animations": {
-		"misc.idle": {
+		"move.idle": {
 			"loop": true,
 			"animation_length": 1.5,
 			"bones": {
@@ -701,7 +701,7 @@
 				}
 			}
 		},
-		"attack.default": {
+		"attack.melee": {
 			"animation_length": 0.5,
 			"bones": {
 				"goblin": {

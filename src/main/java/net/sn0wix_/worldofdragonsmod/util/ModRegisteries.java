@@ -1,15 +1,18 @@
 package net.sn0wix_.worldofdragonsmod.util;
 
+import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.mob.PathAwareEntity;
+import net.sn0wix_.worldofdragonsmod.command.GPTCommand;
 import net.sn0wix_.worldofdragonsmod.entity.ModEntities;
 import net.sn0wix_.worldofdragonsmod.entity.custom.orcs.*;
 
 public class ModRegisteries {
     public static void registerModStuffs() {
         registerAttributes();
+        registerCommands();
     }
 
     private static void registerAttributes() {
@@ -31,5 +34,9 @@ public class ModRegisteries {
         return PathAwareEntity.createLivingAttributes().add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.80000000298023224D)
                 .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 16.0D).add(EntityAttributes.GENERIC_MAX_HEALTH, 10.0D).add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 5)
                 .add(EntityAttributes.GENERIC_ATTACK_KNOCKBACK, 0.1);
+    }
+
+    private static void registerCommands(){
+        CommandRegistrationCallback.EVENT.register(GPTCommand::register);
     }
 }

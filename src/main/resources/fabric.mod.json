@@ -21,10 +21,13 @@
   "environment": "*",
   "entrypoints": {
     "main": [
-      "net.sn0wix_.worldofdragonsmod.WorldOfDragonsMod"
+      "net.sn0wix_.worldofdragonsmod.WorldOfDragonsMain"
     ],
     "client": [
       "net.sn0wix_.worldofdragonsmod.WorldOfDragonsClient"
+    ],
+    "fabric-datagen": [
+      "net.sn0wix_.worldofdragonsmod.WorldOfDragonsDatagen"
     ]
   },
   "mixins": [

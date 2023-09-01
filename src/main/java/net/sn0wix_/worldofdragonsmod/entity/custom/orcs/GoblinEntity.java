@@ -7,14 +7,11 @@ import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.mob.HostileEntity;
-import net.minecraft.entity.passive.AnimalEntity;
-import net.minecraft.entity.passive.IronGolemEntity;
-import net.minecraft.entity.passive.PigEntity;
-import net.minecraft.entity.passive.SnowGolemEntity;
+import net.minecraft.entity.passive.*;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.world.World;
 
-import net.sn0wix_.worldofdragonsmod.WorldOfDragonsMod;
+import net.sn0wix_.worldofdragonsmod.WorldOfDragonsMain;
 import software.bernie.geckolib.animatable.GeoEntity;
 import software.bernie.geckolib.core.animatable.GeoAnimatable;
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
@@ -48,6 +45,7 @@ public class GoblinEntity extends ModOrcEntity implements GeoEntity {
         this.targetSelector.add(3, new ActiveTargetGoal<>(this, IronGolemEntity.class, true));
         this.targetSelector.add(3, new ActiveTargetGoal<>(this, SnowGolemEntity.class, true));
         this.targetSelector.add(3, new ActiveTargetGoal<>(this, PigEntity.class, true));
+        this.targetSelector.add(3, new ActiveTargetGoal<>(this, WanderingTraderEntity.class, true));
     }
 
     public static DefaultAttributeContainer.Builder setAttributes() {
@@ -55,7 +53,7 @@ public class GoblinEntity extends ModOrcEntity implements GeoEntity {
                 .add(EntityAttributes.GENERIC_MAX_HEALTH, 20.0D)
                 .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 4.0f)
                 .add(EntityAttributes.GENERIC_ATTACK_SPEED, 2.0f)
-                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.2f)
+                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.23f)
                 .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 64);
     }
 
@@ -77,7 +75,6 @@ public class GoblinEntity extends ModOrcEntity implements GeoEntity {
     public void tick() {
         super.tick();
         if (!this.getWorld().isClient) {
-            WorldOfDragonsMod.LOGGER.info(String.valueOf(attackTicksLeft));
             if (attackTicksLeft > 0) {
                 this.getNavigation().stop();
 

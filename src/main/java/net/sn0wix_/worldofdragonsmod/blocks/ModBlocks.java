@@ -11,7 +11,7 @@ import net.minecraft.item.ItemGroup;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
-import net.sn0wix_.worldofdragonsmod.WorldOfDragonsMod;
+import net.sn0wix_.worldofdragonsmod.WorldOfDragonsMain;
 import net.sn0wix_.worldofdragonsmod.blocks.custom.ChargeBlock;
 import net.sn0wix_.worldofdragonsmod.blocks.custom.PickupBlock;
 import net.sn0wix_.worldofdragonsmod.item.ModItemGroup;
@@ -29,16 +29,16 @@ public class ModBlocks {
 
     private static Block registerBlock(String name, Block block, ItemGroup itemGroup){
         registerBlockItem(name, block, itemGroup);
-        return Registry.register(Registries.BLOCK, new Identifier(WorldOfDragonsMod.MOD_ID, name),block);
+        return Registry.register(Registries.BLOCK, new Identifier(WorldOfDragonsMain.MOD_ID, name),block);
     }
 
     private static Item registerBlockItem(String name, Block block, ItemGroup itemGroup){
-        Item item = Registry.register(Registries.ITEM, new Identifier(WorldOfDragonsMod.MOD_ID, name), new BlockItem(block, new FabricItemSettings()));
+        Item item = Registry.register(Registries.ITEM, new Identifier(WorldOfDragonsMain.MOD_ID, name), new BlockItem(block, new FabricItemSettings()));
         ItemGroupEvents.modifyEntriesEvent(itemGroup).register(entries -> entries.add(item));
         return item;
     }
 
     public static void registerModBlocks(){
-        WorldOfDragonsMod.LOGGER.info("Registerion Mod Blocks for " + WorldOfDragonsMod.MOD_ID);
+        WorldOfDragonsMain.LOGGER.info("Registerion Mod Blocks for " + WorldOfDragonsMain.MOD_ID);
     }
 }

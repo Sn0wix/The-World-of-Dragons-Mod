@@ -25,4 +25,9 @@ public class DragonNectarItem extends Item {
     public SoundEvent getEatSound() {
         return SoundEvents.ITEM_HONEY_BOTTLE_DRINK;
     }
+
+    @Override
+    public boolean hasGlint(ItemStack stack) {
+        return true;
+    }
 }

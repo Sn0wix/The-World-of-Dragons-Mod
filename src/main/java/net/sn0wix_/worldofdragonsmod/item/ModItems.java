@@ -6,8 +6,9 @@ import net.minecraft.item.*;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
-import net.sn0wix_.worldofdragonsmod.WorldOfDragonsMod;
+import net.sn0wix_.worldofdragonsmod.WorldOfDragonsMain;
 import net.sn0wix_.worldofdragonsmod.item.custom.*;
+import net.sn0wix_.worldofdragonsmod.sounds.ModSounds;
 
 public class ModItems {
 
@@ -73,16 +74,17 @@ public class ModItems {
     public static final Item RUINIC_AXE = registerItem("ruinic_axe",new ModAxeItem(ToolMaterials.DIAMOND,9,-3.0F,new FabricItemSettings()));
     public static final Item DRAGON_STEEL_AXE = registerItem("dragon_steel_axe",new ModAxeItem(ToolMaterials.NETHERITE,10,-3.0F,new FabricItemSettings()));
     public static final Item DRAGON_TREAT = registerItem("dragon_treat",new Item(new FabricItemSettings()));
+    public static final Item MUSIC_DISC_SHREK = registerItem("music_disc_shrek",new MusicDiscItem(15, ModSounds.SHREK, new FabricItemSettings().maxCount(1),200));
 
 
     private static Item registerItem(String name,Item item){
-        Item item1 = Registry.register(Registries.ITEM,new Identifier(WorldOfDragonsMod.MOD_ID,name),item);
+        Item item1 = Registry.register(Registries.ITEM,new Identifier(WorldOfDragonsMain.MOD_ID,name),item);
         addToItemGroup(item1);
         return item1;
     }
 
     public static void registerModItems(){
-        WorldOfDragonsMod.LOGGER.info("Registering Mod Items for " + WorldOfDragonsMod.MOD_ID);
+        WorldOfDragonsMain.LOGGER.info("Registering Mod Items for " + WorldOfDragonsMain.MOD_ID);
     }
 
     private static void addToItemGroup(Item item){

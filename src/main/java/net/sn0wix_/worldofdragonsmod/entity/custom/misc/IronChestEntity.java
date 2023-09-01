@@ -13,7 +13,7 @@ import software.bernie.geckolib.core.object.PlayState;
 public class IronChestEntity extends ModChestEntity implements GeoEntity {
     private final RawAnimation OPEN_ANIMATION = RawAnimation.begin().thenPlayAndHold("animation.iron_chest.open");
 
-    private AnimatableInstanceCache cache =  new SingletonAnimatableInstanceCache(this);
+    private final AnimatableInstanceCache cache =  new SingletonAnimatableInstanceCache(this);
 
     public IronChestEntity(EntityType<? extends PathAwareEntity> entityType, World world) {
         super(entityType, world);
@@ -24,18 +24,11 @@ public class IronChestEntity extends ModChestEntity implements GeoEntity {
         controllerRegistrar.add(new AnimationController<>(this, "controller", 0, this::predicate));
     }
 
-    private <T extends GeoAnimatable> PlayState predicate(AnimationState<T> tAnimationState) {
+    private <T extends GeoAnimatable> PlayState predicate(AnimationState<T> state) {
         if (isOpened()){
-            tAnimationState.setAndContinue(OPEN_ANIMATION);
+            state.setAndContinue(OPEN_ANIMATION);
         }
-
-        if (tAnimationState.getController().getAnimationState() == AnimationController.State.PAUSED){
-            animationTick = tAnimationState.getAnimationTick();
-        }
-
-        tAnimationState.getAnimationTick();
-
-        return PlayState.CONTINUE;
+        return PlayState.STOP;
     }
 
     @Override

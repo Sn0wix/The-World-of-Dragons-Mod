@@ -254,5 +254,13 @@
         "stream": true
       }
     ]
+  },
+  "shrek": {
+    "sounds": [
+      {
+        "name": "worldofdragonsmod:shrek",
+        "stream": true
+      }
+    ]
   }
 }

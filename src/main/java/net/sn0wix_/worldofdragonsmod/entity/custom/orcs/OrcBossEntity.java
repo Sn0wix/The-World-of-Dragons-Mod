@@ -8,10 +8,7 @@ import net.minecraft.entity.ai.goal.WanderAroundFarGoal;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.mob.HostileEntity;
-import net.minecraft.entity.passive.AnimalEntity;
-import net.minecraft.entity.passive.IronGolemEntity;
-import net.minecraft.entity.passive.PigEntity;
-import net.minecraft.entity.passive.SnowGolemEntity;
+import net.minecraft.entity.passive.*;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.world.World;
 import software.bernie.geckolib.animatable.GeoEntity;
@@ -49,6 +46,7 @@ public class OrcBossEntity extends ModOrcEntity implements GeoEntity {
         this.targetSelector.add(3, new ActiveTargetGoal<>(this, IronGolemEntity.class, true));
         this.targetSelector.add(3, new ActiveTargetGoal<>(this, SnowGolemEntity.class, true));
         this.targetSelector.add(3, new ActiveTargetGoal<>(this, PigEntity.class, true));
+        this.targetSelector.add(3, new ActiveTargetGoal<>(this, WanderingTraderEntity.class, true));
     }
 
     public static DefaultAttributeContainer.Builder setAttributes() {

@@ -11,7 +11,6 @@ import net.sn0wix_.worldofdragonsmod.entity.client.misc.ironChest.IronChestRende
 import net.sn0wix_.worldofdragonsmod.entity.client.orcs.orcBoss.OrcBossRenderer;
 import net.sn0wix_.worldofdragonsmod.entity.client.orcs.orcBrute.OrcBruteRenderer;
 import net.sn0wix_.worldofdragonsmod.entity.client.orcs.orcMage.OrcMageRenderer;
-import net.sn0wix_.worldofdragonsmod.entity.client.orcs.orcWarg.OrcWargRenderer;
 import net.sn0wix_.worldofdragonsmod.entity.client.orcs.slasherOrc.SlasherOrcRenderer;
 
 public class WorldOfDragonsClient implements ClientModInitializer {

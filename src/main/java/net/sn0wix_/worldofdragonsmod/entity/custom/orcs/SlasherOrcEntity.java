@@ -10,10 +10,7 @@ import net.minecraft.entity.ai.goal.WanderAroundFarGoal;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.mob.HostileEntity;
-import net.minecraft.entity.passive.AnimalEntity;
-import net.minecraft.entity.passive.IronGolemEntity;
-import net.minecraft.entity.passive.PigEntity;
-import net.minecraft.entity.passive.SnowGolemEntity;
+import net.minecraft.entity.passive.*;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.world.World;
 import software.bernie.geckolib.animatable.GeoEntity;
@@ -34,6 +31,7 @@ public class SlasherOrcEntity extends ModOrcEntity implements GeoEntity {
     public static final RawAnimation DEATH = RawAnimation.begin().then("move.death", Animation.LoopType.HOLD_ON_LAST_FRAME);
 
     private int attackTicksLeft = 0;
+    private int attackAnimTicksLeft = 0;
     private int lastAttackedType = 0;
 
     public SlasherOrcEntity(EntityType<? extends HostileEntity> entityType, World world) {
@@ -51,6 +49,7 @@ public class SlasherOrcEntity extends ModOrcEntity implements GeoEntity {
         this.targetSelector.add(3, new ActiveTargetGoal<>(this, IronGolemEntity.class, true));
         this.targetSelector.add(3, new ActiveTargetGoal<>(this, SnowGolemEntity.class, true));
         this.targetSelector.add(3, new ActiveTargetGoal<>(this, PigEntity.class, true));
+        this.targetSelector.add(3, new ActiveTargetGoal<>(this, WanderingTraderEntity.class, true));
     }
 
     public static DefaultAttributeContainer.Builder setAttributes() {
@@ -58,7 +57,7 @@ public class SlasherOrcEntity extends ModOrcEntity implements GeoEntity {
                 .add(EntityAttributes.GENERIC_MAX_HEALTH, 25.0D)
                 .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 6.0f)
                 .add(EntityAttributes.GENERIC_ATTACK_SPEED, 1.0f)
-                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.3f)
+                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.35f)
                 .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 64);
     }
 
@@ -80,12 +79,17 @@ public class SlasherOrcEntity extends ModOrcEntity implements GeoEntity {
     public void tick() {
         super.tick();
         if (!this.getWorld().isClient) {
-            if (attackTicksLeft > 0) {
-                //this.getNavigation().stop();
+            if (attackAnimTicksLeft > 0) {
+                this.getNavigation().stop();
+                attackAnimTicksLeft--;
+            }
 
-                if (this.getTarget() != null) {
+            if (attackTicksLeft > 0) {
+                this.getNavigation().stop();
+
+                /*if (this.getTarget() != null) {
                     this.getLookControl().lookAt(this.getTarget());
-                }
+                }*/
 
                 attackTicksLeft--;
                 if (attackTicksLeft <= 0 && this.getTarget() != null) {
@@ -104,11 +108,13 @@ public class SlasherOrcEntity extends ModOrcEntity implements GeoEntity {
             if (i == 0) {
                 this.triggerAnim("controller", "attack_stab");
                 this.attackTicksLeft = 8;
-                lastAttackedType = 2;
+                this.lastAttackedType = 2;
+                this.attackAnimTicksLeft = 20;
             } else {
                 this.triggerAnim("controller", "attack_melee");
                 this.attackTicksLeft = 6;
-                lastAttackedType = 1;
+                this.lastAttackedType = 1;
+                this.attackAnimTicksLeft = 12;
             }
         }
         return true;
@@ -120,7 +126,7 @@ public class SlasherOrcEntity extends ModOrcEntity implements GeoEntity {
             double d = this.getSquaredMaxAttackDistance((LivingEntity) target);
 
             if (squaredDistance <= d) {
-                if (lastAttackedType == 1){
+                if (lastAttackedType == 1) {
                     this.getNavigation().stop();
                     super.tryAttack(target);
                 } else if (lastAttackedType == 2) {

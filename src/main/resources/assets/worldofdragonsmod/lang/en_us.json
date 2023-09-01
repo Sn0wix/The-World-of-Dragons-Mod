@@ -52,6 +52,8 @@
   "item.worldofdragonsmod.ruinic_axe": "§lRuinic Axe",
   "item.worldofdragonsmod.dragon_steel_axe": "§lDragon Steel Axe",
   "item.worldofdragonsmod.dragon_treat": "§lDragon Treat",
+  "item.worldofdragonsmod.music_disc_shrek": "§a§lMusic Disc",
+  "item.worldofdragonsmod.music_disc_shrek.desc": "David Lindsay-Abaire - Shrek The Musical",
 
   "block.worldofdragonsmod.xray_block": "§l§dXray Block",
   "block.worldofdragonsmod.pickup_block": "§lPickup Block",
@@ -67,5 +69,12 @@
   "effect.worldofdragonsmod.bleeding": "Bleeding",
 
   "entity.worldofdragonsmod.armored_orc": "Armored Orc",
-  "entity.worldofdragonsmod.goblin": "Goblin"
+  "entity.worldofdragonsmod.goblin": "Goblin",
+  "entity.worldofdragonsmod.archer_orc": "Archer Orc",
+  "entity.worldofdragonsmod.flyer_orc": "Flyer Orc",
+  "entity.worldofdragonsmod.orc_boss": "Orc Boss",
+  "entity.worldofdragonsmod.orc_brute": "Orc Brute",
+  "entity.worldofdragonsmod.slasher_orc": "Slasher Orc",
+  "entity.worldofdragonsmod.orc_mage": "Orc Mage",
+  "entity.worldofdragonsmod.orc_warg": "Orc Warg"
 }
