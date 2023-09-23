@@ -32,12 +32,14 @@ public class ArmoredOrcModel extends GeoModel<ArmoredOrcEntity> {
 
     @Override
     public void setCustomAnimations(ArmoredOrcEntity animatable, long instanceId, AnimationState<ArmoredOrcEntity> animationState) {
-        CoreGeoBone head = this.getAnimationProcessor().getBone("h_head");
+        if (!animatable.getDataTracker().get(ArmoredOrcEntity.CHARGING)){
+            CoreGeoBone head = this.getAnimationProcessor().getBone("h_head");
 
-        if (head != null) {
-            EntityModelData entityData = animationState.getData(DataTickets.ENTITY_MODEL_DATA);
-            head.setRotX(entityData.headPitch() * ((float) Math.PI / 180F));
-            head.setRotY(entityData.netHeadYaw() * ((float) Math.PI / 180F));
+            if (head != null) {
+                EntityModelData entityData = animationState.getData(DataTickets.ENTITY_MODEL_DATA);
+                head.setRotX(entityData.headPitch() * ((float) Math.PI / 180F));
+                head.setRotY(entityData.netHeadYaw() * ((float) Math.PI / 180F));
+            }
         }
     }
 }

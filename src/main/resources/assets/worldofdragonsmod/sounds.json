@@ -262,5 +262,45 @@
         "stream": true
       }
     ]
+  },
+  "desert_dungeon": {
+    "sounds": [
+      {
+        "name": "worldofdragonsmod:desert_dungeon",
+        "stream": true
+      }
+    ]
+  },
+  "fire_dungeon": {
+    "sounds": [
+      {
+        "name": "worldofdragonsmod:fire_dungeon",
+        "stream": true
+      }
+    ]
+  },
+  "ice_dungeon": {
+    "sounds": [
+      {
+        "name": "worldofdragonsmod:ice_dungeon",
+        "stream": true
+      }
+    ]
+  },
+  "jungle_dungeon": {
+    "sounds": [
+      {
+        "name": "worldofdragonsmod:jungle_dungeon",
+        "stream": true
+      }
+    ]
+  },
+  "swamp_dungeon": {
+    "sounds": [
+      {
+        "name": "worldofdragonsmod:swamp_dungeon",
+        "stream": true
+      }
+    ]
   }
 }

@@ -33,6 +33,11 @@ public class ModSounds {
     public static final SoundEvent SHIMMERSCALE = registerSoundEvent("shimmerscale");
     public static final SoundEvent TITAN_BOSS = registerSoundEvent("titan_boss");
     public static final SoundEvent SHREK = registerSoundEvent("shrek");
+    public static final SoundEvent DESERT_DUNGEON = registerSoundEvent("desert_dungeon");
+    public static final SoundEvent FIRE_DUNGEON = registerSoundEvent("fire_dungeon");
+    public static final SoundEvent ICE_DUNGEON = registerSoundEvent("ice_dungeon");
+    public static final SoundEvent JUNGLE_DUNGEON = registerSoundEvent("jungle_dungeon");
+    public static final SoundEvent SWAMP_DUNGEON = registerSoundEvent("swamp_dungeon");
 
 
 

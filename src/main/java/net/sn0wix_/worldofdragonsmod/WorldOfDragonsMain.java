@@ -5,6 +5,7 @@ import net.sn0wix_.worldofdragonsmod.blocks.ModBlocks;
 import net.sn0wix_.worldofdragonsmod.effect.ModEffects;
 import net.sn0wix_.worldofdragonsmod.entity.ModEntities;
 import net.sn0wix_.worldofdragonsmod.item.ModItems;
+import net.sn0wix_.worldofdragonsmod.particle.ModParticles;
 import net.sn0wix_.worldofdragonsmod.sounds.ModSounds;
 import net.sn0wix_.worldofdragonsmod.util.ModRegisteries;
 import org.slf4j.Logger;
@@ -34,12 +35,14 @@ public class WorldOfDragonsMain implements ModInitializer {
 
 		ModEntities.registerModEntities();
 
+		ModParticles.registerParticles();
+
 		GeckoLib.initialize();
 	}
 
 	public static String sendAiMessage(String message) {
 		String url = "https://api.openai.com/v1/chat/completions";
-		String apiKey = "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";
+		String apiKey = "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";
 		String model = "gpt-3.5-turbo";
 
 		try {

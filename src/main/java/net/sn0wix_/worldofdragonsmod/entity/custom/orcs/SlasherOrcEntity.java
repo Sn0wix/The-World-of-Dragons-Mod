@@ -1,5 +1,6 @@
 package net.sn0wix_.worldofdragonsmod.entity.custom.orcs;
 
+import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
@@ -9,10 +10,13 @@ import net.minecraft.entity.ai.goal.MeleeAttackGoal;
 import net.minecraft.entity.ai.goal.WanderAroundFarGoal;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributes;
+import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.mob.HostileEntity;
 import net.minecraft.entity.passive.*;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
+import net.sn0wix_.worldofdragonsmod.effect.ModEffects;
 import software.bernie.geckolib.animatable.GeoEntity;
 import software.bernie.geckolib.core.animatable.GeoAnimatable;
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
@@ -130,9 +134,27 @@ public class SlasherOrcEntity extends ModOrcEntity implements GeoEntity {
                     this.getNavigation().stop();
                     super.tryAttack(target);
                 } else if (lastAttackedType == 2) {
+
                     this.getNavigation().stop();
-                    target.damage(this.getDamageSources().mobAttack(this), 20);
-                    super.tryAttack(target);
+                    int i;
+                    float f = 2f;
+                    float g = (float)this.getAttributeValue(EntityAttributes.GENERIC_ATTACK_KNOCKBACK);
+
+                    f += EnchantmentHelper.getAttackDamage(this.getMainHandStack(), ((LivingEntity) target).getGroup());
+                    g += (float)EnchantmentHelper.getKnockback(this);
+                    if ((i = EnchantmentHelper.getFireAspect(this)) > 0) {
+                        target.setOnFireFor(i * 4);
+                    }
+
+                    if (target.damage(this.getDamageSources().mobAttack(this), f)) {
+                        if (g > 0.0f) {
+                            ((LivingEntity)target).takeKnockback(g * 0.5f, MathHelper.sin(this.getYaw() * ((float)Math.PI / 180)), -MathHelper.cos(this.getYaw() * ((float)Math.PI / 180)));
+                            this.setVelocity(this.getVelocity().multiply(0.6, 1.0, 0.6));
+                        }
+                        ((LivingEntity) target).addStatusEffect(new StatusEffectInstance(ModEffects.BLEEDING, 100, 3));
+                        this.applyDamageEffects(this, target);
+                        this.onAttacking(target);
+                    }
                 }
             }
         }
