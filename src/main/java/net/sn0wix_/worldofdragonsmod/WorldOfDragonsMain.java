@@ -1,10 +1,12 @@
 package net.sn0wix_.worldofdragonsmod;
 
 import net.fabricmc.api.ModInitializer;
+import net.sn0wix_.worldofdragonsmod.blocks.ModBlockEntities;
 import net.sn0wix_.worldofdragonsmod.blocks.ModBlocks;
 import net.sn0wix_.worldofdragonsmod.effect.ModEffects;
 import net.sn0wix_.worldofdragonsmod.entity.ModEntities;
 import net.sn0wix_.worldofdragonsmod.item.ModItems;
+import net.sn0wix_.worldofdragonsmod.networking.ModPackets;
 import net.sn0wix_.worldofdragonsmod.particle.ModParticles;
 import net.sn0wix_.worldofdragonsmod.sounds.ModSounds;
 import net.sn0wix_.worldofdragonsmod.util.ModRegisteries;
@@ -30,19 +32,18 @@ public class WorldOfDragonsMain implements ModInitializer {
 		ModBlocks.registerModBlocks();
 		ModEffects.registerEffects();
 		ModSounds.registerModSounds();
-
 		ModRegisteries.registerModStuffs();
-
 		ModEntities.registerModEntities();
-
 		ModParticles.registerParticles();
+		ModBlockEntities.registerModBlockEntities();
+		ModPackets.registerC2SPackets();
 
 		GeckoLib.initialize();
 	}
 
 	public static String sendAiMessage(String message) {
 		String url = "https://api.openai.com/v1/chat/completions";
-		String apiKey = "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";
+		String apiKey = "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";
 		String model = "gpt-3.5-turbo";
 
 		try {

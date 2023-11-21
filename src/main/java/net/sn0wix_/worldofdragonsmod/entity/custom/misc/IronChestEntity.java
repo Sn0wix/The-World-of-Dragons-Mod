@@ -1,7 +1,10 @@
 package net.sn0wix_.worldofdragonsmod.entity.custom.misc;
 
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.mob.PathAwareEntity;
+import net.minecraft.nbt.NbtCompound;
 import net.minecraft.world.World;
 import software.bernie.geckolib.animatable.GeoEntity;
 import software.bernie.geckolib.core.animatable.GeoAnimatable;
@@ -15,7 +18,7 @@ public class IronChestEntity extends ModChestEntity implements GeoEntity {
 
     private final AnimatableInstanceCache cache =  new SingletonAnimatableInstanceCache(this);
 
-    public IronChestEntity(EntityType<? extends PathAwareEntity> entityType, World world) {
+    public IronChestEntity(EntityType<? extends Entity> entityType, World world) {
         super(entityType, world);
     }
 
@@ -25,7 +28,7 @@ public class IronChestEntity extends ModChestEntity implements GeoEntity {
     }
 
     private <T extends GeoAnimatable> PlayState predicate(AnimationState<T> state) {
-        if (isOpened()){
+        if (this.dataTracker.get(OPENED)) {
             state.setAndContinue(OPEN_ANIMATION);
         }
         return PlayState.STOP;

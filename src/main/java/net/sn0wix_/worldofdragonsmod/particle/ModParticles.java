@@ -6,7 +6,6 @@ import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
 import net.sn0wix_.worldofdragonsmod.WorldOfDragonsMain;
-import net.sn0wix_.worldofdragonsmod.particle.custom.BleedParticle;
 
 public class ModParticles {
     public static final DefaultParticleType BLEED_PARTICLE = FabricParticleTypes.simple();

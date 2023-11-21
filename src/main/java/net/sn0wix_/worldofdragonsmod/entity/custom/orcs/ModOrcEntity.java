@@ -9,7 +9,7 @@ import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-public class ModOrcEntity extends HostileEntity{
+public class ModOrcEntity extends HostileEntity {
 
     public boolean infected = false;
 

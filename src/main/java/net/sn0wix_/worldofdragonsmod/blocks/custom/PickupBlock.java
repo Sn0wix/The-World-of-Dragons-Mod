@@ -13,39 +13,38 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.sn0wix_.worldofdragonsmod.blocks.entity.PickupBlockEntity;
 import org.jetbrains.annotations.Nullable;
 
-public class PickupBlock extends BarrelBlock {
+public class PickupBlock extends BlockWithEntity {
     public PickupBlock(Settings settings) {
         super(settings);
     }
 
     @Override
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
-        if (player.isSneaking() && !player.isCreative()) {
-            if (player.getBlockPos().equals(pos.down())) {
-                world.removeBlock(pos, true);
+        if (!world.isClient()) {
+            if (player.isCreative()) {
+                if (world.getBlockEntity(pos) instanceof PickupBlockEntity pickupBlockEntity) {
+                    pickupBlockEntity.setStack(player.getStackInHand(hand));
+                    return ActionResult.SUCCESS;
+                }
+            }else {
+                world.breakBlock(pos, true, player);
+                return ActionResult.SUCCESS;
             }
         }
-
-        if (player.isCreative()) {
-            BlockEntity blockEntity = world.getBlockEntity(pos);
-            if (blockEntity instanceof BarrelBlockEntity) {
-                player.openHandledScreen((BarrelBlockEntity) blockEntity);
-                player.incrementStat(Stats.OPEN_BARREL);
-            }
-
-        }
-        return ActionResult.CONSUME;
+        return ActionResult.PASS;
     }
 
     @Override
     public void onBreak(World world, BlockPos pos, BlockState state, PlayerEntity player) {
-        player.playSound(SoundEvents.BLOCK_GLASS_BREAK,6F,1F);
+        super.onBreak(world, pos, state, player);
     }
 
+    @Nullable
     @Override
-    public void onPlaced(World world, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack itemStack) {
-        super.onPlaced(world, pos, state, placer, itemStack);
+    public BlockEntity createBlockEntity(BlockPos pos, BlockState state) {
+        return new PickupBlockEntity(pos, state);
     }
 }

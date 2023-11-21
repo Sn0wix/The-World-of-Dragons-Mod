@@ -276,9 +276,7 @@ public class ArmoredOrcEntity extends ModOrcEntity implements GeoEntity {
                 ticksToCharge = 1;
             }
 
-            WorldOfDragonsMain.LOGGER.info(String.valueOf(ticksToCharge));
-
-            if (random.nextInt((int) Math.round(Math.exp((double) -ticksToCharge / 100) * 1000)) == 0) {
+            if (random.nextInt((int) Math.round(Math.exp((double) - ticksToCharge / 100) * 1000)) == 0) {
                 bl = true;
                 ticksToCharge = 0;
             }

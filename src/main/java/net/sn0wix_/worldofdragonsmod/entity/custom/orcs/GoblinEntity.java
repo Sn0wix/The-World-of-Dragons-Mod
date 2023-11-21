@@ -92,9 +92,9 @@ public class GoblinEntity extends ModOrcEntity implements GeoEntity {
 
     @Override
     public boolean tryAttack(Entity target) {
-            if (attackTicksLeft <= 0 && !this.getWorld().isClient) {
-                this.triggerAnim("controller", "attack");
-                this.attackTicksLeft = 5;
+        if (attackTicksLeft <= 0 && !this.getWorld().isClient) {
+            this.triggerAnim("controller", "attack");
+            this.attackTicksLeft = 6;
         }
         return true;
     }

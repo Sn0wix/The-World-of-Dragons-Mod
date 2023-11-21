@@ -126,6 +126,7 @@ public class OrcBruteEntity extends ModOrcEntity implements GeoEntity {
 
     @Override
     public AnimatableInstanceCache getAnimatableInstanceCache() {
+
         return cache;
     }
 

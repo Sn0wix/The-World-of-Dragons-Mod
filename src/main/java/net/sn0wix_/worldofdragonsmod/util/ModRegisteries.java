@@ -7,6 +7,7 @@ import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.mob.PathAwareEntity;
 import net.sn0wix_.worldofdragonsmod.command.GPTCommand;
 import net.sn0wix_.worldofdragonsmod.entity.ModEntities;
+import net.sn0wix_.worldofdragonsmod.entity.custom.hostile.LavaElementalEntity;
 import net.sn0wix_.worldofdragonsmod.entity.custom.orcs.*;
 
 public class ModRegisteries {
@@ -24,10 +25,8 @@ public class ModRegisteries {
         FabricDefaultAttributeRegistry.register(ModEntities.ORC_BRUTE, OrcBruteEntity.setAttributes());
         FabricDefaultAttributeRegistry.register(ModEntities.SLASHER_ORC, SlasherOrcEntity.setAttributes());
         FabricDefaultAttributeRegistry.register(ModEntities.ORC_MAGE, OrcMageEntity.setAttributes());
+        FabricDefaultAttributeRegistry.register(ModEntities.LAVA_ELEMENTAL, LavaElementalEntity.setAttributes());
         //FabricDefaultAttributeRegistry.register(ModEntities.ORC_WARG, OrcWargEntity.setAttributes());
-
-
-        FabricDefaultAttributeRegistry.register(ModEntities.IRON_CHEST_ENTITY, createGenericEntityAttributes());
     }
 
     private static DefaultAttributeContainer.Builder createGenericEntityAttributes() {
