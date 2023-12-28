@@ -11,8 +11,8 @@
   ],
   "contact": {
     "homepage": "https://modrinth.com/mod/the-world-of-dragons-mod",
-    "issues": "https://github.com/Sn0wix/World-Of-Dragons-mod/issues",
-    "sources": "https://github.com/Sn0wix/World-Of-Dragons-mod"
+    "issues": "https://github.com/Sn0wix/The-World-of-Dragons-Mod/issues",
+    "sources": "https://github.com/Sn0wix/The-World-of-Dragons-Mod"
   },
 
   "license": "MIT",
@@ -21,13 +21,13 @@
   "environment": "*",
   "entrypoints": {
     "main": [
-      "net.sn0wix_.worldofdragonsmod.WorldOfDragonsMain"
+      "net.sn0wix_.worldofdragonsmod.common.WorldOfDragonsMain"
     ],
     "client": [
-      "net.sn0wix_.worldofdragonsmod.WorldOfDragonsClient"
+      "net.sn0wix_.worldofdragonsmod.client.WorldOfDragonsClient"
     ],
     "fabric-datagen": [
-      "net.sn0wix_.worldofdragonsmod.WorldOfDragonsDatagen"
+      "net.sn0wix_.worldofdragonsmod.datagen.WorldOfDragonsDatagen"
     ]
   },
   "mixins": [
