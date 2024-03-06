@@ -33,7 +33,7 @@ public class MeleeAttackGoal extends Goal {
 
     @Override
     public boolean canStart() {
-        long l = this.mob.world.getTime();
+        long l = this.mob.getWorld().getTime();
         if (l - this.lastUpdateTime < 20L) {
             return false;
         }
@@ -100,7 +100,7 @@ public class MeleeAttackGoal extends Goal {
             return;
         }
         this.mob.getLookControl().lookAt(livingEntity, 30.0f, 30.0f);
-        double d = this.mob.getSquaredDistanceToAttackPosOf(livingEntity);
+        double d = this.mob.distanceTo(livingEntity);
         this.updateCountdownTicks = Math.max(this.updateCountdownTicks - 1, 0);
         if ((this.pauseWhenMobIdle || this.mob.getVisibilityCache().canSee(livingEntity)) && this.updateCountdownTicks <= 0 && (this.targetX == 0.0 && this.targetY == 0.0 && this.targetZ == 0.0 || livingEntity.squaredDistanceTo(this.targetX, this.targetY, this.targetZ) >= 1.0 || this.mob.getRandom().nextFloat() < 0.05f)) {
             this.targetX = livingEntity.getX();

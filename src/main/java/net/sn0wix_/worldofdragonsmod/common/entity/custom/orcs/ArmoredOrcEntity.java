@@ -18,10 +18,7 @@ import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
-import software.bernie.geckolib.animatable.GeoEntity;
 import software.bernie.geckolib.core.animatable.GeoAnimatable;
-import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
-import software.bernie.geckolib.core.animatable.instance.SingletonAnimatableInstanceCache;
 import software.bernie.geckolib.core.animation.*;
 import software.bernie.geckolib.core.animation.AnimationState;
 import software.bernie.geckolib.core.object.PlayState;
@@ -30,9 +27,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
-public class ArmoredOrcEntity extends ModOrcEntity implements GeoEntity {
-    private final AnimatableInstanceCache cache = new SingletonAnimatableInstanceCache(this);
-
+public class ArmoredOrcEntity extends ModOrcEntity {
     public static final RawAnimation WALK = RawAnimation.begin().then("animation.armored_orc.walk", Animation.LoopType.LOOP);
     public static final RawAnimation IDLE = RawAnimation.begin().then("animation.armored_orc.idle", Animation.LoopType.LOOP);
     public static final RawAnimation DEATH = RawAnimation.begin().then("animation.armored_orc.death", Animation.LoopType.HOLD_ON_LAST_FRAME);
@@ -46,7 +41,7 @@ public class ArmoredOrcEntity extends ModOrcEntity implements GeoEntity {
     private int attackAnimTicksLeft = 0;
     private int lastAttackedType = 0;
     private int ticksToCharge = 0;
-    private HashMap<Entity, Integer> enitiesThrownBack = new HashMap<>();
+    private final HashMap<Entity, Integer> enitiesThrownBack = new HashMap<>();
     MeleeAttackGoal attackGoal;
     MeleeAttackGoal attackGoalCharge;
     public static final TrackedData<Boolean> CHARGING = DataTracker.registerData(ArmoredOrcEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
@@ -120,7 +115,7 @@ public class ArmoredOrcEntity extends ModOrcEntity implements GeoEntity {
                         this.velocityDirty = true;
                         Vec3d vec3d = this.getVelocity();
                         Vec3d vec3d2 = new Vec3d(x, 0.0, z).normalize().multiply(strength);
-                        source.getSource().setVelocity(vec3d.x / 2.0 - vec3d2.x, this.onGround ? Math.min(0.4, vec3d.y / 2.0 + strength) : vec3d.y, vec3d.z / 2.0 - vec3d2.z);
+                        source.getSource().setVelocity(vec3d.x / 2.0 - vec3d2.x, this.isOnGround() ? Math.min(0.4, vec3d.y / 2.0 + strength) : vec3d.y, vec3d.z / 2.0 - vec3d2.z);
                         source.getSource().velocityModified = true;
                     } catch (NullPointerException ignored) {
                     }
@@ -248,15 +243,6 @@ public class ArmoredOrcEntity extends ModOrcEntity implements GeoEntity {
                 }
             }
         }
-    }
-
-    @Override
-    public AnimatableInstanceCache getAnimatableInstanceCache() {
-        return cache;
-    }
-
-    private double getSquaredMaxAttackDistance(LivingEntity entity) {
-        return this.getWidth() * 2.0F * this.getWidth() * 2.0F + entity.getWidth();
     }
 
     private boolean shouldCharge(Entity attacker, Entity target) {

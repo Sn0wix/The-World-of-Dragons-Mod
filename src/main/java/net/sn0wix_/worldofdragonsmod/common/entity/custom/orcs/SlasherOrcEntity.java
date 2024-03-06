@@ -17,15 +17,11 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import net.sn0wix_.worldofdragonsmod.common.effect.ModEffects;
-import software.bernie.geckolib.animatable.GeoEntity;
 import software.bernie.geckolib.core.animatable.GeoAnimatable;
-import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
-import software.bernie.geckolib.core.animatable.instance.SingletonAnimatableInstanceCache;
 import software.bernie.geckolib.core.animation.*;
 import software.bernie.geckolib.core.object.PlayState;
 
-public class SlasherOrcEntity extends ModOrcEntity implements GeoEntity {
-    private final AnimatableInstanceCache cache = new SingletonAnimatableInstanceCache(this);
+public class SlasherOrcEntity extends ModOrcEntity {
 
     public static final RawAnimation WALK = RawAnimation.begin().then("move.walk", Animation.LoopType.LOOP);
     public static final RawAnimation IDLE = RawAnimation.begin().then("move.idle", Animation.LoopType.LOOP);
@@ -158,14 +154,5 @@ public class SlasherOrcEntity extends ModOrcEntity implements GeoEntity {
                 }
             }
         }
-    }
-
-    private double getSquaredMaxAttackDistance(LivingEntity entity) {
-        return this.getWidth() * 2.0F * this.getWidth() * 2.0F + entity.getWidth();
-    }
-
-    @Override
-    public AnimatableInstanceCache getAnimatableInstanceCache() {
-        return cache;
     }
 }

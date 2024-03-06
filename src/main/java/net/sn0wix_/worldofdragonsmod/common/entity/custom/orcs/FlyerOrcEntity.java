@@ -11,16 +11,11 @@ import net.minecraft.entity.mob.HostileEntity;
 import net.minecraft.entity.passive.*;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.world.World;
-import software.bernie.geckolib.animatable.GeoEntity;
 import software.bernie.geckolib.core.animatable.GeoAnimatable;
-import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
-import software.bernie.geckolib.core.animatable.instance.SingletonAnimatableInstanceCache;
 import software.bernie.geckolib.core.animation.*;
 import software.bernie.geckolib.core.object.PlayState;
 
-public class FlyerOrcEntity extends ModOrcEntity implements GeoEntity {
-    private final AnimatableInstanceCache cache =  new SingletonAnimatableInstanceCache(this);
-
+public class FlyerOrcEntity extends ModOrcEntity {
     public static final RawAnimation FLY = RawAnimation.begin().then("move.fly", Animation.LoopType.LOOP);
 
     public static final RawAnimation ATTACK_MELEE = RawAnimation.begin().then("attack.melee", Animation.LoopType.PLAY_ONCE);
@@ -62,10 +57,5 @@ public class FlyerOrcEntity extends ModOrcEntity implements GeoEntity {
 
     private <T extends GeoAnimatable> PlayState predicate(AnimationState<T> state) {
         return state.setAndContinue(FLY);
-    }
-
-    @Override
-    public AnimatableInstanceCache getAnimatableInstanceCache() {
-        return cache;
     }
 }

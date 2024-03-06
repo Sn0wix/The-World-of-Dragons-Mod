@@ -11,19 +11,16 @@ import net.minecraft.entity.mob.HostileEntity;
 import net.minecraft.entity.passive.*;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.ArrowEntity;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.world.World;
 import net.sn0wix_.worldofdragonsmod.common.WorldOfDragonsMain;
-import software.bernie.geckolib.animatable.GeoEntity;
 import software.bernie.geckolib.core.animatable.GeoAnimatable;
-import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
-import software.bernie.geckolib.core.animatable.instance.SingletonAnimatableInstanceCache;
 import software.bernie.geckolib.core.animation.*;
 import software.bernie.geckolib.core.object.PlayState;
 
-public class ArcherOrcEntity extends ModOrcEntity implements GeoEntity, RangedAttackMob {
-    private final AnimatableInstanceCache cache = new SingletonAnimatableInstanceCache(this);
-
+public class ArcherOrcEntity extends ModOrcEntity implements RangedAttackMob {
     public static final RawAnimation IDLE = RawAnimation.begin().then("move.idle", Animation.LoopType.LOOP);
     public static final RawAnimation WALK = RawAnimation.begin().then("move.walk", Animation.LoopType.LOOP);
 
@@ -73,11 +70,6 @@ public class ArcherOrcEntity extends ModOrcEntity implements GeoEntity, RangedAt
             return state.setAndContinue(WALK);
         }
         return state.setAndContinue(IDLE);
-    }
-
-    @Override
-    public AnimatableInstanceCache getAnimatableInstanceCache() {
-        return cache;
     }
 
     public static DefaultAttributeContainer.Builder setAttributes() {
@@ -152,7 +144,7 @@ public class ArcherOrcEntity extends ModOrcEntity implements GeoEntity, RangedAt
     }
 
     @Override
-    public void attack(LivingEntity target, float pullProgress) {
+    public void shootAt(LivingEntity target, float pullProgress) {
         WorldOfDragonsMain.LOGGER.info("shoot");
         if (meleeAttackTicksLeft == 0 && !this.getWorld().isClient && meleeAttackAnimTicksLeft == 0 && shootAttackAnimTicksLeft == 0 && shootAttackTicksLeft == 0 && shooting) {
             this.triggerAnim("controller", "attack_shoot");
@@ -163,7 +155,7 @@ public class ArcherOrcEntity extends ModOrcEntity implements GeoEntity, RangedAt
 
     private void delayedShoot(Entity target) {
         if (shootAttackTicksLeft == 0 && target instanceof LivingEntity) {
-            ArrowEntity arrow = new ArrowEntity(this.getWorld(), this);
+            ArrowEntity arrow = new ArrowEntity(this.getWorld(), this, new ItemStack(Items.ARROW));
             arrow.setPos(getX(), getY() + getEyeHeight(getPose()) - 1, getZ());
             double d = target.getX() - this.getX();
             double e = target.getEyeHeight(target.getPose()) + target.getY() - arrow.getY();
@@ -171,12 +163,12 @@ public class ArcherOrcEntity extends ModOrcEntity implements GeoEntity, RangedAt
             double g = Math.sqrt(d * d + f * f);
             arrow.setVelocity(d, e + g * (double) 0.2f, f, (float) 1.6, 1);
             this.playSound(SoundEvents.ENTITY_SKELETON_SHOOT, 1.0f, 1.0f / (this.getRandom().nextFloat() * 0.4f + 0.8f));
-            this.world.spawnEntity(arrow);
+            this.getWorld().spawnEntity(arrow);
         } else if (shootAttackTicksLeft == 0 && target == null) {
-            ArrowEntity arrow = new ArrowEntity(this.getWorld(), this);
+            ArrowEntity arrow = new ArrowEntity(this.getWorld(), this, new ItemStack(Items.ARROW));
             arrow.setPos(getX(), getY() + getEyeHeight(getPose()) - 1, getZ());
             this.playSound(SoundEvents.ENTITY_SKELETON_SHOOT, 1.0f, 1.0f / (this.getRandom().nextFloat() * 0.4f + 0.8f));
-            this.world.spawnEntity(arrow);
+            this.getWorld().spawnEntity(arrow);
         }
     }
 
@@ -219,9 +211,5 @@ public class ArcherOrcEntity extends ModOrcEntity implements GeoEntity, RangedAt
                 super.tryAttack(target);
             }
         }
-    }
-
-    private double getSquaredMaxAttackDistance(LivingEntity entity) {
-        return this.getWidth() * 2.0F * this.getWidth() * 2.0F + entity.getWidth();
     }
 }

@@ -103,11 +103,6 @@ public class LavaElementalEntity extends HostileEntity implements GeoEntity, Ran
     }
 
     @Override
-    public void attack(LivingEntity target, float pullProgress) {
-
-    }
-
-    @Override
     public boolean damage(DamageSource source, float amount) {
         if (!this.getWorld().isClient && dataTracker.get(SLEEPING)) {
             dataTracker.set(SLEEPING, false);
@@ -146,5 +141,10 @@ public class LavaElementalEntity extends HostileEntity implements GeoEntity, Ran
     protected void initDataTracker() {
         super.initDataTracker();
         getDataTracker().startTracking(SLEEPING, true);
+    }
+
+    @Override
+    public void shootAt(LivingEntity target, float pullProgress) {
+
     }
 }

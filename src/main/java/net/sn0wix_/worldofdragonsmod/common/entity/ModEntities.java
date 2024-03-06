@@ -68,14 +68,6 @@ public class ModEntities {
                     "geo/iron_chest.geo.json", "textures/entity/iron_chest/iron_chest.png",
                     "animations/iron_chest.animation.json")));
 
-
-    /*public static final EntityType<Entity> IRON_CHEST_ENTITY = Registry.register(Registries.ENTITY_TYPE, new Identifier(WorldOfDragonsMain.MOD_ID, "iron_chest"),
-            FabricEntityTypeBuilder.create(SpawnGroup.CREATURE, (type, world) -> new ModChestEntity(type, world,
-                            RawAnimation.begin().thenPlayAndHold("animation.iron_chest.open"),
-                            "geo/iron_chest.geo.json", "textures/entity/iron_chest/iron_chest.png",
-                            "animations/iron_chest.animation.json"))
-                    .dimensions(EntityDimensions.fixed(2.2f, 2f)).build());*/
-
     public static final EntityType<ExplodingCubeProjectile> EXPLODING_MAGMA_PROJECTILE = Registry.register(Registries.ENTITY_TYPE, new Identifier(WorldOfDragonsMain.MOD_ID, "exploding_magma_projectile"),
             FabricEntityTypeBuilder.create(SpawnGroup.CREATURE, ExplodingCubeProjectile::new).dimensions(EntityDimensions.fixed(1f, 1f)).fireImmune().build());
 

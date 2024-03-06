@@ -13,16 +13,11 @@ import net.minecraft.entity.mob.HostileEntity;
 import net.minecraft.entity.passive.*;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.world.World;
-import software.bernie.geckolib.animatable.GeoEntity;
 import software.bernie.geckolib.core.animatable.GeoAnimatable;
-import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
-import software.bernie.geckolib.core.animatable.instance.SingletonAnimatableInstanceCache;
 import software.bernie.geckolib.core.animation.*;
 import software.bernie.geckolib.core.object.PlayState;
 
-public class OrcMageEntity extends ModOrcEntity implements GeoEntity {
-    private final AnimatableInstanceCache cache = new SingletonAnimatableInstanceCache(this);
-
+public class OrcMageEntity extends ModOrcEntity {
     public static final RawAnimation WALK = RawAnimation.begin().then("move.walk", Animation.LoopType.LOOP);
     public static final RawAnimation IDLE = RawAnimation.begin().then("move.idle", Animation.LoopType.LOOP);
 
@@ -118,14 +113,5 @@ public class OrcMageEntity extends ModOrcEntity implements GeoEntity {
                 super.tryAttack(target);
             }
         }
-    }
-
-    @Override
-    public AnimatableInstanceCache getAnimatableInstanceCache() {
-        return cache;
-    }
-
-    private double getSquaredMaxAttackDistance(LivingEntity entity) {
-        return this.getWidth() * 2.0F * this.getWidth() * 2.0F + entity.getWidth();
     }
 }

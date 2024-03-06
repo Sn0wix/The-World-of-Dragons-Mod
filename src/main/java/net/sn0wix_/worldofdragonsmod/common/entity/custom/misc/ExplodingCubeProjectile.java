@@ -21,6 +21,7 @@ import net.minecraft.world.World;
 import net.minecraft.world.explosion.Explosion;
 import net.sn0wix_.worldofdragonsmod.client.particle.ParticleSpawnUtil;
 import net.sn0wix_.worldofdragonsmod.common.networking.ModPackets;
+import net.sn0wix_.worldofdragonsmod.common.networking.packets.ExplodingCubeParticlesPacket;
 
 public class ExplodingCubeProjectile extends ExplosiveProjectileEntity {
     public ParticleEffect mainParticle = ParticleTypes.FLAME;
@@ -36,7 +37,7 @@ public class ExplodingCubeProjectile extends ExplosiveProjectileEntity {
     public void tick() {
         super.tick();
 
-        if (!world.isClient()) {
+        if (!getWorld().isClient()) {
             ticksToExplode--;
 
             if (ticksToExplode <= 0) {
@@ -54,19 +55,17 @@ public class ExplodingCubeProjectile extends ExplosiveProjectileEntity {
     }
 
     private void createExplosion() {
-        world.createExplosion(this, getDamageSources().create(DamageTypes.EXPLOSION), new NoBlocksDestroyBehavior(), getPos(), 1.5f, true, World.ExplosionSourceType.BLOCK);
-        if (!world.isClient()) {
-            world.getPlayers().forEach(player -> {
+        getWorld().createExplosion(this, getDamageSources().create(DamageTypes.EXPLOSION), new NoBlocksDestroyBehavior(), getPos(), 1.5f, true, World.ExplosionSourceType.BLOCK);
+        if (!getWorld().isClient()) {
+            getWorld().getPlayers().forEach(player -> {
                 if (player.isInRange(this, 256)) {
-                    PacketByteBuf buffer = PacketByteBufs.create();
-                    buffer.writeInt(this.getId());
-                    ServerPlayNetworking.send((ServerPlayerEntity) player, ModPackets.EXPLODING_CUBE_PARTICLES, buffer);
+                    ExplodingCubeParticlesPacket.send(this.getId(), (ServerPlayerEntity) player);
                 }
             });
         }
 
-        world.playSound(null, getX(), getY(), getZ(), SoundEvents.BLOCK_STONE_BREAK, SoundCategory.BLOCKS, 8f, 1);
-        world.playSound(null, getX(), getY(), getZ(), SoundEvents.ENTITY_GENERIC_BURN, SoundCategory.BLOCKS, 1.5f, 1);
+        getWorld().playSound(null, getX(), getY(), getZ(), SoundEvents.BLOCK_STONE_BREAK, SoundCategory.BLOCKS, 8f, 1);
+        getWorld().playSound(null, getX(), getY(), getZ(), SoundEvents.ENTITY_GENERIC_BURN, SoundCategory.BLOCKS, 1.5f, 1);
         this.remove(RemovalReason.KILLED);
     }
 
@@ -75,13 +74,13 @@ public class ExplodingCubeProjectile extends ExplosiveProjectileEntity {
     }
 
     public void spawnIdleParticles() {
-        world.addParticle(mainParticle, getX(), getRandomBodyY(), getZ(), getRandomDouble(20), getRandomDouble(20), getRandomDouble(20));
+        getWorld().addParticle(mainParticle, getX(), getRandomBodyY(), getZ(), getRandomDouble(20), getRandomDouble(20), getRandomDouble(20));
 
         for (int i = 0; i < 5; i++) {
-            world.addParticle(secondaryParticle, getX() + getRandomDoubleBetween(getBoundingBox().minX, getBoundingBox().maxX), getRandomBodyY(), getZ() + getRandomDoubleBetween(getBoundingBox().minZ, getBoundingBox().maxZ), getRandomDouble(20), getRandomDouble(20), getRandomDouble(20));
+            getWorld().addParticle(secondaryParticle, getX() + getRandomDoubleBetween(getBoundingBox().minX, getBoundingBox().maxX), getRandomBodyY(), getZ() + getRandomDoubleBetween(getBoundingBox().minZ, getBoundingBox().maxZ), getRandomDouble(20), getRandomDouble(20), getRandomDouble(20));
         }
         if (random.nextInt(15) == 1) {
-            world.addParticle(additionParticle, getX(), getY(), getZ(), 0, 0, 0);
+            getWorld().addParticle(additionParticle, getX(), getY(), getZ(), 0, 0, 0);
         }
     }
 
