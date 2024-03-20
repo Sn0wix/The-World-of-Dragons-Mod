@@ -2,8 +2,6 @@ package net.sn0wix_.worldofdragonsmod.common;
 
 import net.fabricmc.api.ModInitializer;
 import net.sn0wix_.worldofdragonsmod.common.blocks.ModBlocks;
-import net.sn0wix_.worldofdragonsmod.common.config.Config;
-import net.sn0wix_.worldofdragonsmod.common.config.ConfigFile;
 import net.sn0wix_.worldofdragonsmod.common.effect.ModEffects;
 import net.sn0wix_.worldofdragonsmod.common.entity.ModEntities;
 import net.sn0wix_.worldofdragonsmod.common.item.ModItemGroup;
@@ -16,19 +14,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import software.bernie.geckolib.GeckoLib;
 
-public class WorldOfDragonsMain implements ModInitializer {
-    public static final Logger LOGGER = LoggerFactory.getLogger(WorldOfDragonsMain.MOD_ID);
+public class WorldOfDragons implements ModInitializer {
+    public static final Logger LOGGER = LoggerFactory.getLogger(WorldOfDragons.MOD_ID);
     public static final String MOD_ID = "worldofdragonsmod";
-    public static Config CONFIG;
 
     @Override
     public void onInitialize() {
-        if (ConfigFile.checkConfig()) {
-            CONFIG = ConfigFile.readConfig();
-        } else {
-            CONFIG = new Config();
-        }
-
         ModItems.registerModItems();
         ModBlocks.registerModBlocks();
         ModEffects.registerEffects();

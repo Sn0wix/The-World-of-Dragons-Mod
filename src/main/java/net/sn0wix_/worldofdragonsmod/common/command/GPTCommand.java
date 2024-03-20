@@ -9,7 +9,7 @@ import net.minecraft.command.argument.EntityArgumentType;
 import net.minecraft.server.command.CommandManager;
 import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.text.Text;
-import net.sn0wix_.worldofdragonsmod.common.WorldOfDragonsMain;
+import net.sn0wix_.worldofdragonsmod.common.WorldOfDragons;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -31,9 +31,10 @@ public class GPTCommand {
     }
 
     public static String sendAiMessage(String message) {
-        String url = WorldOfDragonsMain.CONFIG.gptUrl;
-        String apiKey = WorldOfDragonsMain.CONFIG.openAiApiKey;
-        String model = WorldOfDragonsMain.CONFIG.gptModel;
+        //TODO
+        String url = "";
+        String apiKey = "";
+        String model = "";
 
         if (url.isEmpty() || apiKey.isEmpty() || model.isEmpty()) {
             return "Sorry, can not contact ChatGPT because config is incomplete. Please contact the server administrator to fix this issue.";

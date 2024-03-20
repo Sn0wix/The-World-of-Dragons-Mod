@@ -9,14 +9,14 @@ import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
-import net.sn0wix_.worldofdragonsmod.common.WorldOfDragonsMain;
+import net.sn0wix_.worldofdragonsmod.common.WorldOfDragons;
 
 import java.util.ArrayList;
 
 public class ModItemGroup {
     private static final ArrayList<Item> ITEMS = new ArrayList<>(64);
 
-    public static final ItemGroup WORLD_OF_DRAGONS_ITEM_GROUP = Registry.register(Registries.ITEM_GROUP, new Identifier(WorldOfDragonsMain.MOD_ID,
+    public static final ItemGroup WORLD_OF_DRAGONS_ITEM_GROUP = Registry.register(Registries.ITEM_GROUP, new Identifier(WorldOfDragons.MOD_ID,
                     "world_of_dragons_item_group"), FabricItemGroup.builder()
             .displayName(Text.translatable("itemGroup.worldofdragonsmod.world_of_dragons_item_group"))
             .icon(() -> new ItemStack(Items.DRAGON_HEAD)).entries(ModItemGroup::addEntries).build());
@@ -28,7 +28,7 @@ public class ModItemGroup {
     }
 
     public static void registerItemGroup() {
-        WorldOfDragonsMain.LOGGER.info("Registering item group for " + WorldOfDragonsMain.MOD_ID);
+        WorldOfDragons.LOGGER.info("Registering item group for " + WorldOfDragons.MOD_ID);
     }
 
     public static void addToGroup(Item item) {

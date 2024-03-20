@@ -9,7 +9,7 @@ import net.minecraft.item.Item;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
-import net.sn0wix_.worldofdragonsmod.common.WorldOfDragonsMain;
+import net.sn0wix_.worldofdragonsmod.common.WorldOfDragons;
 import net.sn0wix_.worldofdragonsmod.common.blocks.custom.ChargeBlock;
 import net.sn0wix_.worldofdragonsmod.common.item.ModItemGroup;
 
@@ -22,15 +22,15 @@ public class ModBlocks {
 
     private static Block registerBlock(String name, Block block) {
         registerBlockItem(name, block);
-        return Registry.register(Registries.BLOCK, new Identifier(WorldOfDragonsMain.MOD_ID, name), block);
+        return Registry.register(Registries.BLOCK, new Identifier(WorldOfDragons.MOD_ID, name), block);
     }
 
     private static void registerBlockItem(String name, Block block) {
-        Item item = Registry.register(Registries.ITEM, new Identifier(WorldOfDragonsMain.MOD_ID, name), new BlockItem(block, new FabricItemSettings()));
+        Item item = Registry.register(Registries.ITEM, new Identifier(WorldOfDragons.MOD_ID, name), new BlockItem(block, new FabricItemSettings()));
         ModItemGroup.addToGroup(item);
     }
 
     public static void registerModBlocks() {
-        WorldOfDragonsMain.LOGGER.info("Registerion Mod Blocks for " + WorldOfDragonsMain.MOD_ID);
+        WorldOfDragons.LOGGER.info("Registerion Mod Blocks for " + WorldOfDragons.MOD_ID);
     }
 }

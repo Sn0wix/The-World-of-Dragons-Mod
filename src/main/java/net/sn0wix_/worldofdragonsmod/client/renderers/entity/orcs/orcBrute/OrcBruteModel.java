@@ -1,7 +1,7 @@
 package net.sn0wix_.worldofdragonsmod.client.renderers.entity.orcs.orcBrute;
 
 import net.minecraft.util.Identifier;
-import net.sn0wix_.worldofdragonsmod.common.WorldOfDragonsMain;
+import net.sn0wix_.worldofdragonsmod.common.WorldOfDragons;
 import net.sn0wix_.worldofdragonsmod.common.entity.custom.orcs.OrcBruteEntity;
 import software.bernie.geckolib.constant.DataTickets;
 import software.bernie.geckolib.core.animatable.model.CoreGeoBone;
@@ -10,10 +10,10 @@ import software.bernie.geckolib.model.GeoModel;
 import software.bernie.geckolib.model.data.EntityModelData;
 
 public class OrcBruteModel extends GeoModel<OrcBruteEntity> {
-    public static final Identifier MODEL_RESOURCE = new Identifier(WorldOfDragonsMain.MOD_ID, "geo/orc_brute.geo.json");
-    public static final Identifier TEXTURE_RESOURCE = new Identifier(WorldOfDragonsMain.MOD_ID, "textures/entity/orc_brute/orc_brute.png");
-    public static final Identifier INFECTED_TEXTURE_RESOURCE = new Identifier(WorldOfDragonsMain.MOD_ID, "textures/entity/orc_brute/orc_brute_infected.png");
-    public static final Identifier ANIMATION_RESOURCE = new Identifier(WorldOfDragonsMain.MOD_ID, "animations/orc_brute.animation.json");
+    public static final Identifier MODEL_RESOURCE = new Identifier(WorldOfDragons.MOD_ID, "geo/orc_brute.geo.json");
+    public static final Identifier TEXTURE_RESOURCE = new Identifier(WorldOfDragons.MOD_ID, "textures/entity/orc_brute/orc_brute.png");
+    public static final Identifier INFECTED_TEXTURE_RESOURCE = new Identifier(WorldOfDragons.MOD_ID, "textures/entity/orc_brute/orc_brute_infected.png");
+    public static final Identifier ANIMATION_RESOURCE = new Identifier(WorldOfDragons.MOD_ID, "animations/orc_brute.animation.json");
 
     @Override
     public Identifier getModelResource(OrcBruteEntity animatable) {

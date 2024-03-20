@@ -7,10 +7,10 @@ import net.minecraft.client.render.entity.model.EntityModelLayer;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.Identifier;
-import net.sn0wix_.worldofdragonsmod.common.WorldOfDragonsMain;
+import net.sn0wix_.worldofdragonsmod.common.WorldOfDragons;
 
 public class ExplodingCubeProjectileModel<T extends Entity> extends EntityModel<T> {
-    public static final EntityModelLayer LAYER_LOCATION = new EntityModelLayer(new Identifier(WorldOfDragonsMain.MOD_ID, "exploding_cube_entity"), "block");
+    public static final EntityModelLayer LAYER_LOCATION = new EntityModelLayer(new Identifier(WorldOfDragons.MOD_ID, "exploding_cube_entity"), "block");
 
     private final ModelPart block;
 

@@ -23,7 +23,7 @@ public class PlayerNPCRenderer extends LivingEntityRenderer<PlayerNPCEntity, Pla
 
     public PlayerNPCRenderer(EntityRendererFactory.Context context, Identifier texture, boolean slim) {
         super(context, new PlayerEntityModel<>(context.getPart(slim ? EntityModelLayers.PLAYER_SLIM : EntityModelLayers.PLAYER), slim), 0.5f);
-        this.addFeature(new ArmorFeatureRenderer(this, new ArmorEntityModel(context.getPart(slim ? EntityModelLayers.PLAYER_SLIM_INNER_ARMOR : EntityModelLayers.PLAYER_INNER_ARMOR)), new ArmorEntityModel(context.getPart(slim ? EntityModelLayers.PLAYER_SLIM_OUTER_ARMOR : EntityModelLayers.PLAYER_OUTER_ARMOR)), context.getModelManager()));
+        this.addFeature(new ArmorFeatureRenderer<>(this, new ArmorEntityModel(context.getPart(slim ? EntityModelLayers.PLAYER_SLIM_INNER_ARMOR : EntityModelLayers.PLAYER_INNER_ARMOR)), new ArmorEntityModel(context.getPart(slim ? EntityModelLayers.PLAYER_SLIM_OUTER_ARMOR : EntityModelLayers.PLAYER_OUTER_ARMOR)), context.getModelManager()));
         this.addFeature(new HeldItemFeatureRenderer<>(this, context.getHeldItemRenderer()));
         this.addFeature(new StuckArrowsFeatureRenderer<>(context, this));
         this.addFeature(new HeadFeatureRenderer<>(this, context.getModelLoader(), context.getHeldItemRenderer()));
@@ -49,7 +49,7 @@ public class PlayerNPCRenderer extends LivingEntityRenderer<PlayerNPCEntity, Pla
     }
 
     private void setModelPose(PlayerNPCEntity player) {
-        PlayerEntityModel playerEntityModel = this.getModel();
+        PlayerEntityModel<PlayerNPCEntity> playerEntityModel = this.getModel();
         if (player.isSpectator()) {
             playerEntityModel.setVisible(false);
             playerEntityModel.head.visible = true;

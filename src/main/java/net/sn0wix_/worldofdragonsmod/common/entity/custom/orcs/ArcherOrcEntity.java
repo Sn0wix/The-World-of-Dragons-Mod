@@ -15,7 +15,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.world.World;
-import net.sn0wix_.worldofdragonsmod.common.WorldOfDragonsMain;
+import net.sn0wix_.worldofdragonsmod.common.WorldOfDragons;
 import software.bernie.geckolib.core.animatable.GeoAnimatable;
 import software.bernie.geckolib.core.animation.*;
 import software.bernie.geckolib.core.object.PlayState;
@@ -145,7 +145,7 @@ public class ArcherOrcEntity extends ModOrcEntity implements RangedAttackMob {
 
     @Override
     public void shootAt(LivingEntity target, float pullProgress) {
-        WorldOfDragonsMain.LOGGER.info("shoot");
+        WorldOfDragons.LOGGER.info("shoot");
         if (meleeAttackTicksLeft == 0 && !this.getWorld().isClient && meleeAttackAnimTicksLeft == 0 && shootAttackAnimTicksLeft == 0 && shootAttackTicksLeft == 0 && shooting) {
             this.triggerAnim("controller", "attack_shoot");
             this.shootAttackTicksLeft = 26;

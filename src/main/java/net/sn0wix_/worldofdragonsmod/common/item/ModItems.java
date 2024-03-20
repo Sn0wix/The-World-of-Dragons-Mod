@@ -1,12 +1,11 @@
 package net.sn0wix_.worldofdragonsmod.common.item;
 
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
-import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.minecraft.item.*;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
-import net.sn0wix_.worldofdragonsmod.common.WorldOfDragonsMain;
+import net.sn0wix_.worldofdragonsmod.common.WorldOfDragons;
 import net.sn0wix_.worldofdragonsmod.common.item.custom.*;
 import net.sn0wix_.worldofdragonsmod.common.sounds.ModSounds;
 
@@ -41,7 +40,7 @@ public class ModItems {
     public static final Item GHOST_GEL = registerItem("ghost_gel", new Item(new FabricItemSettings()));
     public static final Item MEAT = registerItem("meat", new Item(new FabricItemSettings()));
     public static final Item LAVA_ROCK = registerItem("lava_rock", new Item(new FabricItemSettings()));
-    public static final Item WITHERED_MEAT = registerItem("red_meat", new Item(new FabricItemSettings()));
+    public static final Item WITHERED_MEAT = registerItem("withered_meat", new Item(new FabricItemSettings()));
     public static final Item BUNDLE_OF_SEA_WHEAT = registerItem("bundle_of_sea_wheat", new Item(new FabricItemSettings()));
     public static final Item POWDERED_SAND = registerItem("powdered_sand", new Item(new FabricItemSettings()));
     public static final Item COMMON_LOOT = registerItem("common_loot", new Item(new FabricItemSettings()));
@@ -77,12 +76,12 @@ public class ModItems {
 
 
     private static Item registerItem(String name, Item item) {
-        Item item1 = Registry.register(Registries.ITEM, new Identifier(WorldOfDragonsMain.MOD_ID, name), item);
+        Item item1 = Registry.register(Registries.ITEM, new Identifier(WorldOfDragons.MOD_ID, name), item);
         ModItemGroup.addToGroup(item);
         return item1;
     }
 
     public static void registerModItems() {
-        WorldOfDragonsMain.LOGGER.info("Registering Mod Items for " + WorldOfDragonsMain.MOD_ID);
+        WorldOfDragons.LOGGER.info("Registering Mod Items for " + WorldOfDragons.MOD_ID);
     }
 }

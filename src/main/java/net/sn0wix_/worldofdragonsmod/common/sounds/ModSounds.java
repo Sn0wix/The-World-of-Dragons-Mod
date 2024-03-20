@@ -4,7 +4,7 @@ import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.util.Identifier;
-import net.sn0wix_.worldofdragonsmod.common.WorldOfDragonsMain;
+import net.sn0wix_.worldofdragonsmod.common.WorldOfDragons;
 
 public class ModSounds {
     public static final SoundEvent BOSS_FINAL_2 = registerSoundEvent("boss_final_1");
@@ -51,11 +51,11 @@ public class ModSounds {
 
 
     private static SoundEvent registerSoundEvent(String name) {
-        Identifier id = new Identifier(WorldOfDragonsMain.MOD_ID, name);
+        Identifier id = new Identifier(WorldOfDragons.MOD_ID, name);
         return Registry.register(Registries.SOUND_EVENT, id, SoundEvent.of(id));
     }
 
     public static void registerModSounds(){
-        WorldOfDragonsMain.LOGGER.info("Registering sounds for " + WorldOfDragonsMain.MOD_ID);
+        WorldOfDragons.LOGGER.info("Registering sounds for " + WorldOfDragons.MOD_ID);
     }
 }

@@ -21,7 +21,7 @@
   "environment": "*",
   "entrypoints": {
     "main": [
-      "net.sn0wix_.worldofdragonsmod.common.WorldOfDragonsMain"
+      "net.sn0wix_.worldofdragonsmod.common.WorldOfDragons"
     ],
     "client": [
       "net.sn0wix_.worldofdragonsmod.client.WorldOfDragonsClient"

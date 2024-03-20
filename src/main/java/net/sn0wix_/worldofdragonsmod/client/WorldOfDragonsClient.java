@@ -5,12 +5,12 @@ import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.minecraft.util.Identifier;
 import net.sn0wix_.worldofdragonsmod.client.renderers.entity.misc.playerNPC.PlayerNPCRenderer;
-import net.sn0wix_.worldofdragonsmod.common.WorldOfDragonsMain;
+import net.sn0wix_.worldofdragonsmod.common.WorldOfDragons;
 import net.sn0wix_.worldofdragonsmod.common.entity.ModEntities;
 import net.sn0wix_.worldofdragonsmod.client.renderers.entity.hostile.lavaElemental.LavaElementalModel;
 import net.sn0wix_.worldofdragonsmod.client.renderers.entity.misc.explodingCubeProjectile.ExplodingCubeProjectileModel;
 import net.sn0wix_.worldofdragonsmod.client.renderers.entity.misc.explodingCubeProjectile.ExplodingCubeProjectileRenderer;
-import net.sn0wix_.worldofdragonsmod.client.renderers.entity.misc.ironChest.ModChestEntityRenderer;
+import net.sn0wix_.worldofdragonsmod.client.renderers.entity.misc.ironChest.ModChestEntityModel;
 import net.sn0wix_.worldofdragonsmod.client.renderers.entity.orcs.archerOrc.ArcherOrcModel;
 import net.sn0wix_.worldofdragonsmod.client.renderers.entity.orcs.armoredOrc.ArmoredOrcModel;
 import net.sn0wix_.worldofdragonsmod.client.renderers.entity.orcs.flyerOrc.FlyerOrcModel;
@@ -36,12 +36,13 @@ public class WorldOfDragonsClient implements ClientModInitializer {
         EntityRendererRegistry.register(ModEntities.LAVA_ELEMENTAL, ctx -> new GeoEntityRenderer<>(ctx, new LavaElementalModel()));
         //EntityRendererRegistry.register(ModEntities.ORC_WARG, OrcWargRenderer::new);
 
-        EntityRendererRegistry.register(ModEntities.SN0WIX_, ctx -> new PlayerNPCRenderer(ctx, new Identifier(WorldOfDragonsMain.MOD_ID, "textures/entity/players/sn0wix_.png"), true));
-        EntityRendererRegistry.register(ModEntities.BUBBAGUMP7, ctx -> new PlayerNPCRenderer(ctx, new Identifier(WorldOfDragonsMain.MOD_ID, "textures/entity/players/bubbagump7.png"), false));
-        EntityRendererRegistry.register(ModEntities.BOUQUETZ, ctx -> new PlayerNPCRenderer(ctx, new Identifier(WorldOfDragonsMain.MOD_ID, "textures/entity/players/bouquetz.png"), false));
+        EntityRendererRegistry.register(ModEntities.SN0WIX_, ctx -> new PlayerNPCRenderer(ctx, new Identifier(WorldOfDragons.MOD_ID, "textures/entity/players/sn0wix_.png"), true));
+        EntityRendererRegistry.register(ModEntities.BUBBAGUMP7, ctx -> new PlayerNPCRenderer(ctx, new Identifier(WorldOfDragons.MOD_ID, "textures/entity/players/bubbagump7.png"), false));
+        EntityRendererRegistry.register(ModEntities.BOUQUETZ, ctx -> new PlayerNPCRenderer(ctx, new Identifier(WorldOfDragons.MOD_ID, "textures/entity/players/bouquetz.png"), false));
 
 
-        EntityRendererRegistry.register(ModEntities.IRON_CHEST_ENTITY, ctx -> new GeoEntityRenderer<>(ctx, new ModChestEntityRenderer()));
+        EntityRendererRegistry.register(ModEntities.IRON_CHEST_ENTITY, ctx -> new GeoEntityRenderer<>(ctx, new ModChestEntityModel("geo/iron_chest.geo.json", "textures/entity/iron_chest/iron_chest.png",
+                "animations/iron_chest.animation.json")));
 
         EntityModelLayerRegistry.registerModelLayer(ExplodingCubeProjectileModel.LAYER_LOCATION, ExplodingCubeProjectileModel::getTexturedModelData);
         EntityRendererRegistry.register(ModEntities.EXPLODING_MAGMA_PROJECTILE, ctx -> new ExplodingCubeProjectileRenderer(ctx, new Identifier("minecraft", "textures/block/magma.png")));
