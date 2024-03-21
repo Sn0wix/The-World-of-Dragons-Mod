@@ -1,14 +1,11 @@
-package net.sn0wix_.worldofdragonsmod.common.entity.custom.misc;
+package net.sn0wix_.worldofdragonsmod.common.entity.custom.misc.projectile;
 
-import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
-import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.block.BlockState;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.damage.DamageTypes;
 import net.minecraft.entity.projectile.ExplosiveProjectileEntity;
 import net.minecraft.nbt.NbtCompound;
-import net.minecraft.network.PacketByteBuf;
 import net.minecraft.particle.ParticleEffect;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.server.network.ServerPlayerEntity;
@@ -20,8 +17,9 @@ import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 import net.minecraft.world.explosion.Explosion;
 import net.sn0wix_.worldofdragonsmod.client.particle.ParticleSpawnUtil;
-import net.sn0wix_.worldofdragonsmod.common.networking.ModPackets;
-import net.sn0wix_.worldofdragonsmod.common.networking.packets.ExplodingCubeParticlesPacket;
+import net.sn0wix_.worldofdragonsmod.client.particle.packetDecoders.EntityParticlePacketDecoder;
+import net.sn0wix_.worldofdragonsmod.client.particle.packetDecoders.ExplodingCubeProjectileParticleDecoder;
+import net.sn0wix_.worldofdragonsmod.common.networking.packets.s2c.particles.PacketParticleTypes;
 
 public class ExplodingCubeProjectile extends ExplosiveProjectileEntity {
     public ParticleEffect mainParticle = ParticleTypes.FLAME;
@@ -59,7 +57,7 @@ public class ExplodingCubeProjectile extends ExplosiveProjectileEntity {
         if (!getWorld().isClient()) {
             getWorld().getPlayers().forEach(player -> {
                 if (player.isInRange(this, 256)) {
-                    ExplodingCubeParticlesPacket.send(this.getId(), (ServerPlayerEntity) player);
+                    EntityParticlePacketDecoder.sendToClient(this.getId(), (ServerPlayerEntity) player, PacketParticleTypes.EXPLODING_PROJECTILE);
                 }
             });
         }

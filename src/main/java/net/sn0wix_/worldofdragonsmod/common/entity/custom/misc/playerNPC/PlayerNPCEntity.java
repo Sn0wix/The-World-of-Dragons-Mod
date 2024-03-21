@@ -15,7 +15,7 @@ import org.jetbrains.annotations.Nullable;
 public class PlayerNPCEntity extends PathAwareEntity {
     public final Text NAME;
 
-    public PlayerNPCEntity(EntityType<? extends PathAwareEntity> entityType, World world, Text name) {
+    public PlayerNPCEntity(EntityType<PathAwareEntity> entityType, World world, Text name) {
         super(entityType, world);
         NAME = name;
     }

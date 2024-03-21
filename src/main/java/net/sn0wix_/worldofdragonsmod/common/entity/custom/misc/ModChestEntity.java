@@ -1,9 +1,9 @@
 package net.sn0wix_.worldofdragonsmod.common.entity.custom.misc;
 
+import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.damage.DamageSource;
-import net.minecraft.entity.damage.DamageSources;
 import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
@@ -13,13 +13,18 @@ import net.minecraft.loot.context.LootContextParameterSet;
 import net.minecraft.loot.context.LootContextParameters;
 import net.minecraft.loot.context.LootContextTypes;
 import net.minecraft.nbt.NbtCompound;
+import net.minecraft.network.PacketByteBuf;
+import net.minecraft.registry.Registries;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.Identifier;
 import net.minecraft.world.World;
+import net.sn0wix_.worldofdragonsmod.client.particle.packetDecoders.ExplodingCubeProjectileParticleDecoder;
 import net.sn0wix_.worldofdragonsmod.common.WorldOfDragons;
+import net.sn0wix_.worldofdragonsmod.common.networking.packets.s2c.particles.PacketParticleTypes;
+import net.sn0wix_.worldofdragonsmod.common.networking.packets.s2c.particles.SpawnParticlesPacket;
 import software.bernie.geckolib.animatable.GeoEntity;
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
 import software.bernie.geckolib.core.animatable.instance.SingletonAnimatableInstanceCache;
@@ -40,7 +45,7 @@ public class ModChestEntity extends Entity implements GeoEntity {
     public ModChestEntity(EntityType<?> type, World world, String animation) {
         super(type, world);
         this.OPEN_ANIMATION = RawAnimation.begin().thenPlayAndHold(animation);
-        LOOT_TABLE = new Identifier(WorldOfDragons.MOD_ID, "chests/" + type.getName().getString());
+        LOOT_TABLE = new Identifier(WorldOfDragons.MOD_ID, "chests/" + Registries.ENTITY_TYPE.getId(type).getPath());
     }
 
     @Override
@@ -91,43 +96,18 @@ public class ModChestEntity extends Entity implements GeoEntity {
         }
     }
 
-
-    //Not so important things
     @Override
     public void kill() {
-        super.kill();
+        if (!getWorld().isClient) {
+            getWorld().getPlayers().forEach(player -> {
+                if (player.isInRange(this, 256)) {
+                    ExplodingCubeProjectileParticleDecoder.sendToClient(this.getId(), (ServerPlayerEntity) player, PacketParticleTypes.CHEST_BREAK);
+                }
+            });
+        }
+
         dropLoot(this.getDamageSources().genericKill(), true);
-    }
-
-    @Override
-    public boolean canHit() {
-        return true;
-    }
-
-    @Override
-    protected void initDataTracker() {
-        dataTracker.startTracking(IS_OPENED, false);
-    }
-
-    public void setOpened() {
-        dataTracker.set(IS_OPENED, true);
-        openedFor = maxOpenTicks;
-    }
-
-    @Override
-    public void pushAwayFrom(Entity entity) {
-    }
-
-    @Override
-    protected void readCustomDataFromNbt(NbtCompound nbt) {
-        dataTracker.set(IS_OPENED, nbt.getBoolean("IsOpened"));
-        openedFor = nbt.getInt("OpenedFor");
-    }
-
-    @Override
-    protected void writeCustomDataToNbt(NbtCompound nbt) {
-        nbt.putBoolean("IsOpened", true);
-        nbt.putInt("OpenedFor", openedFor);
+        super.kill();
     }
 
 
@@ -145,5 +125,37 @@ public class ModChestEntity extends Entity implements GeoEntity {
     @Override
     public AnimatableInstanceCache getAnimatableInstanceCache() {
         return cache;
+    }
+
+
+    //Not so important things
+    @Override
+    public boolean canHit() {
+        return true;
+    }
+
+    @Override
+    protected void initDataTracker() {
+        dataTracker.startTracking(IS_OPENED, false);
+    }
+
+    public void setOpened() {
+        dataTracker.set(IS_OPENED, true);
+        openedFor = maxOpenTicks;
+    }
+
+    @Override
+    public void pushAwayFrom(Entity entity) {}
+
+    @Override
+    protected void readCustomDataFromNbt(NbtCompound nbt) {
+        dataTracker.set(IS_OPENED, nbt.getBoolean("IsOpened"));
+        openedFor = nbt.getInt("OpenedFor");
+    }
+
+    @Override
+    protected void writeCustomDataToNbt(NbtCompound nbt) {
+        nbt.putBoolean("IsOpened", true);
+        nbt.putInt("OpenedFor", openedFor);
     }
 }

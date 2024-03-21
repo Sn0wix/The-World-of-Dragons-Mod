@@ -11,13 +11,12 @@ import net.minecraft.resource.featuretoggle.FeatureFlags;
 import net.minecraft.util.Identifier;
 import net.sn0wix_.worldofdragonsmod.common.WorldOfDragons;
 import net.sn0wix_.worldofdragonsmod.common.entity.custom.hostile.LavaElementalEntity;
-import net.sn0wix_.worldofdragonsmod.common.entity.custom.misc.ExplodingCubeProjectile;
+import net.sn0wix_.worldofdragonsmod.common.entity.custom.misc.projectile.ExplodingCubeProjectile;
 import net.sn0wix_.worldofdragonsmod.common.entity.custom.misc.ModChestEntity;
 import net.sn0wix_.worldofdragonsmod.common.entity.custom.misc.playerNPC.BouquetZNPC;
 import net.sn0wix_.worldofdragonsmod.common.entity.custom.misc.playerNPC.BubbaGump7NPC;
 import net.sn0wix_.worldofdragonsmod.common.entity.custom.misc.playerNPC.Sn0wix_NPC;
 import net.sn0wix_.worldofdragonsmod.common.entity.custom.orcs.*;
-import software.bernie.geckolib.core.animation.RawAnimation;
 
 public class ModEntities {
     public static final EntityType<ArmoredOrcEntity> ARMORED_ORC = Registry.register(Registries.ENTITY_TYPE, new Identifier(WorldOfDragons.MOD_ID, "armored_orc"),

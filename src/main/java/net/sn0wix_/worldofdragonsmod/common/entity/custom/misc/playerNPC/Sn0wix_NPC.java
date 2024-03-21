@@ -7,6 +7,6 @@ import net.minecraft.world.World;
 
 public class Sn0wix_NPC extends PlayerNPCEntity {
     public Sn0wix_NPC(EntityType<? extends PathAwareEntity> entityType, World world) {
-        super(entityType, world, Text.of("Sn0wix_"));
+        super((EntityType<PathAwareEntity>) entityType, world, Text.of("Sn0wix_"));
     }
 }

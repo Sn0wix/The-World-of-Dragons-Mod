@@ -7,6 +7,6 @@ import net.minecraft.world.World;
 
 public class BubbaGump7NPC extends PlayerNPCEntity {
     public BubbaGump7NPC(EntityType<? extends PathAwareEntity> entityType, World world) {
-        super(entityType, world, Text.of("BubbaGump7"));
+        super((EntityType<PathAwareEntity>) entityType, world, Text.of("BubbaGump7"));
     }
 }

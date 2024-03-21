@@ -7,6 +7,6 @@ import net.minecraft.world.World;
 
 public class BouquetZNPC extends PlayerNPCEntity {
     public BouquetZNPC(EntityType<? extends PathAwareEntity> entityType, World world) {
-        super(entityType, world, Text.of("BouquetZ"));
+        super((EntityType<PathAwareEntity>) entityType, world, Text.of("BouquetZ"));
     }
 }

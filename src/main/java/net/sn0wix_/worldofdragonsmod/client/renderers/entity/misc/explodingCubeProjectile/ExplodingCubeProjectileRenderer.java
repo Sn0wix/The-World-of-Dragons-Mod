@@ -8,7 +8,7 @@ import net.minecraft.client.render.entity.EntityRendererFactory;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.Identifier;
-import net.sn0wix_.worldofdragonsmod.common.entity.custom.misc.ExplodingCubeProjectile;
+import net.sn0wix_.worldofdragonsmod.common.entity.custom.misc.projectile.ExplodingCubeProjectile;
 
 public class ExplodingCubeProjectileRenderer extends EntityRenderer<ExplodingCubeProjectile> {
     private final Identifier TEXTURE;

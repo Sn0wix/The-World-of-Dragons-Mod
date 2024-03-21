@@ -11,11 +11,16 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.util.math.Box;
 import net.minecraft.util.math.MathHelper;
-import net.sn0wix_.worldofdragonsmod.common.entity.custom.misc.ExplodingCubeProjectile;
+import net.sn0wix_.worldofdragonsmod.common.WorldOfDragons;
+import net.sn0wix_.worldofdragonsmod.common.entity.custom.misc.projectile.ExplodingCubeProjectile;
 
 import java.util.Random;
 
 public class ParticleSpawnUtil {
+    public static void spawnChestBreakParticles(double x, double y, double z, MinecraftClient client) {
+
+    }
+
     public static void spawnMagmaProjectileParticles(double x, double y, double z, MinecraftClient client, ExplodingCubeProjectile projectile) {
         if (client.world != null) {
             Random random = new Random();
@@ -68,10 +73,6 @@ public class ParticleSpawnUtil {
         }
     }
 
-    private static double getRandomDouble(float divisor, Random random) {
-        return random.nextBoolean() ? -random.nextDouble() / divisor : random.nextDouble() / divisor;
-    }
-
 
     public static void spawnBleedParticles(Entity entity, Random random) {
         MinecraftClient.getInstance().execute(() -> {if (entity instanceof PlayerEntity player && player.getWorld() instanceof ClientWorld clientWorld) {
@@ -84,5 +85,10 @@ public class ParticleSpawnUtil {
                 }
             }
         }});
+    }
+
+    //Helper methods
+    private static double getRandomDouble(float divisor, Random random) {
+        return random.nextBoolean() ? -random.nextDouble() / divisor : random.nextDouble() / divisor;
     }
 }
