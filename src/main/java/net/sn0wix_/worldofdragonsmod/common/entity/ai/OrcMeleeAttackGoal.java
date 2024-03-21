@@ -5,7 +5,7 @@ import net.minecraft.entity.ai.goal.Goal;
 import net.minecraft.entity.ai.pathing.Path;
 import net.minecraft.util.math.BlockPos;
 import net.sn0wix_.worldofdragonsmod.WorldOfDragonsMod;
-import net.sn0wix_.worldofdragonsmod.common.entity.custom.orcs.ModOrcEntity;
+import net.sn0wix_.worldofdragonsmod.common.entity.custom.hostile.orcs.ModOrcEntity;
 
 import java.util.EnumSet;
 

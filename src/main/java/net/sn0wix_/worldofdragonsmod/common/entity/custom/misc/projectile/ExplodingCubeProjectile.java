@@ -101,10 +101,6 @@ public class ExplodingCubeProjectile extends ExplosiveProjectileEntity {
         }
     }
 
-    private double getRandomDouble() {
-        return random.nextBoolean() ? -random.nextDouble() : random.nextDouble();
-    }
-
     private double getRandomDoubleBetween(double minValue, double maxValue) {
         if (minValue >= maxValue) {
             throw new IllegalArgumentException("Invalid range. MinValue must be less than maxValue.");

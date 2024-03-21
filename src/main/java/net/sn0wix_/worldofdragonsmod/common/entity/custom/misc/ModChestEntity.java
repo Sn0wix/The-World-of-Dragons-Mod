@@ -21,6 +21,7 @@ import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.Identifier;
 import net.minecraft.world.World;
+import net.sn0wix_.worldofdragonsmod.client.particle.packetDecoders.EntityParticlePacketDecoder;
 import net.sn0wix_.worldofdragonsmod.client.particle.packetDecoders.ExplodingCubeProjectileParticleDecoder;
 import net.sn0wix_.worldofdragonsmod.common.WorldOfDragons;
 import net.sn0wix_.worldofdragonsmod.common.networking.packets.s2c.particles.PacketParticleTypes;
@@ -77,6 +78,8 @@ public class ModChestEntity extends Entity implements GeoEntity {
             if (openedFor == 0) {
                 kill();
             }
+        } else if (openedFor < 0) {
+            super.kill();
         }
     }
 
@@ -101,7 +104,7 @@ public class ModChestEntity extends Entity implements GeoEntity {
         if (!getWorld().isClient) {
             getWorld().getPlayers().forEach(player -> {
                 if (player.isInRange(this, 256)) {
-                    ExplodingCubeProjectileParticleDecoder.sendToClient(this.getId(), (ServerPlayerEntity) player, PacketParticleTypes.CHEST_BREAK);
+                    EntityParticlePacketDecoder.sendToClient(this.getId(), (ServerPlayerEntity) player, PacketParticleTypes.CHEST_BREAK);
                 }
             });
         }
@@ -145,7 +148,8 @@ public class ModChestEntity extends Entity implements GeoEntity {
     }
 
     @Override
-    public void pushAwayFrom(Entity entity) {}
+    public void pushAwayFrom(Entity entity) {
+    }
 
     @Override
     protected void readCustomDataFromNbt(NbtCompound nbt) {

@@ -7,7 +7,6 @@ import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayNetworkHandler;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.server.network.ServerPlayerEntity;
-import net.sn0wix_.worldofdragonsmod.common.WorldOfDragons;
 import net.sn0wix_.worldofdragonsmod.common.networking.ModPackets;
 
 public class SpawnParticlesPacket {
@@ -16,8 +15,7 @@ public class SpawnParticlesPacket {
 
         for (PacketParticleTypes packetParticleType : PacketParticleTypes.values()) {
             if (packetParticleType.getType() == type) {
-                WorldOfDragons.LOGGER.info(String.valueOf(type));
-                minecraftClient.execute(() -> packetParticleType.execute(packetByteBuf));
+                minecraftClient.execute(() -> packetParticleType.decode(packetByteBuf));
             }
         }
     }
@@ -32,7 +30,7 @@ public class SpawnParticlesPacket {
         ServerPlayNetworking.send(player, ModPackets.SPAWN_PARTICLES, byteBuf);
     }
 
-    public static PacketByteBuf getBuf (PacketParticleTypes type) {
+    public static PacketByteBuf getBuf(PacketParticleTypes type) {
         PacketByteBuf buffer = PacketByteBufs.create();
         buffer.writeByte(type.getType());
         return buffer;

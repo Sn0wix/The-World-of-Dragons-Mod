@@ -11,7 +11,6 @@ public class ModParticles {
     public static final DefaultParticleType BLEED_PARTICLE = FabricParticleTypes.simple();
 
     public static void registerParticles(){
-        Registry.register(Registries.PARTICLE_TYPE, new Identifier(WorldOfDragons.MOD_ID, "bleed"),
-                BLEED_PARTICLE);
+        Registry.register(Registries.PARTICLE_TYPE, new Identifier(WorldOfDragons.MOD_ID, "bleed"), BLEED_PARTICLE);
     }
 }

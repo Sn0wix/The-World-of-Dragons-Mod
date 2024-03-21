@@ -9,7 +9,7 @@ import net.sn0wix_.worldofdragonsmod.common.command.GPTCommand;
 import net.sn0wix_.worldofdragonsmod.common.entity.ModEntities;
 import net.sn0wix_.worldofdragonsmod.common.entity.custom.hostile.LavaElementalEntity;
 import net.sn0wix_.worldofdragonsmod.common.entity.custom.misc.playerNPC.PlayerNPCEntity;
-import net.sn0wix_.worldofdragonsmod.common.entity.custom.orcs.*;
+import net.sn0wix_.worldofdragonsmod.common.entity.custom.hostile.orcs.*;
 
 public class ModRegisteries {
     public static void registerModStuffs() {

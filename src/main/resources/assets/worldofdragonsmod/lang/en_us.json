@@ -60,6 +60,8 @@
   "block.worldofdragonsmod.charge_block": "§d§lElectric Vein",
 
   "itemGroup.worldofdragonsmod.world_of_dragons_item_group": "§4§lWorld of Dragons Items",
+  "itemGroup.worldofdragonsmod.admin_item_group": "Admin Items",
+
 
   "item.worldofdragonsmod.chestGenerator.hasShiftDown": "§7Right-click a chest or barrel to generate items",
   "item.worldofdragonsmod.chestGenerator": "§8Press §7SHIFT§8 for more Information",

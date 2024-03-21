@@ -21,7 +21,7 @@ public enum PacketParticleTypes {
         return type;
     }
 
-    public void execute(PacketByteBuf byteBuf) {
+    public void decode(PacketByteBuf byteBuf) {
         decoder.decode(byteBuf);
     }
 }

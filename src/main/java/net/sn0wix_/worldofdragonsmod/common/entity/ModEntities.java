@@ -16,7 +16,7 @@ import net.sn0wix_.worldofdragonsmod.common.entity.custom.misc.ModChestEntity;
 import net.sn0wix_.worldofdragonsmod.common.entity.custom.misc.playerNPC.BouquetZNPC;
 import net.sn0wix_.worldofdragonsmod.common.entity.custom.misc.playerNPC.BubbaGump7NPC;
 import net.sn0wix_.worldofdragonsmod.common.entity.custom.misc.playerNPC.Sn0wix_NPC;
-import net.sn0wix_.worldofdragonsmod.common.entity.custom.orcs.*;
+import net.sn0wix_.worldofdragonsmod.common.entity.custom.hostile.orcs.*;
 
 public class ModEntities {
     public static final EntityType<ArmoredOrcEntity> ARMORED_ORC = Registry.register(Registries.ENTITY_TYPE, new Identifier(WorldOfDragons.MOD_ID, "armored_orc"),

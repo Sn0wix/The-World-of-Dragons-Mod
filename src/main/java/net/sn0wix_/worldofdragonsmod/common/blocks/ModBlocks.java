@@ -14,11 +14,10 @@ import net.sn0wix_.worldofdragonsmod.common.blocks.custom.ChargeBlock;
 import net.sn0wix_.worldofdragonsmod.common.item.ModItemGroup;
 
 public class ModBlocks {
-    public static final Block XRAY_BLOCK = registerBlock("xray_block",
-            new Block(FabricBlockSettings.copyOf(Blocks.BARRIER)));
+    public static final Block XRAY_BLOCK = registerBlock("xray_block", new Block(FabricBlockSettings.copyOf(Blocks.BARRIER)));
 
-    public static final Block CHARGE_BLOCK = registerBlock("charge_block",
-            new ChargeBlock(FabricBlockSettings.copy(Blocks.STONE)));
+    public static final Block CHARGE_BLOCK = registerBlock("charge_block", new ChargeBlock(FabricBlockSettings.copy(Blocks.STONE)));
+
 
     private static Block registerBlock(String name, Block block) {
         registerBlockItem(name, block);

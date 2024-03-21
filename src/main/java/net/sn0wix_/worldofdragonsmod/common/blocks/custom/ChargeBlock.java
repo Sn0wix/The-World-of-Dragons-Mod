@@ -17,9 +17,7 @@ public class ChargeBlock extends Block {
 
     @Override
     public void onSteppedOn(World world, BlockPos pos, BlockState state, Entity entity) {
-        if (!world.isClient && entity instanceof PlayerEntity){
-            PlayerEntity player = (PlayerEntity) entity;
-
+        if (!world.isClient && entity instanceof PlayerEntity player){
             if (player.getInventory().getMainHandStack().getItem().equals(ModItems.CHARGE_BATTERY)){
                 ItemStack itemStack = player.getInventory().getMainHandStack();
                 itemStack.damage(-1, player, (e) -> e.sendEquipmentBreakStatus(EquipmentSlot.MAINHAND));

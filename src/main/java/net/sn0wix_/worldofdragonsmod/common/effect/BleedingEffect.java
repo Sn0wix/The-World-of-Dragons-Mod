@@ -9,7 +9,7 @@ import net.sn0wix_.worldofdragonsmod.client.particle.ParticleSpawnUtil;
 import java.util.Random;
 
 public class BleedingEffect extends StatusEffect {
-    Random random = new Random();
+    public static final Random random = new Random();
     public BleedingEffect() {
         super(StatusEffectCategory.HARMFUL, 11808842);
     }

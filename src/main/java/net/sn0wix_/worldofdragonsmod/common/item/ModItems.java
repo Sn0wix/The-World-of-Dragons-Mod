@@ -24,7 +24,7 @@ public class ModItems {
     public static final Item STAMINA_UPGRADE = registerItem("stamina_upgrade", new Item(new FabricItemSettings().maxCount(1)));
 
 
-    public static final Item BIG_EMERALD = registerItem("big_emerald", new BigEmeraldItem(new FabricItemSettings()));
+    public static final Item BIG_EMERALD = registerItem("big_emerald", new FakeEnchantedItem(new FabricItemSettings()));
     public static final Item FROZEN_FISH = registerItem("frozen_fish", new Item(new FabricItemSettings()));
     public static final Item CHARGE_BATTERY = registerItem("charge_battery", new ChargeBatteryItem(ModToolMaterial.ELECTRIC, 0.0f, 1.8f, new FabricItemSettings().maxCount(1)));
     public static final Item BOTTLE_OF_ELECTRIC_CHARGE = registerItem("bottle_of_electric_charge", new Item(new FabricItemSettings().maxCount(16)));
