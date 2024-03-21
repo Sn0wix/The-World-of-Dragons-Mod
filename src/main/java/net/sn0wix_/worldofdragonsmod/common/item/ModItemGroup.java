@@ -1,6 +1,7 @@
 package net.sn0wix_.worldofdragonsmod.common.item;
 
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
+import net.minecraft.block.LightBlock;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
@@ -16,6 +17,11 @@ import java.util.ArrayList;
 public class ModItemGroup {
     private static final ArrayList<Item> ITEMS = new ArrayList<>(64);
 
+    public static final ItemGroup ADMIN_ITEM_GROUP = Registry.register(Registries.ITEM_GROUP, new Identifier(WorldOfDragons.MOD_ID,
+            "world_of_dragons_admin_item_group"), FabricItemGroup.builder()
+            .displayName(Text.translatable("itemGroup.worldofdragonsmod.admin_item_group"))
+            .icon(() -> new ItemStack(Items.COMMAND_BLOCK)).entries(ModItemGroup::addItemsToAdminGroup).build());
+
     public static final ItemGroup WORLD_OF_DRAGONS_ITEM_GROUP = Registry.register(Registries.ITEM_GROUP, new Identifier(WorldOfDragons.MOD_ID,
                     "world_of_dragons_item_group"), FabricItemGroup.builder()
             .displayName(Text.translatable("itemGroup.worldofdragonsmod.world_of_dragons_item_group"))
@@ -25,6 +31,19 @@ public class ModItemGroup {
         ITEMS.forEach(entries::add);
         ITEMS.clear();
         ITEMS.trimToSize();
+    }
+
+    private static void addItemsToAdminGroup(ItemGroup.DisplayContext displayContext, ItemGroup.Entries entries) {
+        entries.add(new ItemStack(Items.COMMAND_BLOCK));
+        entries.add(new ItemStack(Items.CHAIN_COMMAND_BLOCK));
+        entries.add(new ItemStack(Items.REPEATING_COMMAND_BLOCK));
+        entries.add(new ItemStack(Items.BARRIER));
+        entries.add(new ItemStack(Items.DEBUG_STICK));
+        entries.add(new ItemStack(Items.LIGHT));
+        entries.add(new ItemStack(Items.COMMAND_BLOCK_MINECART));
+        entries.add(new ItemStack(Items.STRUCTURE_BLOCK));
+        entries.add(new ItemStack(Items.JIGSAW));
+        entries.add(new ItemStack(Items.STRUCTURE_VOID));
     }
 
     public static void registerItemGroup() {
