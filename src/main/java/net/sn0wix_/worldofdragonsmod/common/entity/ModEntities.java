@@ -19,6 +19,7 @@ import net.sn0wix_.worldofdragonsmod.common.entity.custom.misc.playerNPC.Sn0wix_
 import net.sn0wix_.worldofdragonsmod.common.entity.custom.hostile.orcs.*;
 
 public class ModEntities {
+    //Orcs
     public static final EntityType<ArmoredOrcEntity> ARMORED_ORC = Registry.register(Registries.ENTITY_TYPE, new Identifier(WorldOfDragons.MOD_ID, "armored_orc"),
             FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, ArmoredOrcEntity::new).dimensions(EntityDimensions.fixed(1.3f, 2.5f)).build());
 
@@ -46,10 +47,15 @@ public class ModEntities {
     /*public static final EntityType<OrcWargEntity> ORC_WARG = Registry.register(Registries.ENTITY_TYPE, new Identifier(WorldOfDragonsMod.MOD_ID, "orc_warg"),
             FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, OrcWargEntity::new).dimensions(EntityDimensions.fixed(1.3f, 2.2f)).build());*/
 
+
+
+    //Other hostile mobs
     public static final EntityType<LavaElementalEntity> LAVA_ELEMENTAL = Registry.register(Registries.ENTITY_TYPE, new Identifier(WorldOfDragons.MOD_ID, "lava_elemental"),
             FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, LavaElementalEntity::new).dimensions(EntityDimensions.fixed(3f, 4.4f)).build());
 
 
+
+    //player npcs
     public static final EntityType<Sn0wix_NPC> SN0WIX_ = Registry.register(Registries.ENTITY_TYPE, new Identifier(WorldOfDragons.MOD_ID, "sn0wix_"),
             FabricEntityTypeBuilder.create(SpawnGroup.CREATURE, Sn0wix_NPC::new).dimensions(EntityDimensions.fixed(0.6f, 1.8f)).build());
 
@@ -60,12 +66,20 @@ public class ModEntities {
             FabricEntityTypeBuilder.create(SpawnGroup.CREATURE, BouquetZNPC::new).dimensions(EntityDimensions.fixed(0.6f, 1.8f)).build());
 
 
-    public static final EntityType<ModChestEntity> IRON_CHEST_ENTITY = Registry.register(Registries.ENTITY_TYPE, new Identifier(WorldOfDragons.MOD_ID, "iron_chest"),
-            getModChestEntityType((type, world) -> new ModChestEntity(type, world, "animation.iron_chest.open")));
 
+    //chests
+    public static final EntityType<ModChestEntity> IRON_CHEST_ENTITY = Registry.register(Registries.ENTITY_TYPE, new Identifier(WorldOfDragons.MOD_ID, "iron_chest"),
+            getModChestEntityType((type, world) -> new ModChestEntity(type, world, "animation.iron_chest.open", 90)));
+    public static final EntityType<ModChestEntity> COMMON_CHEST_ENTITY = Registry.register(Registries.ENTITY_TYPE, new Identifier(WorldOfDragons.MOD_ID, "common_chest"),
+            getModChestEntityType((type, world) -> new ModChestEntity(type, world, "animation.common_chest.open", 83)));
+
+
+    //projectiles
     public static final EntityType<ExplodingCubeProjectile> EXPLODING_MAGMA_PROJECTILE = Registry.register(Registries.ENTITY_TYPE, new Identifier(WorldOfDragons.MOD_ID, "exploding_magma_projectile"),
             FabricEntityTypeBuilder.create(SpawnGroup.CREATURE, ExplodingCubeProjectile::new).dimensions(EntityDimensions.fixed(1f, 1f)).fireImmune().build());
 
+
+    //helper methods
     public static void registerModEntities() {
         WorldOfDragons.LOGGER.info("Registering entities for " + WorldOfDragons.MOD_ID);
     }

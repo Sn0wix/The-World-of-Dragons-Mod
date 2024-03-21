@@ -82,6 +82,8 @@
   "entity.worldofdragonsmod.lava_elemental": "Lava Elemental",
 
   "entity.worldofdragonsmod.iron_chest": "Iron Chest",
+  "entity.worldofdragonsmod.common_chest": "Common Chest",
+
 
   "death.attack.bleeding": "%1$s bled out!",
   "death.attack.bleeding.player": "%1$s bled out!"

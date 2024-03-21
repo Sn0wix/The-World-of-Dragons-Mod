@@ -3,7 +3,6 @@ package net.sn0wix_.worldofdragonsmod.client;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
-import net.minecraft.entity.Entity;
 import net.minecraft.util.Identifier;
 import net.sn0wix_.worldofdragonsmod.client.renderersAndModels.entity.GenericEntityModel;
 import net.sn0wix_.worldofdragonsmod.client.renderersAndModels.entity.hostile.OrcModel;
@@ -12,7 +11,6 @@ import net.sn0wix_.worldofdragonsmod.common.WorldOfDragons;
 import net.sn0wix_.worldofdragonsmod.common.entity.ModEntities;
 import net.sn0wix_.worldofdragonsmod.client.renderersAndModels.entity.misc.explodingCubeProjectile.ExplodingCubeProjectileModel;
 import net.sn0wix_.worldofdragonsmod.client.renderersAndModels.entity.misc.explodingCubeProjectile.ExplodingCubeProjectileRenderer;
-import net.sn0wix_.worldofdragonsmod.client.renderersAndModels.entity.misc.ironChest.ModChestEntityModel;
 import net.sn0wix_.worldofdragonsmod.common.networking.ModPackets;
 import software.bernie.geckolib.renderer.GeoEntityRenderer;
 
@@ -36,6 +34,7 @@ public class WorldOfDragonsClient implements ClientModInitializer {
         EntityRendererRegistry.register(ModEntities.BOUQUETZ, ctx -> new PlayerNPCRenderer(ctx, new Identifier(WorldOfDragons.MOD_ID, "textures/entity/misc/players/bouquetz.png"), false));
 
         EntityRendererRegistry.register(ModEntities.IRON_CHEST_ENTITY, ctx -> new GeoEntityRenderer<>(ctx, new GenericEntityModel<>("misc/chests/iron_chest", false)));
+        EntityRendererRegistry.register(ModEntities.COMMON_CHEST_ENTITY, ctx -> new GeoEntityRenderer<>(ctx, new GenericEntityModel<>("misc/chests/common_chest", false)));
 
 
         //mc rendering

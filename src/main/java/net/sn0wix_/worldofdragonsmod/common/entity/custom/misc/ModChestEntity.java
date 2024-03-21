@@ -1,6 +1,5 @@
 package net.sn0wix_.worldofdragonsmod.common.entity.custom.misc;
 
-import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.damage.DamageSource;
@@ -13,7 +12,6 @@ import net.minecraft.loot.context.LootContextParameterSet;
 import net.minecraft.loot.context.LootContextParameters;
 import net.minecraft.loot.context.LootContextTypes;
 import net.minecraft.nbt.NbtCompound;
-import net.minecraft.network.PacketByteBuf;
 import net.minecraft.registry.Registries;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
@@ -22,10 +20,8 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.Identifier;
 import net.minecraft.world.World;
 import net.sn0wix_.worldofdragonsmod.client.particle.packetDecoders.EntityParticlePacketDecoder;
-import net.sn0wix_.worldofdragonsmod.client.particle.packetDecoders.ExplodingCubeProjectileParticleDecoder;
 import net.sn0wix_.worldofdragonsmod.common.WorldOfDragons;
 import net.sn0wix_.worldofdragonsmod.common.networking.packets.s2c.particles.PacketParticleTypes;
-import net.sn0wix_.worldofdragonsmod.common.networking.packets.s2c.particles.SpawnParticlesPacket;
 import software.bernie.geckolib.animatable.GeoEntity;
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
 import software.bernie.geckolib.core.animatable.instance.SingletonAnimatableInstanceCache;
@@ -37,16 +33,18 @@ import software.bernie.geckolib.core.object.PlayState;
 
 public class ModChestEntity extends Entity implements GeoEntity {
     public static final TrackedData<Boolean> IS_OPENED = DataTracker.registerData(ModChestEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
+    //TODO set current anim progress upon load
     private int openedFor = 0;
-    private final int maxOpenTicks = 90;
+    private final int maxOpenedForTicks;
     private final RawAnimation OPEN_ANIMATION;
     public final Identifier LOOT_TABLE;
     private final AnimatableInstanceCache cache = new SingletonAnimatableInstanceCache(this);
 
-    public ModChestEntity(EntityType<?> type, World world, String animation) {
+    public ModChestEntity(EntityType<?> type, World world, String animation, int maxOpenedForTicks) {
         super(type, world);
         this.OPEN_ANIMATION = RawAnimation.begin().thenPlayAndHold(animation);
         LOOT_TABLE = new Identifier(WorldOfDragons.MOD_ID, "chests/" + Registries.ENTITY_TYPE.getId(type).getPath());
+        this.maxOpenedForTicks = maxOpenedForTicks;
     }
 
     @Override
@@ -144,7 +142,7 @@ public class ModChestEntity extends Entity implements GeoEntity {
 
     public void setOpened() {
         dataTracker.set(IS_OPENED, true);
-        openedFor = maxOpenTicks;
+        openedFor = maxOpenedForTicks;
     }
 
     @Override
