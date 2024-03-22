@@ -48,11 +48,9 @@ public class ModEntities {
             FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, OrcWargEntity::new).dimensions(EntityDimensions.fixed(1.3f, 2.2f)).build());*/
 
 
-
     //Other hostile mobs
     public static final EntityType<LavaElementalEntity> LAVA_ELEMENTAL = Registry.register(Registries.ENTITY_TYPE, new Identifier(WorldOfDragons.MOD_ID, "lava_elemental"),
             FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, LavaElementalEntity::new).dimensions(EntityDimensions.fixed(3f, 4.4f)).build());
-
 
 
     //player npcs
@@ -66,12 +64,11 @@ public class ModEntities {
             FabricEntityTypeBuilder.create(SpawnGroup.CREATURE, BouquetZNPC::new).dimensions(EntityDimensions.fixed(0.6f, 1.8f)).build());
 
 
-
     //chests
     public static final EntityType<ModChestEntity> IRON_CHEST_ENTITY = Registry.register(Registries.ENTITY_TYPE, new Identifier(WorldOfDragons.MOD_ID, "iron_chest"),
-            getModChestEntityType((type, world) -> new ModChestEntity(type, world, "animation.iron_chest.open", 90)));
+            getModChestEntityType((type, world) -> new ModChestEntity(type, world, "animation.iron_chest.open", 90, 80, 40)));
     public static final EntityType<ModChestEntity> COMMON_CHEST_ENTITY = Registry.register(Registries.ENTITY_TYPE, new Identifier(WorldOfDragons.MOD_ID, "common_chest"),
-            getModChestEntityType((type, world) -> new ModChestEntity(type, world, "animation.common_chest.open", 83)));
+            getModChestEntityType((type, world) -> new ModChestEntity(type, world, "animation.common_chest.open", 83, 73, 30)));
 
 
     //projectiles

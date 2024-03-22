@@ -19,7 +19,7 @@ import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.Identifier;
 import net.minecraft.world.World;
-import net.sn0wix_.worldofdragonsmod.client.particle.packetDecoders.EntityParticlePacketDecoder;
+import net.sn0wix_.worldofdragonsmod.client.particle.packetDecoders.ChestBreakParticleDecoder;
 import net.sn0wix_.worldofdragonsmod.common.WorldOfDragons;
 import net.sn0wix_.worldofdragonsmod.common.networking.packets.s2c.particles.PacketParticleTypes;
 import software.bernie.geckolib.animatable.GeoEntity;
@@ -35,16 +35,20 @@ public class ModChestEntity extends Entity implements GeoEntity {
     public static final TrackedData<Boolean> IS_OPENED = DataTracker.registerData(ModChestEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
     //TODO set current anim progress upon load
     private int openedFor = 0;
+    private final int dropLootAfter;
+    private final int spawnGoldParticlesAfter;
     private final int maxOpenedForTicks;
     private final RawAnimation OPEN_ANIMATION;
     public final Identifier LOOT_TABLE;
     private final AnimatableInstanceCache cache = new SingletonAnimatableInstanceCache(this);
 
-    public ModChestEntity(EntityType<?> type, World world, String animation, int maxOpenedForTicks) {
+    public ModChestEntity(EntityType<?> type, World world, String animation, int maxOpenedForTicks, int dropLootAfter, int spawnGoldParticlesAfter) {
         super(type, world);
         this.OPEN_ANIMATION = RawAnimation.begin().thenPlayAndHold(animation);
         LOOT_TABLE = new Identifier(WorldOfDragons.MOD_ID, "chests/" + Registries.ENTITY_TYPE.getId(type).getPath());
         this.maxOpenedForTicks = maxOpenedForTicks;
+        this.dropLootAfter = maxOpenedForTicks - dropLootAfter;
+        this.spawnGoldParticlesAfter = maxOpenedForTicks - spawnGoldParticlesAfter;
     }
 
     @Override
@@ -76,8 +80,28 @@ public class ModChestEntity extends Entity implements GeoEntity {
             if (openedFor == 0) {
                 kill();
             }
+
+            if (openedFor == dropLootAfter) {
+                spawnParticles(256, false);
+                dropLoot(this.getDamageSources().genericKill(), true);
+            }
+
+            if (openedFor == spawnGoldParticlesAfter) {
+                spawnParticles(256, true);
+            }
+
         } else if (openedFor < 0) {
-            super.kill();
+            kill();
+        }
+    }
+
+    public void spawnParticles(int range, boolean gold) {
+        if (!getWorld().isClient) {
+            getWorld().getPlayers().forEach(player -> {
+                if (player.isInRange(this, range)) {
+                    ChestBreakParticleDecoder.sendToClient(this.getId(), (ServerPlayerEntity) player, gold, PacketParticleTypes.CHEST_BREAK);
+                }
+            });
         }
     }
 
@@ -96,21 +120,6 @@ public class ModChestEntity extends Entity implements GeoEntity {
             e.printStackTrace();
         }
     }
-
-    @Override
-    public void kill() {
-        if (!getWorld().isClient) {
-            getWorld().getPlayers().forEach(player -> {
-                if (player.isInRange(this, 256)) {
-                    EntityParticlePacketDecoder.sendToClient(this.getId(), (ServerPlayerEntity) player, PacketParticleTypes.CHEST_BREAK);
-                }
-            });
-        }
-
-        dropLoot(this.getDamageSources().genericKill(), true);
-        super.kill();
-    }
-
 
     //geckolib
     @Override
