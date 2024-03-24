@@ -11,7 +11,6 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.util.math.Box;
 import net.minecraft.util.math.MathHelper;
-import net.sn0wix_.worldofdragonsmod.common.WorldOfDragons;
 import net.sn0wix_.worldofdragonsmod.common.entity.custom.misc.ModChestEntity;
 import net.sn0wix_.worldofdragonsmod.common.entity.custom.misc.projectile.ExplodingCubeProjectile;
 
@@ -20,25 +19,17 @@ import java.util.Random;
 public class ParticleSpawnUtil {
     public static final Random random = new Random();
 
-    public static void spawnChestBreakParticles(double x, double y, double z, boolean gold, Entity entity, MinecraftClient client) {
+    public static void spawnChestBreakParticles(double x, double y, double z, boolean puf, Entity entity, MinecraftClient client) {
         //gold particle pri otevreni - puf, po "kilnuti" campfire particly ale o hodne min XD
-        if (gold) {
-            WorldOfDragons.LOGGER.info("gold particles");
+        if (client.world != null && entity instanceof ModChestEntity) {
+            ParticleManager manager = client.particleManager;
 
-        } else {
-            if (client.world != null && entity instanceof ModChestEntity chest) {
-                ParticleManager manager = client.particleManager;
-
-
-
-            /*for (int i = 0; i < 180; i++) {
-                manager.addParticle(ParticleTypes.CAMPFIRE_COSY_SMOKE, x + getRandomDouble(), y + getRandomDouble() * 1.5, z + getRandomDouble(), getRandomDouble(100), getRandomDouble(100), getRandomDouble(100));
-                Box box = entity.getBoundingBox();
-
-                for (Direction ignored : Direction.values()) {
-                    manager.addParticle(ParticleTypes.CAMPFIRE_COSY_SMOKE, generateRandomFloat(box.getMin(Direction.Axis.X), box.getMax(Direction.Axis.X)), generateRandomFloat(box.getMin(Direction.Axis.Y), box.getMax(Direction.Axis.Y)), generateRandomFloat(box.getMin(Direction.Axis.Z), box.getMax(Direction.Axis.Z)), getRandomDouble(), getRandomDouble(), getRandomDouble());
+            if (!puf) {
+                for (int i = 0; i < (96 - 69) * 2 + random.nextInt(4); i++) {
+                    manager.addParticle(ParticleTypes.CAMPFIRE_COSY_SMOKE, x + getRandomDouble(2), y + getRandomDouble(2), z + getRandomDouble(2), getRandomDouble(25), getRandomDouble(25), getRandomDouble(25));
                 }
-            }*/
+            } else {
+
             }
         }
     }

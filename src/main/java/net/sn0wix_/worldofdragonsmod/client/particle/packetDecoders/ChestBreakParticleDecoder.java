@@ -29,10 +29,10 @@ public class ChestBreakParticleDecoder extends EntityParticlePacketDecoder {
         return entity instanceof ModChestEntity;
     }
 
-    public static void sendToClient(int id, ServerPlayerEntity player, boolean gold, PacketParticleTypes type) {
+    public static void sendToClient(int id, ServerPlayerEntity player, boolean puf, PacketParticleTypes type) {
         PacketByteBuf buffer = SpawnParticlesPacket.getBuf(type);
         buffer.writeInt(id);
-        buffer.writeBoolean(gold);
+        buffer.writeBoolean(puf);
         SpawnParticlesPacket.send(player, buffer);
     }
 

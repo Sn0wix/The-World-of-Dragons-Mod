@@ -2,11 +2,13 @@ package net.sn0wix_.worldofdragonsmod.common.entity.custom.misc;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.ItemEntity;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.ItemStack;
 import net.minecraft.loot.LootTable;
 import net.minecraft.loot.context.LootContextParameterSet;
 import net.minecraft.loot.context.LootContextParameters;
@@ -18,10 +20,12 @@ import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.math.Direction;
 import net.minecraft.world.World;
 import net.sn0wix_.worldofdragonsmod.client.particle.packetDecoders.ChestBreakParticleDecoder;
 import net.sn0wix_.worldofdragonsmod.common.WorldOfDragons;
 import net.sn0wix_.worldofdragonsmod.common.networking.packets.s2c.particles.PacketParticleTypes;
+import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib.animatable.GeoEntity;
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
 import software.bernie.geckolib.core.animatable.instance.SingletonAnimatableInstanceCache;
@@ -33,22 +37,19 @@ import software.bernie.geckolib.core.object.PlayState;
 
 public class ModChestEntity extends Entity implements GeoEntity {
     public static final TrackedData<Boolean> IS_OPENED = DataTracker.registerData(ModChestEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
-    //TODO set current anim progress upon load
     private int openedFor = 0;
     private final int dropLootAfter;
-    private final int spawnGoldParticlesAfter;
     private final int maxOpenedForTicks;
     private final RawAnimation OPEN_ANIMATION;
     public final Identifier LOOT_TABLE;
     private final AnimatableInstanceCache cache = new SingletonAnimatableInstanceCache(this);
 
-    public ModChestEntity(EntityType<?> type, World world, String animation, int maxOpenedForTicks, int dropLootAfter, int spawnGoldParticlesAfter) {
+    public ModChestEntity(EntityType<?> type, World world, String animation, int maxOpenedForTicks, int dropLootAfter) {
         super(type, world);
         this.OPEN_ANIMATION = RawAnimation.begin().thenPlayAndHold(animation);
-        LOOT_TABLE = new Identifier(WorldOfDragons.MOD_ID, "chests/" + Registries.ENTITY_TYPE.getId(type).getPath());
+        this.LOOT_TABLE = new Identifier(WorldOfDragons.MOD_ID, "chests/" + Registries.ENTITY_TYPE.getId(type).getPath());
         this.maxOpenedForTicks = maxOpenedForTicks;
         this.dropLootAfter = maxOpenedForTicks - dropLootAfter;
-        this.spawnGoldParticlesAfter = maxOpenedForTicks - spawnGoldParticlesAfter;
     }
 
     @Override
@@ -74,32 +75,31 @@ public class ModChestEntity extends Entity implements GeoEntity {
     public void tick() {
         super.tick();
 
-        if (openedFor > 0) {
-            openedFor--;
+        if (!getWorld().isClient()) {
+            if (openedFor > 0) {
+                openedFor--;
 
-            if (openedFor == 0) {
+                if (openedFor == 0) {
+                    spawnParticles(256, false);
+                    kill();
+                }
+
+                if (openedFor == dropLootAfter) {
+                    spawnParticles(256, true);
+                    dropLoot(this.getDamageSources().genericKill(), true);
+                }
+
+            } else if (openedFor < 0) {
                 kill();
             }
-
-            if (openedFor == dropLootAfter) {
-                spawnParticles(256, false);
-                dropLoot(this.getDamageSources().genericKill(), true);
-            }
-
-            if (openedFor == spawnGoldParticlesAfter) {
-                spawnParticles(256, true);
-            }
-
-        } else if (openedFor < 0) {
-            kill();
         }
     }
 
-    public void spawnParticles(int range, boolean gold) {
+    public void spawnParticles(int range, boolean puf) {
         if (!getWorld().isClient) {
             getWorld().getPlayers().forEach(player -> {
                 if (player.isInRange(this, range)) {
-                    ChestBreakParticleDecoder.sendToClient(this.getId(), (ServerPlayerEntity) player, gold, PacketParticleTypes.CHEST_BREAK);
+                    ChestBreakParticleDecoder.sendToClient(this.getId(), (ServerPlayerEntity) player, puf, PacketParticleTypes.CHEST_BREAK);
                 }
             });
         }
@@ -121,6 +121,36 @@ public class ModChestEntity extends Entity implements GeoEntity {
         }
     }
 
+    @Nullable
+    @Override
+    public ItemEntity dropStack(ItemStack stack, float yOffset) {
+        if (stack.isEmpty()) {
+            return null;
+        }
+        if (this.getWorld().isClient) {
+            return null;
+        }
+        ItemEntity itemEntity = new ItemEntity(this.getWorld(), this.getX(), this.getY() + (double) yOffset, this.getZ(), stack);
+        itemEntity.setToDefaultPickupDelay();
+
+        itemEntity.setVelocity(itemEntity.getVelocity());
+        Direction direction = getHorizontalFacing();
+        float i = 0.2f;
+
+        if (direction == Direction.SOUTH) {
+            itemEntity.setVelocity(itemEntity.getVelocity().add(0, 0, i));
+        } else if (direction == Direction.NORTH) {
+            itemEntity.setVelocity(itemEntity.getVelocity().add(0, 0, -i));
+        } else if (direction == Direction.EAST) {
+            itemEntity.setVelocity(itemEntity.getVelocity().add(i, 0, 0));
+        } else if (direction == Direction.WEST) {
+            itemEntity.setVelocity(itemEntity.getVelocity().add(-i, 0, 0));
+        }
+
+        this.getWorld().spawnEntity(itemEntity);
+        return itemEntity;
+    }
+
     //geckolib
     @Override
     public void registerControllers(AnimatableManager.ControllerRegistrar controllerRegistrar) {
@@ -139,6 +169,12 @@ public class ModChestEntity extends Entity implements GeoEntity {
 
 
     //Not so important things
+    @Nullable
+    @Override
+    public ItemEntity dropStack(ItemStack stack) {
+        return this.dropStack(stack, 0.5f);
+    }
+
     @Override
     public boolean canHit() {
         return true;
@@ -166,7 +202,7 @@ public class ModChestEntity extends Entity implements GeoEntity {
 
     @Override
     protected void writeCustomDataToNbt(NbtCompound nbt) {
-        nbt.putBoolean("IsOpened", true);
+        nbt.putBoolean("IsOpened", dataTracker.get(IS_OPENED));
         nbt.putInt("OpenedFor", openedFor);
     }
 }

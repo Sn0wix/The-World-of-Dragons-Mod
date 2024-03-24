@@ -53,7 +53,7 @@ public class ModEntities {
             FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, LavaElementalEntity::new).dimensions(EntityDimensions.fixed(3f, 4.4f)).build());
 
 
-    //player npcs
+    //Player npcs
     public static final EntityType<Sn0wix_NPC> SN0WIX_ = Registry.register(Registries.ENTITY_TYPE, new Identifier(WorldOfDragons.MOD_ID, "sn0wix_"),
             FabricEntityTypeBuilder.create(SpawnGroup.CREATURE, Sn0wix_NPC::new).dimensions(EntityDimensions.fixed(0.6f, 1.8f)).build());
 
@@ -64,14 +64,14 @@ public class ModEntities {
             FabricEntityTypeBuilder.create(SpawnGroup.CREATURE, BouquetZNPC::new).dimensions(EntityDimensions.fixed(0.6f, 1.8f)).build());
 
 
-    //chests
+    //Chests
     public static final EntityType<ModChestEntity> IRON_CHEST_ENTITY = Registry.register(Registries.ENTITY_TYPE, new Identifier(WorldOfDragons.MOD_ID, "iron_chest"),
-            getModChestEntityType((type, world) -> new ModChestEntity(type, world, "animation.iron_chest.open", 90, 80, 40)));
+            getModChestEntityType((type, world) -> new ModChestEntity(type, world, "animation.iron_chest.open", 90, 44), 1.7f, 1.8f));
     public static final EntityType<ModChestEntity> COMMON_CHEST_ENTITY = Registry.register(Registries.ENTITY_TYPE, new Identifier(WorldOfDragons.MOD_ID, "common_chest"),
-            getModChestEntityType((type, world) -> new ModChestEntity(type, world, "animation.common_chest.open", 83, 73, 30)));
+            getModChestEntityType((type, world) -> new ModChestEntity(type, world, "animation.common_chest.open", 83, 35), 1.2f, 1.2f));
 
 
-    //projectiles
+    //Projectiles
     public static final EntityType<ExplodingCubeProjectile> EXPLODING_MAGMA_PROJECTILE = Registry.register(Registries.ENTITY_TYPE, new Identifier(WorldOfDragons.MOD_ID, "exploding_magma_projectile"),
             FabricEntityTypeBuilder.create(SpawnGroup.CREATURE, ExplodingCubeProjectile::new).dimensions(EntityDimensions.fixed(1f, 1f)).fireImmune().build());
 
@@ -81,7 +81,7 @@ public class ModEntities {
         WorldOfDragons.LOGGER.info("Registering entities for " + WorldOfDragons.MOD_ID);
     }
 
-    private static EntityType<ModChestEntity> getModChestEntityType(EntityType.EntityFactory<ModChestEntity> factory) {
-        return new EntityType<>(factory, SpawnGroup.MISC, true, true, false, true, ImmutableSet.of(), EntityDimensions.fixed(1f, 1f), 5, 3, FeatureFlags.VANILLA_FEATURES);
+    private static EntityType<ModChestEntity> getModChestEntityType(EntityType.EntityFactory<ModChestEntity> factory, float... dimensions) {
+        return new EntityType<>(factory, SpawnGroup.MISC, true, true, false, true, ImmutableSet.of(), EntityDimensions.fixed(dimensions[0], dimensions[1]), 5, 3, FeatureFlags.VANILLA_FEATURES);
     }
 }

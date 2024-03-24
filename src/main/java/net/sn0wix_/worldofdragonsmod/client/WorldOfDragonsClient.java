@@ -33,8 +33,8 @@ public class WorldOfDragonsClient implements ClientModInitializer {
         EntityRendererRegistry.register(ModEntities.BUBBAGUMP7, ctx -> new PlayerNPCRenderer(ctx, new Identifier(WorldOfDragons.MOD_ID, "textures/entity/misc/players/bubbagump7.png"), false));
         EntityRendererRegistry.register(ModEntities.BOUQUETZ, ctx -> new PlayerNPCRenderer(ctx, new Identifier(WorldOfDragons.MOD_ID, "textures/entity/misc/players/bouquetz.png"), false));
 
-        EntityRendererRegistry.register(ModEntities.IRON_CHEST_ENTITY, ctx -> new GeoEntityRenderer<>(ctx, new GenericEntityModel<>("misc/chests/iron_chest", false)));
-        EntityRendererRegistry.register(ModEntities.COMMON_CHEST_ENTITY, ctx -> new GeoEntityRenderer<>(ctx, new GenericEntityModel<>("misc/chests/common_chest", false)));
+        EntityRendererRegistry.register(ModEntities.IRON_CHEST_ENTITY, ctx -> new GeoEntityRenderer<>(ctx, new GenericEntityModel<>("misc/chests/iron_chest", "")));
+        EntityRendererRegistry.register(ModEntities.COMMON_CHEST_ENTITY, ctx -> new GeoEntityRenderer<>(ctx, new GenericEntityModel<>("misc/chests/common_chest", "")));
 
 
         //mc rendering

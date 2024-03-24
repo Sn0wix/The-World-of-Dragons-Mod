@@ -6,16 +6,20 @@ import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
 import net.sn0wix_.worldofdragonsmod.common.WorldOfDragons;
+import net.sn0wix_.worldofdragonsmod.common.entity.ModEntities;
 import net.sn0wix_.worldofdragonsmod.common.item.custom.*;
 import net.sn0wix_.worldofdragonsmod.common.sounds.ModSounds;
 
 public class ModItems {
-
     public static final Item COMMON_CHEST_GENERATOR = registerItem("common_chest_generator", new CommonChestGeneratorItem(
             new FabricItemSettings().maxCount(1)));
 
     public static final Item RARE_CHEST_GENERATOR = registerItem("rare_chest_generator", new RareChestGeneratorItem(
             new FabricItemSettings().maxCount(1)));
+
+    public static final Item COMMON_CHEST = registerItem("common_chest", new ChestItem(new FabricItemSettings().maxCount(1), ModEntities.COMMON_CHEST_ENTITY));
+    public static final Item IRON_CHEST = registerItem("iron_chest", new ChestItem(new FabricItemSettings().maxCount(1), ModEntities.IRON_CHEST_ENTITY));
+
 
     public static final Item ARMOR_UPGRADE = registerItem("armor_upgrade", new Item(new FabricItemSettings().maxCount(1)));
     public static final Item DAMAGE_UPGRADE = registerItem("damage_upgrade", new Item(new FabricItemSettings().maxCount(1).maxDamage(4)));

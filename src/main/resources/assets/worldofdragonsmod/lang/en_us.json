@@ -28,6 +28,8 @@
   "item.worldofdragonsmod.bottle_of_electric_charge": "§3§lBottle Of Electric Charge",
   "item.worldofdragonsmod.common_chest_generator": "§7§lCommon Chest Generator",
   "item.worldofdragonsmod.rare_chest_generator": "§b§lRare Chest Generator",
+  "item.worldofdragonsmod.common_chest": "§7§lCommon Chest",
+  "item.worldofdragonsmod.iron_chest": "§b§lIron Chest",
   "item.worldofdragonsmod.common_loot": "§lCommon loot",
   "item.worldofdragonsmod.rare_loot": "§e§lRare loot",
   "item.worldofdragonsmod.scrap": "§6§lScrap",
@@ -83,7 +85,6 @@
 
   "entity.worldofdragonsmod.iron_chest": "Iron Chest",
   "entity.worldofdragonsmod.common_chest": "Common Chest",
-
 
   "death.attack.bleeding": "%1$s bled out!",
   "death.attack.bleeding.player": "%1$s bled out!"

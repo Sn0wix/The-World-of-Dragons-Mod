@@ -18,7 +18,6 @@ import net.minecraft.world.World;
 import net.minecraft.world.explosion.Explosion;
 import net.sn0wix_.worldofdragonsmod.client.particle.ParticleSpawnUtil;
 import net.sn0wix_.worldofdragonsmod.client.particle.packetDecoders.EntityParticlePacketDecoder;
-import net.sn0wix_.worldofdragonsmod.client.particle.packetDecoders.ExplodingCubeProjectileParticleDecoder;
 import net.sn0wix_.worldofdragonsmod.common.networking.packets.s2c.particles.PacketParticleTypes;
 
 public class ExplodingCubeProjectile extends ExplosiveProjectileEntity {
