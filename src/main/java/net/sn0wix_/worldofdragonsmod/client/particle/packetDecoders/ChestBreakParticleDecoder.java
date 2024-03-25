@@ -5,7 +5,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.sn0wix_.worldofdragonsmod.client.particle.ParticleSpawnUtil;
-import net.sn0wix_.worldofdragonsmod.common.entity.custom.misc.ModChestEntity;
+import net.sn0wix_.worldofdragonsmod.common.entity.custom.misc.ChestEntity;
 import net.sn0wix_.worldofdragonsmod.common.networking.packets.s2c.particles.PacketParticleTypes;
 import net.sn0wix_.worldofdragonsmod.common.networking.packets.s2c.particles.SpawnParticlesPacket;
 
@@ -26,7 +26,7 @@ public class ChestBreakParticleDecoder extends EntityParticlePacketDecoder {
 
     @Override
     public boolean isInstanceOf(Entity entity) {
-        return entity instanceof ModChestEntity;
+        return entity instanceof ChestEntity;
     }
 
     public static void sendToClient(int id, ServerPlayerEntity player, boolean puf, PacketParticleTypes type) {

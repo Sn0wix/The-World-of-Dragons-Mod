@@ -16,7 +16,6 @@ import net.minecraft.registry.Registries;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.ActionResult;
-import net.minecraft.util.Arm;
 import net.minecraft.util.Hand;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.Direction;
@@ -34,8 +33,8 @@ import software.bernie.geckolib.core.animation.AnimationState;
 import software.bernie.geckolib.core.animation.RawAnimation;
 import software.bernie.geckolib.core.object.PlayState;
 
-public class ModChestEntity extends Entity implements GeoEntity {
-    public static final TrackedData<Boolean> IS_OPENED = DataTracker.registerData(ModChestEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
+public class ChestEntity extends Entity implements GeoEntity {
+    public static final TrackedData<Boolean> IS_OPENED = DataTracker.registerData(ChestEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
     private int openedFor = 0;
     private final int dropLootAfter;
     private final int maxOpenedForTicks;
@@ -44,7 +43,7 @@ public class ModChestEntity extends Entity implements GeoEntity {
     private final AnimatableInstanceCache cache = new SingletonAnimatableInstanceCache(this);
 
 
-    public ModChestEntity(EntityType<? extends Entity> entityType, World world, String animation, int maxOpenedForTicks, int dropLootAfter) {
+    public ChestEntity(EntityType<? extends Entity> entityType, World world, String animation, int maxOpenedForTicks, int dropLootAfter) {
         super(entityType, world);
         this.OPEN_ANIMATION = RawAnimation.begin().thenPlayAndHold(animation);
         this.LOOT_TABLE = new Identifier(WorldOfDragons.MOD_ID, "chests/" + Registries.ENTITY_TYPE.getId(entityType).getPath());
@@ -157,7 +156,7 @@ public class ModChestEntity extends Entity implements GeoEntity {
         controllerRegistrar.add(new AnimationController<>(this, "controller", 0, this::predicate));
     }
 
-    private PlayState predicate(AnimationState<ModChestEntity> modChestEntityAnimationState) {
+    private PlayState predicate(AnimationState<ChestEntity> modChestEntityAnimationState) {
         modChestEntityAnimationState.setAnimation(OPEN_ANIMATION);
         return dataTracker.get(IS_OPENED) ? PlayState.CONTINUE : PlayState.STOP;
     }

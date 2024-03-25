@@ -6,6 +6,7 @@ import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.minecraft.util.Identifier;
 import net.sn0wix_.worldofdragonsmod.client.renderersAndModels.entity.GenericEntityModel;
 import net.sn0wix_.worldofdragonsmod.client.renderersAndModels.entity.hostile.OrcModel;
+import net.sn0wix_.worldofdragonsmod.client.renderersAndModels.entity.misc.chest.ChestEntityRenderer;
 import net.sn0wix_.worldofdragonsmod.client.renderersAndModels.entity.misc.playerNPC.PlayerNPCRenderer;
 import net.sn0wix_.worldofdragonsmod.common.WorldOfDragons;
 import net.sn0wix_.worldofdragonsmod.common.entity.ModEntities;
@@ -33,8 +34,8 @@ public class WorldOfDragonsClient implements ClientModInitializer {
         EntityRendererRegistry.register(ModEntities.BUBBAGUMP7, ctx -> new PlayerNPCRenderer(ctx, new Identifier(WorldOfDragons.MOD_ID, "textures/entity/misc/players/bubbagump7.png"), false));
         EntityRendererRegistry.register(ModEntities.BOUQUETZ, ctx -> new PlayerNPCRenderer(ctx, new Identifier(WorldOfDragons.MOD_ID, "textures/entity/misc/players/bouquetz.png"), false));
 
-        EntityRendererRegistry.register(ModEntities.IRON_CHEST_ENTITY, ctx -> new GeoEntityRenderer<>(ctx, new GenericEntityModel<>("misc/chests/iron_chest")));
-        EntityRendererRegistry.register(ModEntities.COMMON_CHEST_ENTITY, ctx -> new GeoEntityRenderer<>(ctx, new GenericEntityModel<>("misc/chests/common_chest")));
+        EntityRendererRegistry.register(ModEntities.IRON_CHEST_ENTITY, ctx -> new ChestEntityRenderer(ctx, new GenericEntityModel<>("misc/chests/iron_chest")));
+        EntityRendererRegistry.register(ModEntities.COMMON_CHEST_ENTITY, ctx -> new ChestEntityRenderer(ctx, new GenericEntityModel<>("misc/chests/common_chest")));
 
 
         //Mc rendering

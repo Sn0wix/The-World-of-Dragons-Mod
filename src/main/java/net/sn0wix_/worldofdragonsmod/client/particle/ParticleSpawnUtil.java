@@ -11,7 +11,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.util.math.Box;
 import net.minecraft.util.math.MathHelper;
-import net.sn0wix_.worldofdragonsmod.common.entity.custom.misc.ModChestEntity;
+import net.sn0wix_.worldofdragonsmod.common.entity.custom.misc.ChestEntity;
 import net.sn0wix_.worldofdragonsmod.common.entity.custom.misc.projectile.ExplodingCubeProjectile;
 
 import java.util.Random;
@@ -21,7 +21,7 @@ public class ParticleSpawnUtil {
 
     public static void spawnChestBreakParticles(double x, double y, double z, boolean puf, Entity entity, MinecraftClient client) {
         //gold particle pri otevreni - puf, po "kilnuti" campfire particly ale o hodne min XD
-        if (client.world != null && entity instanceof ModChestEntity) {
+        if (client.world != null && entity instanceof ChestEntity) {
             ParticleManager manager = client.particleManager;
 
             if (!puf) {

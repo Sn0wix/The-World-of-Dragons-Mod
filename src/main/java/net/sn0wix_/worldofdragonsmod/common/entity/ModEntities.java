@@ -11,8 +11,8 @@ import net.minecraft.resource.featuretoggle.FeatureFlags;
 import net.minecraft.util.Identifier;
 import net.sn0wix_.worldofdragonsmod.common.WorldOfDragons;
 import net.sn0wix_.worldofdragonsmod.common.entity.custom.hostile.LavaElementalEntity;
+import net.sn0wix_.worldofdragonsmod.common.entity.custom.misc.ChestEntity;
 import net.sn0wix_.worldofdragonsmod.common.entity.custom.misc.projectile.ExplodingCubeProjectile;
-import net.sn0wix_.worldofdragonsmod.common.entity.custom.misc.ModChestEntity;
 import net.sn0wix_.worldofdragonsmod.common.entity.custom.misc.playerNPC.BouquetZNPC;
 import net.sn0wix_.worldofdragonsmod.common.entity.custom.misc.playerNPC.BubbaGump7NPC;
 import net.sn0wix_.worldofdragonsmod.common.entity.custom.misc.playerNPC.Sn0wix_NPC;
@@ -65,10 +65,10 @@ public class ModEntities {
 
 
     //Chests
-    public static final EntityType<ModChestEntity> IRON_CHEST_ENTITY = Registry.register(Registries.ENTITY_TYPE, new Identifier(WorldOfDragons.MOD_ID, "iron_chest"),
-            getModChestEntityType((type, world) -> new ModChestEntity(type, world, "animation.iron_chest.open", 90, 44), 1.7f, 1.8f));
-    public static final EntityType<ModChestEntity> COMMON_CHEST_ENTITY = Registry.register(Registries.ENTITY_TYPE, new Identifier(WorldOfDragons.MOD_ID, "common_chest"),
-            getModChestEntityType((type, world) -> new ModChestEntity(type, world, "animation.common_chest.open", 83, 35), 1.2f, 1.2f));
+    public static final EntityType<ChestEntity> IRON_CHEST_ENTITY = Registry.register(Registries.ENTITY_TYPE, new Identifier(WorldOfDragons.MOD_ID, "iron_chest"),
+            getModChestEntityType((type, world) -> new ChestEntity(type, world, "animation.iron_chest.open", 90, 44), 1.7f, 1.8f));
+    public static final EntityType<ChestEntity> COMMON_CHEST_ENTITY = Registry.register(Registries.ENTITY_TYPE, new Identifier(WorldOfDragons.MOD_ID, "common_chest"),
+            getModChestEntityType((type, world) -> new ChestEntity(type, world, "animation.common_chest.open", 83, 35), 1.2f, 1.2f));
 
 
     //Projectiles
@@ -81,7 +81,7 @@ public class ModEntities {
         WorldOfDragons.LOGGER.info("Registering entities for " + WorldOfDragons.MOD_ID);
     }
 
-    private static EntityType<ModChestEntity> getModChestEntityType(EntityType.EntityFactory<ModChestEntity> factory, float... dimensions) {
+    private static EntityType<ChestEntity> getModChestEntityType(EntityType.EntityFactory<ChestEntity> factory, float... dimensions) {
         return new EntityType<>(factory, SpawnGroup.MISC, true, true, false, true, ImmutableSet.of(), EntityDimensions.fixed(dimensions[0], dimensions[1]), 5, 3, FeatureFlags.VANILLA_FEATURES);
     }
 }
