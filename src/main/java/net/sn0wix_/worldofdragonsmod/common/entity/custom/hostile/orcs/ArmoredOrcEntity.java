@@ -39,7 +39,7 @@ public class ArmoredOrcEntity extends ModOrcEntity {
 
     private int attackTicksLeft = 0;
     private int attackAnimTicksLeft = 0;
-    private int lastAttackedType = 0;
+    private ATTACK_TYPE lastAttackedType = ATTACK_TYPE.NONE;
     private int ticksToCharge = 0;
     private final HashMap<Entity, Integer> enitiesThrownBack = new HashMap<>();
     MeleeAttackGoal attackGoal;
@@ -155,7 +155,7 @@ public class ArmoredOrcEntity extends ModOrcEntity {
                     if (squaredDistance <= d) {
                         this.attackTicksLeft = 4;
                         this.attackAnimTicksLeft = 16;
-                        this.lastAttackedType = 2;
+                        this.lastAttackedType = ATTACK_TYPE.STAB;
                         this.triggerAnim("controller", "stab");
                     }
                 }
@@ -196,26 +196,26 @@ public class ArmoredOrcEntity extends ModOrcEntity {
             this.triggerAnim("controller", "attack");
             this.attackTicksLeft = 7;
             this.attackAnimTicksLeft = 14;
-            this.lastAttackedType = 1;
+            this.lastAttackedType = ATTACK_TYPE.GENERIC;
         }
         return true;
     }
 
     public void tryDelayedAttack(Entity target) {
         if (attackTicksLeft == 0 && target instanceof LivingEntity) {
-            if (lastAttackedType == 1) {
+            if (lastAttackedType == ATTACK_TYPE.GENERIC) {
                 double squaredDistance = this.squaredDistanceTo(target.getX(), target.getY(), target.getZ());
                 double d = this.getSquaredMaxAttackDistance((LivingEntity) target);
-                lastAttackedType = 0;
+                lastAttackedType = ATTACK_TYPE.NONE;
 
                 if (squaredDistance <= d) {
                     this.getNavigation().stop();
                     super.tryAttack(target);
                 }
-            } else if (lastAttackedType == 2) {
+            } else if (lastAttackedType == ATTACK_TYPE.STAB) {
                 double squaredDistance = this.squaredDistanceTo(target.getX(), target.getY(), target.getZ());
                 double d = this.getSquaredMaxAttackDistance((LivingEntity) target);
-                lastAttackedType = 0;
+                lastAttackedType = ATTACK_TYPE.NONE;
                 dataTracker.set(CHARGING, false);
                 this.goalSelector.remove(attackGoalCharge);
                 this.goalSelector.add(2, attackGoal);
@@ -252,7 +252,6 @@ public class ArmoredOrcEntity extends ModOrcEntity {
 
         boolean bl = false;
         int x = (int) Math.abs(attacker.getPos().x - target.getPos().x);
-        int y = (int) Math.abs(attacker.getPos().y - target.getPos().y);
         int z = (int) Math.abs(attacker.getPos().z - target.getPos().z);
 
         int chargeRange = 10;
@@ -286,5 +285,11 @@ public class ArmoredOrcEntity extends ModOrcEntity {
     protected void initDataTracker() {
         super.initDataTracker();
         getDataTracker().startTracking(CHARGING, false);
+    }
+
+    public enum ATTACK_TYPE {
+        NONE,
+        GENERIC,
+        STAB
     }
 }

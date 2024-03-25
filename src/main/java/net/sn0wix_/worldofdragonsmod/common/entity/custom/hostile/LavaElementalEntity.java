@@ -87,7 +87,6 @@ public class LavaElementalEntity extends HostileEntity implements GeoEntity, Ran
         }
 
         return state.setAndContinue(IDLE);
-
     }
 
     @Override

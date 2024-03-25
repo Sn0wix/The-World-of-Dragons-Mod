@@ -4,6 +4,7 @@ import net.fabricmc.api.ModInitializer;
 import net.sn0wix_.worldofdragonsmod.common.blocks.ModBlocks;
 import net.sn0wix_.worldofdragonsmod.common.effect.ModEffects;
 import net.sn0wix_.worldofdragonsmod.common.entity.ModEntities;
+import net.sn0wix_.worldofdragonsmod.common.events.ServerEvents;
 import net.sn0wix_.worldofdragonsmod.common.item.ModItemGroup;
 import net.sn0wix_.worldofdragonsmod.common.item.ModItems;
 import net.sn0wix_.worldofdragonsmod.common.networking.ModPackets;
@@ -29,6 +30,7 @@ public class WorldOfDragons implements ModInitializer {
         ModParticles.registerParticles();
         ModPackets.registerC2SPackets();
         ModItemGroup.registerItemGroup();
+        ServerEvents.registerEvents();
 
         GeckoLib.initialize();
     }

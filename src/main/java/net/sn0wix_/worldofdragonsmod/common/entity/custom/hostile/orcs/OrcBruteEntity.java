@@ -13,6 +13,7 @@ import net.minecraft.entity.mob.HostileEntity;
 import net.minecraft.entity.passive.*;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.world.World;
+import net.sn0wix_.worldofdragonsmod.common.WorldOfDragons;
 import software.bernie.geckolib.core.animatable.GeoAnimatable;
 import software.bernie.geckolib.core.animation.*;
 import software.bernie.geckolib.core.object.PlayState;
@@ -26,7 +27,7 @@ public class OrcBruteEntity extends ModOrcEntity {
 
     private int attackTicksLeft = 0;
     private int attackAnimTicksLeft = 0;
-    private int lastAttackedType = 0;
+    private ATTACK_TYPE lastAttackedType = ATTACK_TYPE.NONE;
 
     public OrcBruteEntity(EntityType<? extends HostileEntity> entityType, World world) {
         super(entityType, world);
@@ -90,13 +91,13 @@ public class OrcBruteEntity extends ModOrcEntity {
         if (random.nextInt(4) == 0 && attackAnimTicksLeft <= 0 && !this.getWorld().isClient && attackTicksLeft <= 0) {
             this.triggerAnim("controller", "smash");
             this.attackTicksLeft = 8;
-            this.attackAnimTicksLeft = 13;
-            this.lastAttackedType = 1;
+            this.attackAnimTicksLeft = 20;
+            this.lastAttackedType = ATTACK_TYPE.SMASH;
         } else if (attackAnimTicksLeft <= 0 && !this.getWorld().isClient && attackTicksLeft <= 0) {
             this.triggerAnim("controller", "attack");
             this.attackTicksLeft = 8;
-            this.attackAnimTicksLeft = 16;
-            this.lastAttackedType = 1;
+            this.attackAnimTicksLeft = 13;
+            this.lastAttackedType = ATTACK_TYPE.GENERIC;
         }
 
         return true;
@@ -104,15 +105,20 @@ public class OrcBruteEntity extends ModOrcEntity {
 
     public void tryDelayedAttack(Entity target) {
         if (attackTicksLeft == 0 && target instanceof LivingEntity) {
-            double squaredDistance = this.squaredDistanceTo(target.getX(), target.getY(), target.getZ());
-            double d = this.getSquaredMaxAttackDistance((LivingEntity) target);
+            if (lastAttackedType == ATTACK_TYPE.GENERIC) {
+                double squaredDistance = this.squaredDistanceTo(target.getX(), target.getY(), target.getZ());
+                double d = this.getSquaredMaxAttackDistance((LivingEntity) target);
 
-            if (squaredDistance <= d) {
-                this.getNavigation().stop();
-                super.tryAttack(target);
+                if (squaredDistance <= d) {
+                    this.getNavigation().stop();
+                    super.tryAttack(target);
+                }
+            } else if (lastAttackedType == ATTACK_TYPE.SMASH) {
+                WorldOfDragons.LOGGER.info("SMASH");
             }
         }
     }
+
 
     /*if (!this.getWorld().isClient) {
             Box box = this.getBoundingBox().expand(2);
@@ -120,4 +126,10 @@ public class OrcBruteEntity extends ModOrcEntity {
                     entity.damage(this.getDamageSources().generic(), 5f)
             );
         }*/
+
+    public enum ATTACK_TYPE {
+        NONE,
+        GENERIC,
+        SMASH
+    }
 }

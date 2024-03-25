@@ -32,7 +32,7 @@ public class SlasherOrcEntity extends ModOrcEntity {
 
     private int attackTicksLeft = 0;
     private int attackAnimTicksLeft = 0;
-    private int lastAttackedType = 0;
+    private ATTACK_TYPE lastAttackedType = ATTACK_TYPE.NONE;
 
     public SlasherOrcEntity(EntityType<? extends HostileEntity> entityType, World world) {
         super(entityType, world);
@@ -94,7 +94,7 @@ public class SlasherOrcEntity extends ModOrcEntity {
                 attackTicksLeft--;
                 if (attackTicksLeft <= 0 && this.getTarget() != null) {
                     tryDelayedAttack(this.getTarget());
-                    lastAttackedType = 0;
+                    lastAttackedType = ATTACK_TYPE.NONE;
                 }
             }
         }
@@ -108,12 +108,12 @@ public class SlasherOrcEntity extends ModOrcEntity {
             if (i == 0) {
                 this.triggerAnim("controller", "attack_stab");
                 this.attackTicksLeft = 8;
-                this.lastAttackedType = 2;
+                this.lastAttackedType = ATTACK_TYPE.STAB;
                 this.attackAnimTicksLeft = 20;
             } else {
                 this.triggerAnim("controller", "attack_melee");
                 this.attackTicksLeft = 6;
-                this.lastAttackedType = 1;
+                this.lastAttackedType = ATTACK_TYPE.GENERIC;
                 this.attackAnimTicksLeft = 12;
             }
         }
@@ -126,10 +126,10 @@ public class SlasherOrcEntity extends ModOrcEntity {
             double d = this.getSquaredMaxAttackDistance((LivingEntity) target);
 
             if (squaredDistance <= d) {
-                if (lastAttackedType == 1) {
+                if (lastAttackedType == ATTACK_TYPE.GENERIC) {
                     this.getNavigation().stop();
                     super.tryAttack(target);
-                } else if (lastAttackedType == 2) {
+                } else if (lastAttackedType == ATTACK_TYPE.STAB) {
 
                     this.getNavigation().stop();
                     int i;
@@ -154,5 +154,11 @@ public class SlasherOrcEntity extends ModOrcEntity {
                 }
             }
         }
+    }
+
+    public enum ATTACK_TYPE {
+        NONE,
+        GENERIC,
+        STAB
     }
 }
