@@ -4,6 +4,7 @@ import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.minecraft.util.Identifier;
+import net.sn0wix_.worldofdragonsmod.client.events.ClientEvents;
 import net.sn0wix_.worldofdragonsmod.client.renderersAndModels.entity.GenericEntityModel;
 import net.sn0wix_.worldofdragonsmod.client.renderersAndModels.entity.hostile.OrcModel;
 import net.sn0wix_.worldofdragonsmod.client.renderersAndModels.entity.misc.chest.ChestEntityRenderer;
@@ -44,5 +45,8 @@ public class WorldOfDragonsClient implements ClientModInitializer {
 
         //Networking
         ModPackets.registerS2CPackets();
+
+        //Events
+        ClientEvents.registerEvents();
     }
 }
