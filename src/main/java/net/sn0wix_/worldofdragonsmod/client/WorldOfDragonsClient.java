@@ -17,7 +17,7 @@ import software.bernie.geckolib.renderer.GeoEntityRenderer;
 public class WorldOfDragonsClient implements ClientModInitializer {
     @Override
     public void onInitializeClient() {
-        //geckolib
+        //Geckolib
         EntityRendererRegistry.register(ModEntities.ARMORED_ORC, ctx -> new GeoEntityRenderer<>(ctx, new OrcModel<>("armored_orc")));
         EntityRendererRegistry.register(ModEntities.GOBLIN, ctx -> new GeoEntityRenderer<>(ctx, new OrcModel<>("goblin")));
         EntityRendererRegistry.register(ModEntities.ARCHER_ORC, ctx -> new GeoEntityRenderer<>(ctx, new OrcModel<>("archer_orc")));
@@ -33,13 +33,15 @@ public class WorldOfDragonsClient implements ClientModInitializer {
         EntityRendererRegistry.register(ModEntities.BUBBAGUMP7, ctx -> new PlayerNPCRenderer(ctx, new Identifier(WorldOfDragons.MOD_ID, "textures/entity/misc/players/bubbagump7.png"), false));
         EntityRendererRegistry.register(ModEntities.BOUQUETZ, ctx -> new PlayerNPCRenderer(ctx, new Identifier(WorldOfDragons.MOD_ID, "textures/entity/misc/players/bouquetz.png"), false));
 
-        EntityRendererRegistry.register(ModEntities.IRON_CHEST_ENTITY, ctx -> new GeoEntityRenderer<>(ctx, new GenericEntityModel<>("misc/chests/iron_chest", "")));
-        EntityRendererRegistry.register(ModEntities.COMMON_CHEST_ENTITY, ctx -> new GeoEntityRenderer<>(ctx, new GenericEntityModel<>("misc/chests/common_chest", "")));
+        EntityRendererRegistry.register(ModEntities.IRON_CHEST_ENTITY, ctx -> new GeoEntityRenderer<>(ctx, new GenericEntityModel<>("misc/chests/iron_chest")));
+        EntityRendererRegistry.register(ModEntities.COMMON_CHEST_ENTITY, ctx -> new GeoEntityRenderer<>(ctx, new GenericEntityModel<>("misc/chests/common_chest")));
 
 
-        //mc rendering
+        //Mc rendering
         EntityModelLayerRegistry.registerModelLayer(ExplodingCubeProjectileModel.LAYER_LOCATION, ExplodingCubeProjectileModel::getTexturedModelData);
         EntityRendererRegistry.register(ModEntities.EXPLODING_MAGMA_PROJECTILE, ctx -> new ExplodingCubeProjectileRenderer(ctx, new Identifier("minecraft", "textures/block/magma.png")));
+
+        //Networking
         ModPackets.registerS2CPackets();
     }
 }

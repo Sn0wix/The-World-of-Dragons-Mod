@@ -1,8 +1,6 @@
 package net.sn0wix_.worldofdragonsmod.common.entity.custom.misc;
 
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.ItemEntity;
+import net.minecraft.entity.*;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.data.TrackedData;
@@ -18,6 +16,7 @@ import net.minecraft.registry.Registries;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.ActionResult;
+import net.minecraft.util.Arm;
 import net.minecraft.util.Hand;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.Direction;
@@ -44,10 +43,11 @@ public class ModChestEntity extends Entity implements GeoEntity {
     public final Identifier LOOT_TABLE;
     private final AnimatableInstanceCache cache = new SingletonAnimatableInstanceCache(this);
 
-    public ModChestEntity(EntityType<?> type, World world, String animation, int maxOpenedForTicks, int dropLootAfter) {
-        super(type, world);
+
+    public ModChestEntity(EntityType<? extends Entity> entityType, World world, String animation, int maxOpenedForTicks, int dropLootAfter) {
+        super(entityType, world);
         this.OPEN_ANIMATION = RawAnimation.begin().thenPlayAndHold(animation);
-        this.LOOT_TABLE = new Identifier(WorldOfDragons.MOD_ID, "chests/" + Registries.ENTITY_TYPE.getId(type).getPath());
+        this.LOOT_TABLE = new Identifier(WorldOfDragons.MOD_ID, "chests/" + Registries.ENTITY_TYPE.getId(entityType).getPath());
         this.maxOpenedForTicks = maxOpenedForTicks;
         this.dropLootAfter = maxOpenedForTicks - dropLootAfter;
     }
@@ -195,13 +195,13 @@ public class ModChestEntity extends Entity implements GeoEntity {
     }
 
     @Override
-    protected void readCustomDataFromNbt(NbtCompound nbt) {
+    public void readCustomDataFromNbt(NbtCompound nbt) {
         dataTracker.set(IS_OPENED, nbt.getBoolean("IsOpened"));
         openedFor = nbt.getInt("OpenedFor");
     }
 
     @Override
-    protected void writeCustomDataToNbt(NbtCompound nbt) {
+    public void writeCustomDataToNbt(NbtCompound nbt) {
         nbt.putBoolean("IsOpened", dataTracker.get(IS_OPENED));
         nbt.putInt("OpenedFor", openedFor);
     }

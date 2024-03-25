@@ -23,7 +23,6 @@ public class OrcBruteEntity extends ModOrcEntity {
     public static final RawAnimation ATTACK_MELEE = RawAnimation.begin().then("attack.melee", Animation.LoopType.PLAY_ONCE);
 
     public static final RawAnimation ATTACK_SMASH = RawAnimation.begin().then("attack.smash", Animation.LoopType.PLAY_ONCE);
-    public static final RawAnimation DEATH = RawAnimation.begin().then("move.death", Animation.LoopType.HOLD_ON_LAST_FRAME);
 
     private int attackTicksLeft = 0;
     private int attackAnimTicksLeft = 0;
@@ -59,7 +58,7 @@ public class OrcBruteEntity extends ModOrcEntity {
     @Override
     public void registerControllers(AnimatableManager.ControllerRegistrar controllerRegistrar) {
         controllerRegistrar.add(new AnimationController<>(this, "controller", 2, this::predicate)
-                .triggerableAnim("attack", ATTACK_MELEE).triggerableAnim("smash", ATTACK_SMASH).triggerableAnim("death", DEATH));
+                .triggerableAnim("attack", ATTACK_MELEE).triggerableAnim("smash", ATTACK_SMASH));
     }
 
     private <T extends GeoAnimatable> PlayState predicate(AnimationState<T> state) {
@@ -79,9 +78,6 @@ public class OrcBruteEntity extends ModOrcEntity {
         }
 
         if (attackTicksLeft > 0) {
-                /*if (this.getTarget() != null) {
-                    this.getLookControl().lookAt(this.getTarget());
-                }*/
             attackTicksLeft--;
             if (attackTicksLeft <= 0 && this.getTarget() != null) {
                 tryDelayedAttack(this.getTarget());
@@ -91,12 +87,18 @@ public class OrcBruteEntity extends ModOrcEntity {
 
     @Override
     public boolean tryAttack(Entity target) {
-        if (attackAnimTicksLeft <= 0 && !this.getWorld().isClient && attackTicksLeft <= 0) {
-            this.triggerAnim("controller", "attack");
+        if (random.nextInt(4) == 0 && attackAnimTicksLeft <= 0 && !this.getWorld().isClient && attackTicksLeft <= 0) {
+            this.triggerAnim("controller", "smash");
             this.attackTicksLeft = 8;
             this.attackAnimTicksLeft = 13;
             this.lastAttackedType = 1;
+        } else if (attackAnimTicksLeft <= 0 && !this.getWorld().isClient && attackTicksLeft <= 0) {
+            this.triggerAnim("controller", "attack");
+            this.attackTicksLeft = 8;
+            this.attackAnimTicksLeft = 16;
+            this.lastAttackedType = 1;
         }
+
         return true;
     }
 
