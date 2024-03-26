@@ -16,7 +16,7 @@ public class ClientEndTickEvent implements ClientTickEvents.EndTick {
     public void onEndTick(MinecraftClient client) {
         if (client.world != null && client.world.getPlayers().size() > 1) {
             client.world.getPlayers().forEach(abstractClientPlayerEntity -> {
-                if (abstractClientPlayerEntity.hasStatusEffect(ModEffects.BLEEDING)) {
+                if (abstractClientPlayerEntity.hasStatusEffect(ModEffects.BLEEDING) && client.player != null && abstractClientPlayerEntity.getUuid() != client.player.getUuid()) {
                     ParticleSpawnUtil.spawnBleedParticles(abstractClientPlayerEntity, RANDOM);
                 }
             });

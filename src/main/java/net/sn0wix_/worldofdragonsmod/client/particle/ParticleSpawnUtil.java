@@ -10,6 +10,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.util.math.Box;
+import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.MathHelper;
 import net.sn0wix_.worldofdragonsmod.common.entity.custom.misc.ChestEntity;
 import net.sn0wix_.worldofdragonsmod.common.entity.custom.misc.projectile.ExplodingCubeProjectile;
@@ -24,12 +25,16 @@ public class ParticleSpawnUtil {
         if (client.world != null && entity instanceof ChestEntity) {
             ParticleManager manager = client.particleManager;
 
-            if (!puf) {
+            if (puf) {
+                Direction direction = entity.getHorizontalFacing();
+
+                for (int i = 0; i < 90 + random.nextInt(10); i++) {
+                    manager.addParticle(new BlockDustParticle(client.world, x + getRandomDouble(2), y + 0.7, z + getRandomDouble(2), direction.getOffsetX() + getRandomDouble(), direction.getOffsetY() + getRandomDouble(), direction.getOffsetZ() + getRandomDouble(), Blocks.GOLD_BLOCK.getDefaultState()));
+                }
+            } else {
                 for (int i = 0; i < (96 - 69) * 2 + random.nextInt(4); i++) {
                     manager.addParticle(ParticleTypes.CAMPFIRE_COSY_SMOKE, x + getRandomDouble(2), y + getRandomDouble(2), z + getRandomDouble(2), getRandomDouble(25), getRandomDouble(25), getRandomDouble(25));
                 }
-            } else {
-
             }
         }
     }
@@ -100,6 +105,7 @@ public class ParticleSpawnUtil {
             }
         });
     }
+
 
     //Helper methods
     private static double getRandomDouble(float divisor) {
