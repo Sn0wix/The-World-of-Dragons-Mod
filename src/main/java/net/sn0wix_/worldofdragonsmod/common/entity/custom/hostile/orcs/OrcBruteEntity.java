@@ -3,17 +3,17 @@ package net.sn0wix_.worldofdragonsmod.common.entity.custom.hostile.orcs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.ai.goal.ActiveTargetGoal;
-import net.minecraft.entity.ai.goal.LookAroundGoal;
-import net.minecraft.entity.ai.goal.MeleeAttackGoal;
-import net.minecraft.entity.ai.goal.WanderAroundFarGoal;
+import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.mob.HostileEntity;
 import net.minecraft.entity.passive.*;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.world.World;
 import net.sn0wix_.worldofdragonsmod.common.WorldOfDragons;
+import net.sn0wix_.worldofdragonsmod.common.util.blockWaves.BlockWave;
+import net.sn0wix_.worldofdragonsmod.common.util.blockWaves.BlockWaves;
 import software.bernie.geckolib.core.animatable.GeoAnimatable;
 import software.bernie.geckolib.core.animation.*;
 import software.bernie.geckolib.core.object.PlayState;
@@ -36,7 +36,7 @@ public class OrcBruteEntity extends ModOrcEntity {
     @Override
     protected void initGoals() {
         this.goalSelector.add(2, new MeleeAttackGoal(this, 1f, false));
-        //this.goalSelector.add(8, new LookAtEntityGoal(this, PlayerEntity.class, 8.0F));
+        this.goalSelector.add(8, new LookAtEntityGoal(this, PlayerEntity.class, 8.0F));
         this.goalSelector.add(8, new LookAroundGoal(this));
         this.goalSelector.add(7, new WanderAroundFarGoal(this, 1.0));
 
@@ -88,7 +88,7 @@ public class OrcBruteEntity extends ModOrcEntity {
 
     @Override
     public boolean tryAttack(Entity target) {
-        if (random.nextInt(4) == 0 && attackAnimTicksLeft <= 0 && !this.getWorld().isClient && attackTicksLeft <= 0) {
+        /*if (random.nextInt(4) == 0 && attackAnimTicksLeft <= 0 && !this.getWorld().isClient && attackTicksLeft <= 0) {
             this.triggerAnim("controller", "smash");
             this.attackTicksLeft = 8;
             this.attackAnimTicksLeft = 20;
@@ -98,7 +98,12 @@ public class OrcBruteEntity extends ModOrcEntity {
             this.attackTicksLeft = 8;
             this.attackAnimTicksLeft = 13;
             this.lastAttackedType = ATTACK_TYPE.GENERIC;
-        }
+        }*/
+
+        this.triggerAnim("controller", "smash");
+        this.attackTicksLeft = 8;
+        this.attackAnimTicksLeft = 40;
+        this.lastAttackedType = ATTACK_TYPE.SMASH;
 
         return true;
     }
@@ -113,8 +118,8 @@ public class OrcBruteEntity extends ModOrcEntity {
                     this.getNavigation().stop();
                     super.tryAttack(target);
                 }
-            } else if (lastAttackedType == ATTACK_TYPE.SMASH) {
-                WorldOfDragons.LOGGER.info("SMASH");
+            } else if (lastAttackedType == ATTACK_TYPE.SMASH && getWorld() instanceof ServerWorld serverWorld) {
+                BlockWaves.addWave(new BlockWave(0.1f, 250, getPos(), getPos(), target.getPos(), 10, 10, serverWorld));
             }
         }
     }
