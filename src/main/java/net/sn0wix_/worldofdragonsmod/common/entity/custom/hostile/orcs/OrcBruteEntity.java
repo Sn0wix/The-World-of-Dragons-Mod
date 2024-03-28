@@ -4,6 +4,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.goal.*;
+import net.minecraft.entity.ai.pathing.EntityNavigation;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.mob.HostileEntity;
@@ -11,7 +12,8 @@ import net.minecraft.entity.passive.*;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.world.World;
-import net.sn0wix_.worldofdragonsmod.common.WorldOfDragons;
+import net.sn0wix_.worldofdragonsmod.common.entity.ai.MMEntityMoveHelper;
+import net.sn0wix_.worldofdragonsmod.common.entity.ai.MMPathNavigateGround;
 import net.sn0wix_.worldofdragonsmod.common.util.blockWaves.BlockWave;
 import net.sn0wix_.worldofdragonsmod.common.util.blockWaves.BlockWaves;
 import software.bernie.geckolib.core.animatable.GeoAnimatable;
@@ -27,10 +29,12 @@ public class OrcBruteEntity extends ModOrcEntity {
 
     private int attackTicksLeft = 0;
     private int attackAnimTicksLeft = 0;
+    public final float maxIndirectSmashDistance = 3;
     private ATTACK_TYPE lastAttackedType = ATTACK_TYPE.NONE;
 
     public OrcBruteEntity(EntityType<? extends HostileEntity> entityType, World world) {
         super(entityType, world);
+        moveControl = new MMEntityMoveHelper(this, 90);
     }
 
     @Override
@@ -73,6 +77,10 @@ public class OrcBruteEntity extends ModOrcEntity {
     @Override
     public void tick() {
         super.tick();
+        if (getTarget() != null) {
+            getLookControl().lookAt(getTarget());
+        }
+
         if (attackAnimTicksLeft > 0) {
             this.getNavigation().stop();
             attackAnimTicksLeft--;
@@ -84,26 +92,22 @@ public class OrcBruteEntity extends ModOrcEntity {
                 tryDelayedAttack(this.getTarget());
             }
         }
+
+        if (getTarget() != null && random.nextInt(200) == 0 && canSmashIndirectly(getTarget())) {
+            startSmashingIf();
+        }
     }
 
     @Override
     public boolean tryAttack(Entity target) {
-        /*if (random.nextInt(4) == 0 && attackAnimTicksLeft <= 0 && !this.getWorld().isClient && attackTicksLeft <= 0) {
-            this.triggerAnim("controller", "smash");
-            this.attackTicksLeft = 8;
-            this.attackAnimTicksLeft = 20;
-            this.lastAttackedType = ATTACK_TYPE.SMASH;
+        if (random.nextInt(6) == 0 ) {
+            startSmashingIf();
         } else if (attackAnimTicksLeft <= 0 && !this.getWorld().isClient && attackTicksLeft <= 0) {
             this.triggerAnim("controller", "attack");
             this.attackTicksLeft = 8;
             this.attackAnimTicksLeft = 13;
             this.lastAttackedType = ATTACK_TYPE.GENERIC;
-        }*/
-
-        this.triggerAnim("controller", "smash");
-        this.attackTicksLeft = 8;
-        this.attackAnimTicksLeft = 40;
-        this.lastAttackedType = ATTACK_TYPE.SMASH;
+        }
 
         return true;
     }
@@ -119,9 +123,32 @@ public class OrcBruteEntity extends ModOrcEntity {
                     super.tryAttack(target);
                 }
             } else if (lastAttackedType == ATTACK_TYPE.SMASH && getWorld() instanceof ServerWorld serverWorld) {
-                BlockWaves.addWave(new BlockWave(0.1f, 250, getPos(), getPos(), target.getPos(), 10, 10, serverWorld));
+                BlockWaves.addWave(new BlockWave(0.1f, 250, getPos(), target.getPos(), 10, 10, serverWorld));
             }
         }
+    }
+
+    public void startSmashingIf() {
+        if ((attackAnimTicksLeft <= 0 && !this.getWorld().isClient && attackTicksLeft <= 0 && getTarget() != null)) {
+            this.triggerAnim("controller", "smash");
+            this.attackTicksLeft = 8;
+            this.attackAnimTicksLeft = 20;
+            this.lastAttackedType = ATTACK_TYPE.SMASH;
+        }
+    }
+
+    public boolean canSmashIndirectly(Entity target) {
+        if (target != null && attackAnimTicksLeft == 0 && attackTicksLeft == 0) {
+            double x = target.getX() - getX();
+            double y = target.getY() - getY();
+            double z = target.getZ() - getZ();
+
+            double c = Math.sqrt(x * x + z * z);
+            double cy = Math.sqrt(c * c + y * y);
+
+            return c >= maxIndirectSmashDistance && cy >= maxIndirectSmashDistance;
+        }
+        return false;
     }
 
 
@@ -131,6 +158,11 @@ public class OrcBruteEntity extends ModOrcEntity {
                     entity.damage(this.getDamageSources().generic(), 5f)
             );
         }*/
+    @Override
+    protected EntityNavigation createNavigation(World world) {
+        return new MMPathNavigateGround(this, world);
+    }
+
 
     public enum ATTACK_TYPE {
         NONE,
