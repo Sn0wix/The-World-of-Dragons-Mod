@@ -1,10 +1,10 @@
 package net.sn0wix_.worldofdragonsmod.common.util.blockWaves;
 
-import net.fabricmc.loader.impl.lib.sat4j.core.Vec;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.server.world.ServerWorld;
+import net.minecraft.util.math.Direction;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
-import net.sn0wix_.worldofdragonsmod.common.WorldOfDragons;
 
 import java.util.ArrayList;
 import java.util.ListIterator;
@@ -116,7 +116,10 @@ public class BlockWave {
         }
 
         notAlignedVectors.forEach(vec3d -> {
-            vectors.add(rotateVec(vec3d, pos1, Math.toRadians(rotation)));
+            Vec3d vec = vec3d.subtract(pos1);
+            vec = vec.rotateX(rotation);
+            vec = vec.add(pos1);
+            vectors.add(vec);
         });
 
 
