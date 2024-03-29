@@ -11,6 +11,7 @@ import net.minecraft.entity.mob.HostileEntity;
 import net.minecraft.entity.passive.*;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.server.world.ServerWorld;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.sn0wix_.worldofdragonsmod.common.entity.ai.MMEntityMoveHelper;
 import net.sn0wix_.worldofdragonsmod.common.entity.ai.MMPathNavigateGround;
@@ -93,14 +94,14 @@ public class OrcBruteEntity extends ModOrcEntity {
             }
         }
 
-        if (getTarget() != null && random.nextInt(200) == 0 && canSmashIndirectly(getTarget())) {
+        if (getTarget() != null && random.nextInt(50) == 0 && canSmashIndirectly(getTarget())) {
             startSmashingIf();
         }
     }
 
     @Override
     public boolean tryAttack(Entity target) {
-        if (random.nextInt(6) == 0 ) {
+        if (random.nextInt(6) == 0) {
             startSmashingIf();
         } else if (attackAnimTicksLeft <= 0 && !this.getWorld().isClient && attackTicksLeft <= 0) {
             this.triggerAnim("controller", "attack");
@@ -123,7 +124,7 @@ public class OrcBruteEntity extends ModOrcEntity {
                     super.tryAttack(target);
                 }
             } else if (lastAttackedType == ATTACK_TYPE.SMASH && getWorld() instanceof ServerWorld serverWorld) {
-                BlockWaves.addWave(new BlockWave(0.1f, 250, getPos(), target.getPos(), 10, 10, serverWorld));
+                BlockWaves.addWave(new BlockWave(0.1f, 250, getPos(), new Vec3d(getLookControl().getLookX(), getLookControl().getLookY(), getLookControl().getLookZ()), getYaw(), 4, 4, serverWorld));
             }
         }
     }
