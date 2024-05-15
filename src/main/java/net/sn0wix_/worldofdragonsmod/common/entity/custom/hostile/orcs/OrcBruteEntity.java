@@ -124,7 +124,7 @@ public class OrcBruteEntity extends ModOrcEntity {
                     super.tryAttack(target);
                 }
             } else if (lastAttackedType == ATTACK_TYPE.SMASH && getWorld() instanceof ServerWorld serverWorld) {
-                BlockWaves.addWave(new BlockWave(0.1f, 250, getPos(), new Vec3d(getLookControl().getLookX(), getLookControl().getLookY(), getLookControl().getLookZ()), getYaw(), 4, 4, serverWorld));
+                BlockWaves.addWave(new BlockWave(0.1f, 250, getPos(), new Vec3d(getLookControl().getLookX(), getLookControl().getLookY(), getLookControl().getLookZ()), 4, 4, serverWorld));
             }
         }
     }
