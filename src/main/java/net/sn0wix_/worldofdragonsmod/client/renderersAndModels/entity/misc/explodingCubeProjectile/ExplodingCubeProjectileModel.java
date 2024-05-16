@@ -1,5 +1,7 @@
 package net.sn0wix_.worldofdragonsmod.client.renderersAndModels.entity.misc.explodingCubeProjectile;
 
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.minecraft.client.model.*;
 import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.render.entity.model.EntityModel;
@@ -9,6 +11,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.util.Identifier;
 import net.sn0wix_.worldofdragonsmod.common.WorldOfDragons;
 
+@Environment(EnvType.CLIENT)
 public class ExplodingCubeProjectileModel<T extends Entity> extends EntityModel<T> {
     public static final EntityModelLayer LAYER_LOCATION = new EntityModelLayer(new Identifier(WorldOfDragons.MOD_ID, "exploding_cube_entity"), "block");
 

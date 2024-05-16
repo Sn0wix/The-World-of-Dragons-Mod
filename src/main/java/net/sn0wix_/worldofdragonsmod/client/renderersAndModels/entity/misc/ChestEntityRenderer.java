@@ -1,5 +1,7 @@
-package net.sn0wix_.worldofdragonsmod.client.renderersAndModels.entity.misc.chest;
+package net.sn0wix_.worldofdragonsmod.client.renderersAndModels.entity.misc;
 
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.render.VertexConsumerProvider;
@@ -11,6 +13,7 @@ import software.bernie.geckolib.cache.object.BakedGeoModel;
 import software.bernie.geckolib.model.GeoModel;
 import software.bernie.geckolib.renderer.GeoEntityRenderer;
 
+@Environment(EnvType.CLIENT)
 public class ChestEntityRenderer extends GeoEntityRenderer<ChestEntity> {
     public ChestEntityRenderer(EntityRendererFactory.Context renderManager, GeoModel<ChestEntity> model) {
         super(renderManager, model);

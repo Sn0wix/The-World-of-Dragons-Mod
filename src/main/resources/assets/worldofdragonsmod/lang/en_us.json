@@ -87,5 +87,8 @@
   "entity.worldofdragonsmod.common_chest": "Common Chest",
 
   "death.attack.bleeding": "%1$s bled out!",
-  "death.attack.bleeding.player": "%1$s bled out!"
+  "death.attack.bleeding.player": "%1$s bled out!",
+
+  "death.attack.block_wave": "%1$s was killed by a flying block!",
+  "death.attack.block_wave.player": "%1$s was killed by a flying block!"
 }

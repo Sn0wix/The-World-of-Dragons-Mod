@@ -21,9 +21,9 @@ public abstract class EntityParticlePacketDecoder extends ParticlePacketDecoder 
         }
     }
 
-    public static void sendToClient(int id, ServerPlayerEntity player, PacketParticleTypes type) {
+    public static void sendToClient(int entityId, ServerPlayerEntity player, PacketParticleTypes type) {
         PacketByteBuf buffer = SpawnParticlesPacket.getBuf(type);
-        buffer.writeInt(id);
+        buffer.writeInt(entityId);
         SpawnParticlesPacket.send(player, buffer);
     }
 

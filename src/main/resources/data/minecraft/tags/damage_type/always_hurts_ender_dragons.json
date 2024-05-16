@@ -1,6 +1,7 @@
 {
   "replace": false,
   "values": [
-    "worldofdragonsmod:bleeding"
+    "worldofdragonsmod:bleeding",
+    "worldofdragonsmod:block_wave"
   ]
 }

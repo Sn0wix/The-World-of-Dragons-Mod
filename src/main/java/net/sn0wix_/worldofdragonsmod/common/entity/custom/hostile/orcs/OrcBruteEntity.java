@@ -58,7 +58,8 @@ public class OrcBruteEntity extends ModOrcEntity {
                 .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 6.0f)
                 .add(EntityAttributes.GENERIC_ATTACK_SPEED, 4.0f)
                 .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.26f)
-                .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 64);
+                .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 64)
+                .add(EntityAttributes.GENERIC_KNOCKBACK_RESISTANCE, 0.5);
     }
 
     @Override
@@ -101,13 +102,13 @@ public class OrcBruteEntity extends ModOrcEntity {
 
     @Override
     public boolean tryAttack(Entity target) {
-        if (random.nextInt(6) == 0) {
-            startSmashingIf();
-        } else if (attackAnimTicksLeft <= 0 && !this.getWorld().isClient && attackTicksLeft <= 0) {
-            this.triggerAnim("controller", "attack");
-            this.attackTicksLeft = 8;
-            this.attackAnimTicksLeft = 13;
-            this.lastAttackedType = ATTACK_TYPE.GENERIC;
+        if (!(random.nextInt(6) == 0 && startSmashingIf())) {
+            if (attackAnimTicksLeft <= 0 && !this.getWorld().isClient && attackTicksLeft <= 0) {
+                this.triggerAnim("controller", "attack");
+                this.attackTicksLeft = 8;
+                this.attackAnimTicksLeft = 13;
+                this.lastAttackedType = ATTACK_TYPE.GENERIC;
+            }
         }
 
         return true;
@@ -124,18 +125,21 @@ public class OrcBruteEntity extends ModOrcEntity {
                     super.tryAttack(target);
                 }
             } else if (lastAttackedType == ATTACK_TYPE.SMASH && getWorld() instanceof ServerWorld serverWorld) {
-                BlockWaves.addWave(new BlockWave(0.1f, 250, getPos(), new Vec3d(getLookControl().getLookX(), getLookControl().getLookY(), getLookControl().getLookZ()), 4, 4, serverWorld));
+                BlockWaves.addWave(new BlockWave(0.8f, 20, getPos(), new Vec3d(getLookControl().getLookX(), getLookControl().getLookY(), getLookControl().getLookZ()), 4, 4, serverWorld));
             }
         }
     }
 
-    public void startSmashingIf() {
-        if ((attackAnimTicksLeft <= 0 && !this.getWorld().isClient && attackTicksLeft <= 0 && getTarget() != null)) {
+    public boolean startSmashingIf() {
+        if (attackAnimTicksLeft <= 0 && !this.getWorld().isClient && attackTicksLeft <= 0 && getTarget() != null && !getWorld().getBlockState(getBlockPos().down()).isAir()) {
             this.triggerAnim("controller", "smash");
             this.attackTicksLeft = 8;
             this.attackAnimTicksLeft = 20;
             this.lastAttackedType = ATTACK_TYPE.SMASH;
+            return true;
         }
+
+        return false;
     }
 
     public boolean canSmashIndirectly(Entity target) {

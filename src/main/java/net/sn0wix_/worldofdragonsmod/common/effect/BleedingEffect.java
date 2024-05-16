@@ -17,7 +17,7 @@ public class BleedingEffect extends StatusEffect {
     @Override
     public void applyUpdateEffect(LivingEntity entity, int amplifier) {
         if (!entity.getWorld().isClient) {
-            entity.damage(ModDamageSources.of(entity.getWorld(), ModDamageSources.DAMAGE_SOURCE_BLEEDING), (float) (amplifier + 1) / 4);
+            entity.damage(ModDamageSources.of(entity.getWorld(), ModDamageSources.BLEEDING), (float) (amplifier + 1) / 4);
         } else {
             ParticleSpawnUtil.spawnBleedParticles(entity, random);
         }

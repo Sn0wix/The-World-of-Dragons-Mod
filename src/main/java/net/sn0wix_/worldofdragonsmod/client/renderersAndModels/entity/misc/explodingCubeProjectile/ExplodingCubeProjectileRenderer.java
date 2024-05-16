@@ -1,5 +1,7 @@
 package net.sn0wix_.worldofdragonsmod.client.renderersAndModels.entity.misc.explodingCubeProjectile;
 
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.minecraft.client.render.OverlayTexture;
 import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.render.VertexConsumerProvider;
@@ -10,6 +12,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.util.Identifier;
 import net.sn0wix_.worldofdragonsmod.common.entity.custom.misc.projectile.ExplodingCubeProjectile;
 
+@Environment(EnvType.CLIENT)
 public class ExplodingCubeProjectileRenderer extends EntityRenderer<ExplodingCubeProjectile> {
     private final Identifier TEXTURE;
     private final ExplodingCubeProjectileModel<ExplodingCubeProjectile> model;

@@ -3,12 +3,14 @@ package net.sn0wix_.worldofdragonsmod.client;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
+import net.minecraft.client.render.entity.FallingBlockEntityRenderer;
 import net.minecraft.util.Identifier;
 import net.sn0wix_.worldofdragonsmod.client.events.ClientEvents;
 import net.sn0wix_.worldofdragonsmod.client.renderersAndModels.entity.GenericEntityModel;
 import net.sn0wix_.worldofdragonsmod.client.renderersAndModels.entity.hostile.OrcModel;
-import net.sn0wix_.worldofdragonsmod.client.renderersAndModels.entity.misc.chest.ChestEntityRenderer;
-import net.sn0wix_.worldofdragonsmod.client.renderersAndModels.entity.misc.playerNPC.PlayerNPCRenderer;
+import net.sn0wix_.worldofdragonsmod.client.renderersAndModels.entity.misc.BlockWaveFallingBlockEntityRenderer;
+import net.sn0wix_.worldofdragonsmod.client.renderersAndModels.entity.misc.ChestEntityRenderer;
+import net.sn0wix_.worldofdragonsmod.client.renderersAndModels.entity.misc.PlayerNPCRenderer;
 import net.sn0wix_.worldofdragonsmod.common.WorldOfDragons;
 import net.sn0wix_.worldofdragonsmod.common.entity.ModEntities;
 import net.sn0wix_.worldofdragonsmod.client.renderersAndModels.entity.misc.explodingCubeProjectile.ExplodingCubeProjectileModel;
@@ -42,6 +44,7 @@ public class WorldOfDragonsClient implements ClientModInitializer {
         //Mc rendering
         EntityModelLayerRegistry.registerModelLayer(ExplodingCubeProjectileModel.LAYER_LOCATION, ExplodingCubeProjectileModel::getTexturedModelData);
         EntityRendererRegistry.register(ModEntities.EXPLODING_MAGMA_PROJECTILE, ctx -> new ExplodingCubeProjectileRenderer(ctx, new Identifier("minecraft", "textures/block/magma.png")));
+        EntityRendererRegistry.register(ModEntities.BLOCK_WAVE_FALLING_BLOCK, BlockWaveFallingBlockEntityRenderer::new);
 
         //Networking
         ModPackets.registerS2CPackets();

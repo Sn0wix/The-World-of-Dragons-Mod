@@ -21,7 +21,6 @@ public class ParticleSpawnUtil {
     public static final Random random = new Random();
 
     public static void spawnChestBreakParticles(double x, double y, double z, boolean puf, Entity entity, MinecraftClient client) {
-        //gold particle pri otevreni - puf, po "kilnuti" campfire particly ale o hodne min XD
         if (client.world != null && entity instanceof ChestEntity) {
             ParticleManager manager = client.particleManager;
 
@@ -97,8 +96,8 @@ public class ParticleSpawnUtil {
                 if (player.getWorld().isClient()) {
                     for (int i = 0; i < 7; i++) {
                         MinecraftClient.getInstance().particleManager.addParticle(new BlockDustParticle(clientWorld, player.getX(),
-                                player.getY() + random.nextDouble(1.8), player.getZ(), random.nextInt(10) * (random.nextBoolean() ? 1 : -1),
-                                random.nextInt(8) * (random.nextBoolean() ? 1 : -1), random.nextInt(10) * (random.nextBoolean() ? 1 : -1)
+                                player.getY() + random.nextDouble(1.8), player.getZ(), (random.nextInt(10) * (random.nextBoolean() ? 1 : -1)) + entity.getVelocity().getX(),
+                                random.nextInt(8) * (random.nextBoolean() ? 1 : -1), (random.nextInt(10) * (random.nextBoolean() ? 1 : -1)) + entity.getVelocity().getZ()
                                 , Blocks.REDSTONE_BLOCK.getDefaultState()));
                     }
                 }

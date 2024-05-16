@@ -1,5 +1,7 @@
-package net.sn0wix_.worldofdragonsmod.client.renderersAndModels.entity.misc.playerNPC;
+package net.sn0wix_.worldofdragonsmod.client.renderersAndModels.entity.misc;
 
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.entity.EntityRendererFactory;
 import net.minecraft.client.render.entity.LivingEntityRenderer;
@@ -18,6 +20,7 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.UseAction;
 import net.sn0wix_.worldofdragonsmod.common.entity.custom.misc.playerNPC.PlayerNPCEntity;
 
+@Environment(EnvType.CLIENT)
 public class PlayerNPCRenderer extends LivingEntityRenderer<PlayerNPCEntity, PlayerEntityModel<PlayerNPCEntity>> {
     public final Identifier TEXTURE;
 

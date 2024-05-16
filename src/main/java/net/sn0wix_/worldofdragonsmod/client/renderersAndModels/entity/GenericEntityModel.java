@@ -1,5 +1,7 @@
 package net.sn0wix_.worldofdragonsmod.client.renderersAndModels.entity;
 
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.minecraft.util.Identifier;
 import net.sn0wix_.worldofdragonsmod.common.WorldOfDragons;
 import software.bernie.geckolib.constant.DataTickets;
@@ -9,6 +11,7 @@ import software.bernie.geckolib.core.animation.AnimationState;
 import software.bernie.geckolib.model.GeoModel;
 import software.bernie.geckolib.model.data.EntityModelData;
 
+@Environment(EnvType.CLIENT)
 public class GenericEntityModel<T extends GeoAnimatable> extends GeoModel<T> {
     public final Identifier MODEL_RESOURCE;
     public final Identifier TEXTURE_RESOURCE;
