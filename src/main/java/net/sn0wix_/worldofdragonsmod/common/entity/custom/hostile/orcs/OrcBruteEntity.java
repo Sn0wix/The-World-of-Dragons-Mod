@@ -125,7 +125,7 @@ public class OrcBruteEntity extends ModOrcEntity {
                     super.tryAttack(target);
                 }
             } else if (lastAttackedType == ATTACK_TYPE.SMASH && getWorld() instanceof ServerWorld serverWorld) {
-                BlockWaves.addWave(new BlockWave(0.8f, 20, getPos(), new Vec3d(getLookControl().getLookX(), getLookControl().getLookY(), getLookControl().getLookZ()), 4, 4, serverWorld));
+                BlockWaves.addWave(new BlockWave(0.7f, 25, getPos(), new Vec3d(getLookControl().getLookX(), getLookControl().getLookY(), getLookControl().getLookZ()), 4, 4, serverWorld));
             }
         }
     }
@@ -156,13 +156,6 @@ public class OrcBruteEntity extends ModOrcEntity {
         return false;
     }
 
-
-    /*if (!this.getWorld().isClient) {
-            Box box = this.getBoundingBox().expand(2);
-            this.getWorld().getOtherEntities(this, box).forEach(entity ->
-                    entity.damage(this.getDamageSources().generic(), 5f)
-            );
-        }*/
     @Override
     protected EntityNavigation createNavigation(World world) {
         return new MMPathNavigateGround(this, world);

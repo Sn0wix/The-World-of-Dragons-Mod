@@ -21,8 +21,10 @@ public class BlockWave {
 
     private int currentTick = 0;
     public final ArrayList<Vec3d> vectors = new ArrayList<>(8);
-    public final ArrayList<BlockPos> usedPositions = new ArrayList<>();
+    public final ArrayList<BlockPos> thrownPositions = new ArrayList<>();
+    public final ArrayList<BlockPos> holesMadeByWave = new ArrayList<>();
 
+    //TODO fix water behavior
 
     public BlockWave(float tickDistance, int ticksToFinish, Vec3d pos1, Vec3d pos2, int vectorCount, int nextRowAfter, ServerWorld world) {
         this.distancePerTick = tickDistance;
@@ -35,7 +37,7 @@ public class BlockWave {
     public void tick() {
         currentTick++;
 
-        if (currentTick == ticksToFinish) {
+        if (currentTick > ticksToFinish) {
             hasFinished = true;
             return;
         }
@@ -52,11 +54,12 @@ public class BlockWave {
                     iterator.remove();
                     continue;
                 } else {
-                    //step down
-                    vec3d = new Vec3d(vec3d.getX(), vec3d.getY() - 1, vec3d.getZ());
+                    if (!holesMadeByWave.contains(pos.down()) && !BlockWaves.containsHole(pos.down())) {
+                        //step down
+                        vec3d = new Vec3d(vec3d.getX(), vec3d.getY() - 1, vec3d.getZ());
+                    }
                 }
             }
-            //TODO fix wave ending upon slow speeds
 
             if (hasCollision(world.getBlockState(pos), pos)) {
                 if (hasCollision(world.getBlockState(pos.up()), pos.up())) {
@@ -64,18 +67,21 @@ public class BlockWave {
                     iterator.remove();
                     continue;
                 } else {
-                    //step up
-                    vec3d = new Vec3d(vec3d.getX(), vec3d.getY() + 1, vec3d.getZ());
+                    if (!holesMadeByWave.contains(pos.down()) && !BlockWaves.containsHole(pos.down())) {
+                        //step up
+                        vec3d = new Vec3d(vec3d.getX(), vec3d.getY() + 1, vec3d.getZ());
+                    }
                 }
             }
 
-            if (!usedPositions.contains(pos)) {
+            if (!thrownPositions.contains(pos) && !holesMadeByWave.contains(pos.down())) {
+                thrownPositions.add(pos);
+                holesMadeByWave.add(pos.down());
+                BlockWaves.addHole(pos.down());
                 world.setBlockState(pos.down(), Blocks.AIR.getDefaultState());
-                usedPositions.add(pos);
 
                 Vec3d velocity = new Vec3d(0, 0.5, 0);
                 FallingBlockEntity entity = FallingBlockEntity.spawnFromBlock(world, pos.down(), stateDown);
-                entity.collidedSoftly = false;
                 entity.dropItem = false;
                 entity.setFallingBlockPos(pos.down());
                 entity.setVelocity(velocity);
@@ -83,7 +89,6 @@ public class BlockWave {
                 entity.velocityModified = true;
                 entity.velocityDirty = true;
                 entity.tick();
-                //new BlockWaveFallingBlockEntity(ModEntities.BLOCK_WAVE_FALLING_BLOCK, world).spawn(world, pos.down(), stateDown);
             }
 
             iterator.remove();
@@ -93,6 +98,10 @@ public class BlockWave {
         if (vectors.isEmpty()) {
             hasFinished = true;
         }
+    }
+
+    public void finishWave() {
+        BlockWaves.removeAllHoles(holesMadeByWave);
     }
 
     public boolean hasCollision(BlockState state, BlockPos pos) {
