@@ -11,6 +11,8 @@ import net.minecraft.entity.mob.HostileEntity;
 import net.minecraft.entity.passive.*;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.server.world.ServerWorld;
+import net.minecraft.sound.SoundCategory;
+import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.sn0wix_.worldofdragonsmod.common.entity.ai.MMEntityMoveHelper;
@@ -30,12 +32,13 @@ public class OrcBruteEntity extends ModOrcEntity {
 
     private int attackTicksLeft = 0;
     private int attackAnimTicksLeft = 0;
-    public final float maxIndirectSmashDistance = 3;
+    public final float maxIndirectSmashDistance = 4;
     private ATTACK_TYPE lastAttackedType = ATTACK_TYPE.NONE;
 
     public OrcBruteEntity(EntityType<? extends HostileEntity> entityType, World world) {
         super(entityType, world);
         moveControl = new MMEntityMoveHelper(this, 90);
+        ignoreCameraFrustum = true;
     }
 
     @Override
@@ -90,12 +93,12 @@ public class OrcBruteEntity extends ModOrcEntity {
 
         if (attackTicksLeft > 0) {
             attackTicksLeft--;
-            if (attackTicksLeft <= 0 && this.getTarget() != null) {
+            if (attackTicksLeft <= 0) {
                 tryDelayedAttack(this.getTarget());
             }
         }
-
-        if (getTarget() != null && random.nextInt(50) == 0 && canSmashIndirectly(getTarget())) {
+        //TODO 69
+        if (getTarget() != null && random.nextInt(20) == 0 && canSmashIndirectly(getTarget())) {
             startSmashingIf();
         }
     }
@@ -124,17 +127,20 @@ public class OrcBruteEntity extends ModOrcEntity {
                     this.getNavigation().stop();
                     super.tryAttack(target);
                 }
-            } else if (lastAttackedType == ATTACK_TYPE.SMASH && getWorld() instanceof ServerWorld serverWorld) {
-                BlockWaves.addWave(new BlockWave(0.7f, 25, getPos(), new Vec3d(getLookControl().getLookX(), getLookControl().getLookY(), getLookControl().getLookZ()), 4, 4, serverWorld));
             }
+        }
+
+        if (attackTicksLeft == 0 && lastAttackedType == ATTACK_TYPE.SMASH && getWorld() instanceof ServerWorld serverWorld) {
+            BlockWaves.addWave(new BlockWave((float) (0.7 + Math.random() / 2), (int) (24 + Math.random()), getPos(), new Vec3d(getLookControl().getLookX(), getLookControl().getLookY(), getLookControl().getLookZ()), 4, 4, serverWorld, (float) (3.5 + Math.random()), this));
+            getWorld().playSound(this, this.getBlockPos(), SoundEvents.ENTITY_GENERIC_EXPLODE, SoundCategory.HOSTILE, 64, 10);
         }
     }
 
     public boolean startSmashingIf() {
-        if (attackAnimTicksLeft <= 0 && !this.getWorld().isClient && attackTicksLeft <= 0 && getTarget() != null && !getWorld().getBlockState(getBlockPos().down()).isAir()) {
+        if (attackAnimTicksLeft <= 0 && !this.getWorld().isClient && attackTicksLeft <= 0 && !getWorld().getBlockState(getBlockPos().down()).isAir()) {
             this.triggerAnim("controller", "smash");
             this.attackTicksLeft = 8;
-            this.attackAnimTicksLeft = 20;
+            this.attackAnimTicksLeft = 40;
             this.lastAttackedType = ATTACK_TYPE.SMASH;
             return true;
         }

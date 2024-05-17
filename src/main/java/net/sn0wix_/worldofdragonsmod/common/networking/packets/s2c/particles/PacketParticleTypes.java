@@ -1,13 +1,15 @@
 package net.sn0wix_.worldofdragonsmod.common.networking.packets.s2c.particles;
 
 import net.minecraft.network.PacketByteBuf;
+import net.sn0wix_.worldofdragonsmod.client.particle.packetDecoders.BlockBreakParticleDecoder;
 import net.sn0wix_.worldofdragonsmod.client.particle.packetDecoders.ChestBreakParticleDecoder;
 import net.sn0wix_.worldofdragonsmod.client.particle.packetDecoders.ExplodingCubeProjectileParticleDecoder;
 import net.sn0wix_.worldofdragonsmod.client.particle.packetDecoders.ParticlePacketDecoder;
 
 public enum PacketParticleTypes {
     EXPLODING_PROJECTILE((byte) 0, new ExplodingCubeProjectileParticleDecoder()),
-    CHEST_BREAK((byte) 1, new ChestBreakParticleDecoder());
+    CHEST_BREAK((byte) 1, new ChestBreakParticleDecoder()),
+    BLOCK_BREAK((byte) 2, new BlockBreakParticleDecoder());
 
     private final byte type;
     private final ParticlePacketDecoder decoder;
