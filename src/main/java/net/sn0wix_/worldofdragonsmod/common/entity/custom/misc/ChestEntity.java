@@ -1,5 +1,6 @@
 package net.sn0wix_.worldofdragonsmod.common.entity.custom.misc;
 
+import net.minecraft.client.MinecraftClient;
 import net.minecraft.entity.*;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.data.DataTracker;
@@ -15,14 +16,16 @@ import net.minecraft.nbt.NbtCompound;
 import net.minecraft.registry.Registries;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
+import net.minecraft.sound.SoundCategory;
+import net.minecraft.sound.SoundEvent;
+import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.World;
-import net.sn0wix_.worldofdragonsmod.client.particle.packetDecoders.ChestBreakParticleDecoder;
+import net.sn0wix_.worldofdragonsmod.client.particle.ParticleSpawnUtil;
 import net.sn0wix_.worldofdragonsmod.common.WorldOfDragons;
-import net.sn0wix_.worldofdragonsmod.common.networking.packets.s2c.particles.PacketParticleTypes;
 import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib.animatable.GeoEntity;
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
@@ -33,6 +36,8 @@ import software.bernie.geckolib.core.animation.AnimationState;
 import software.bernie.geckolib.core.animation.RawAnimation;
 import software.bernie.geckolib.core.object.PlayState;
 
+import java.util.Objects;
+
 public class ChestEntity extends Entity implements GeoEntity {
     public static final TrackedData<Boolean> IS_OPENED = DataTracker.registerData(ChestEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
     private int openedFor = 0;
@@ -40,15 +45,19 @@ public class ChestEntity extends Entity implements GeoEntity {
     private final int maxOpenedForTicks;
     private final RawAnimation OPEN_ANIMATION;
     public final Identifier LOOT_TABLE;
+    private final double particleYOffset;
+    private final float randomDivisor;
     private final AnimatableInstanceCache cache = new SingletonAnimatableInstanceCache(this);
 
 
-    public ChestEntity(EntityType<? extends Entity> entityType, World world, String animation, int maxOpenedForTicks, int dropLootAfter) {
+    public ChestEntity(EntityType<? extends Entity> entityType, World world, String animation, int maxOpenedForTicks, int dropLootAfter, double particlesYOffset, float randomDivisor) {
         super(entityType, world);
         this.OPEN_ANIMATION = RawAnimation.begin().thenPlayAndHold(animation);
         this.LOOT_TABLE = new Identifier(WorldOfDragons.MOD_ID, "chests/" + Registries.ENTITY_TYPE.getId(entityType).getPath());
         this.maxOpenedForTicks = maxOpenedForTicks;
         this.dropLootAfter = maxOpenedForTicks - dropLootAfter;
+        this.particleYOffset = particlesYOffset;
+        this.randomDivisor = randomDivisor;
     }
 
     @Override
@@ -79,12 +88,10 @@ public class ChestEntity extends Entity implements GeoEntity {
                 openedFor--;
 
                 if (openedFor == 0) {
-                    spawnParticles(256, false);
                     kill();
                 }
 
                 if (openedFor == dropLootAfter) {
-                    spawnParticles(256, true);
                     dropLoot(this.getDamageSources().genericKill(), true);
                 }
 
@@ -94,20 +101,10 @@ public class ChestEntity extends Entity implements GeoEntity {
         }
     }
 
-    public void spawnParticles(int range, boolean puf) {
-        if (!getWorld().isClient) {
-            getWorld().getPlayers().forEach(player -> {
-                if (player.isInRange(this, range)) {
-                    ChestBreakParticleDecoder.sendToClient(this.getId(), (ServerPlayerEntity) player, puf, PacketParticleTypes.CHEST_BREAK);
-                }
-            });
-        }
-    }
-
     public void dropLoot(DamageSource damageSource, boolean causedByPlayer) {
         try {
             if (!getWorld().isClient()) {
-                LootTable lootTable = this.getWorld().getServer().getLootManager().getLootTable(LOOT_TABLE);
+                LootTable lootTable = Objects.requireNonNull(this.getWorld().getServer()).getLootManager().getLootTable(LOOT_TABLE);
                 LootContextParameterSet.Builder builder = new LootContextParameterSet.Builder((ServerWorld) this.getWorld()).add(LootContextParameters.THIS_ENTITY, this).add(LootContextParameters.ORIGIN, this.getPos()).add(LootContextParameters.DAMAGE_SOURCE, damageSource).addOptional(LootContextParameters.KILLER_ENTITY, damageSource.getAttacker()).addOptional(LootContextParameters.DIRECT_KILLER_ENTITY, damageSource.getSource());
                 if (causedByPlayer && damageSource.getAttacker() instanceof PlayerEntity player) {
                     builder = builder.add(LootContextParameters.LAST_DAMAGE_PLAYER, player).luck(player.getLuck());
@@ -153,7 +150,23 @@ public class ChestEntity extends Entity implements GeoEntity {
     //geckolib
     @Override
     public void registerControllers(AnimatableManager.ControllerRegistrar controllerRegistrar) {
-        controllerRegistrar.add(new AnimationController<>(this, "controller", 0, this::predicate));
+        controllerRegistrar.add(new AnimationController<>(this, "controller", 0, this::predicate)
+                //spawn particles
+                .setParticleKeyframeHandler(event -> {
+                    if (event.getKeyframeData().getEffect().equals("gold")) {
+                        ParticleSpawnUtil.spawnChestDropLootParticles(getX(), getY(), getZ(), particleYOffset, randomDivisor, this, MinecraftClient.getInstance());
+                    } else if (event.getKeyframeData().getEffect().equals("smoke")) {
+                        ParticleSpawnUtil.spawnChestBreakParticles(getX(), getY(), getZ(), MinecraftClient.getInstance());
+                    }
+                })
+                //play sounds
+                .setSoundKeyframeHandler(event -> {
+                    if (event.getKeyframeData().getSound().equals("attack") && MinecraftClient.getInstance().world != null) {
+                        MinecraftClient.getInstance().world.playSound(getX(), getY(), getZ(), SoundEvents.ENTITY_ZOMBIE_ATTACK_WOODEN_DOOR, SoundCategory.BLOCKS, 16f,1f, true);
+                    } else if (event.getKeyframeData().getSound().equals("break") && MinecraftClient.getInstance().world != null) {
+                        MinecraftClient.getInstance().world.playSound(getX(), getY(), getZ(), SoundEvents.ENTITY_ZOMBIE_BREAK_WOODEN_DOOR, SoundCategory.BLOCKS, 16f,1f, true);
+                    }
+                }));
     }
 
     private PlayState predicate(AnimationState<ChestEntity> modChestEntityAnimationState) {

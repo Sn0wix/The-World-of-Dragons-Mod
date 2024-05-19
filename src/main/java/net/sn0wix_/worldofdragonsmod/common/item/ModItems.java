@@ -19,6 +19,7 @@ public class ModItems {
 
     public static final Item COMMON_CHEST = registerItem("common_chest", new ChestItem(new FabricItemSettings().maxCount(1), ModEntities.COMMON_CHEST_ENTITY));
     public static final Item IRON_CHEST = registerItem("iron_chest", new ChestItem(new FabricItemSettings().maxCount(1), ModEntities.IRON_CHEST_ENTITY));
+    public static final Item GOLDEN_CHEST = registerItem("golden_chest", new ChestItem(new FabricItemSettings().maxCount(1), ModEntities.GOLDEN_CHEST_ENTITY));
 
 
     public static final Item ARMOR_UPGRADE = registerItem("armor_upgrade", new Item(new FabricItemSettings().maxCount(1)));

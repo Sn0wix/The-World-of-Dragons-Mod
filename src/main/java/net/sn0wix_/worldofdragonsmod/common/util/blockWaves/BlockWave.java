@@ -99,10 +99,10 @@ public class BlockWave {
                     }
                 });
                 world.playSound(null, pos.down(), stateDown.getSoundGroup().getBreakSound(), SoundCategory.BLOCKS);
-                world.setBlockState(pos.down(), stateDown.getFluidState().getBlockState(), Block.NOTIFY_ALL, 0);
                 thrownPositions.add(pos);
                 holesMadeByWave.add(pos.down());
                 BlockWaves.addHole(pos.down());
+                world.setBlockState(pos.down(), stateDown.getFluidState().getBlockState(), Block.NOTIFY_ALL, 0);
 
                 Vec3d velocity = new Vec3d(0, 0.3, 0);
                 BlockWaveFallingBlockEntity entity = BlockWaveFallingBlockEntity.spawnFromBlock(world, pos.down(), stateDown, owner, damage, this);

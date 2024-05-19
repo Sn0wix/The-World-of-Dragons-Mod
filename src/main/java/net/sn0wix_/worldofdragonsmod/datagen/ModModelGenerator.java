@@ -21,5 +21,6 @@ public class ModModelGenerator extends FabricModelProvider {
     public void generateItemModels(ItemModelGenerator itemModelGenerator) {
         itemModelGenerator.register(ModItems.COMMON_CHEST, Models.GENERATED);
         itemModelGenerator.register(ModItems.IRON_CHEST, Models.GENERATED);
+        itemModelGenerator.register(ModItems.GOLDEN_CHEST, Models.GENERATED);
     }
 }

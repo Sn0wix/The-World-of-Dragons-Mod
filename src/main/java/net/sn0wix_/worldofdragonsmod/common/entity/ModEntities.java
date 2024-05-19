@@ -66,10 +66,13 @@ public class ModEntities {
 
 
     //Chests
+    //TODO fix hitboxes and golden loot timing
     public static final EntityType<ChestEntity> IRON_CHEST_ENTITY = Registry.register(Registries.ENTITY_TYPE, new Identifier(WorldOfDragons.MOD_ID, "iron_chest"),
-            getModChestEntityType((type, world) -> new ChestEntity(type, world, "animation.iron_chest.open", 90, 44), 1.7f, 1.8f));
+            getModChestEntityType((type, world) -> new ChestEntity(type, world, "animation.iron_chest.open", 91, 44, 0.7, 2), 1.7f, 1.8f));
     public static final EntityType<ChestEntity> COMMON_CHEST_ENTITY = Registry.register(Registries.ENTITY_TYPE, new Identifier(WorldOfDragons.MOD_ID, "common_chest"),
-            getModChestEntityType((type, world) -> new ChestEntity(type, world, "animation.common_chest.open", 83, 35), 1.2f, 1.2f));
+            getModChestEntityType((type, world) -> new ChestEntity(type, world, "animation.common_chest.open", 91, 35, 0.7, 2), 1.2f, 1.2f));
+    public static final EntityType<ChestEntity> GOLDEN_CHEST_ENTITY = Registry.register(Registries.ENTITY_TYPE, new Identifier(WorldOfDragons.MOD_ID, "golden_chest"),
+            getModChestEntityType((type, world) -> new ChestEntity(type, world, "animation.golden_chest.open", 91, 35, 0.7, 2), 1.7f, 1.8f));
 
 
     //Projectiles
@@ -79,7 +82,7 @@ public class ModEntities {
 
     //Others
     public static final EntityType<BlockWaveFallingBlockEntity> BLOCK_WAVE_FALLING_BLOCK = Registry.register(Registries.ENTITY_TYPE, new Identifier(WorldOfDragons.MOD_ID, "block_wave_falling_block"),
-            FabricEntityTypeBuilder.create(SpawnGroup.MISC, BlockWaveFallingBlockEntity::new).dimensions(EntityDimensions.fixed(0.98f,0.98f)).trackRangeChunks(10).trackedUpdateRate(20).build());
+            FabricEntityTypeBuilder.create(SpawnGroup.MISC, BlockWaveFallingBlockEntity::new).dimensions(EntityDimensions.fixed(0.98f, 0.98f)).trackRangeChunks(10).trackedUpdateRate(20).build());
 
 
     //Helper methods

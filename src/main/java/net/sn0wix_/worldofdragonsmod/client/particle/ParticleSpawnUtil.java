@@ -12,7 +12,6 @@ import net.minecraft.particle.ParticleTypes;
 import net.minecraft.util.math.Box;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.MathHelper;
-import net.sn0wix_.worldofdragonsmod.common.entity.custom.misc.ChestEntity;
 import net.sn0wix_.worldofdragonsmod.common.entity.custom.misc.projectile.ExplodingCubeProjectile;
 
 import java.util.Random;
@@ -20,20 +19,19 @@ import java.util.Random;
 public class ParticleSpawnUtil {
     public static final Random random = new Random();
 
-    public static void spawnChestBreakParticles(double x, double y, double z, boolean puf, Entity entity, MinecraftClient client) {
-        if (client.world != null && entity instanceof ChestEntity) {
-            ParticleManager manager = client.particleManager;
+    public static void spawnChestBreakParticles(double x, double y, double z, MinecraftClient client) {
+        if (client.world != null) {
+            for (int i = 0; i < (96 - 69) * 2 + random.nextInt(4); i++) {
+                client.particleManager.addParticle(ParticleTypes.CAMPFIRE_COSY_SMOKE, x + getRandomDouble(2), y + getRandomDouble(2), z + getRandomDouble(2), getRandomDouble(25), getRandomDouble(25), getRandomDouble(25));
+            }
+        }
+    }
 
-            if (puf) {
-                Direction direction = entity.getHorizontalFacing();
-
-                for (int i = 0; i < 90 + random.nextInt(10); i++) {
-                    manager.addParticle(new BlockDustParticle(client.world, x + getRandomDouble(2), y + 0.7, z + getRandomDouble(2), direction.getOffsetX() + getRandomDouble(), direction.getOffsetY() + getRandomDouble(), direction.getOffsetZ() + getRandomDouble(), Blocks.GOLD_BLOCK.getDefaultState()));
-                }
-            } else {
-                for (int i = 0; i < (96 - 69) * 2 + random.nextInt(4); i++) {
-                    manager.addParticle(ParticleTypes.CAMPFIRE_COSY_SMOKE, x + getRandomDouble(2), y + getRandomDouble(2), z + getRandomDouble(2), getRandomDouble(25), getRandomDouble(25), getRandomDouble(25));
-                }
+    public static void spawnChestDropLootParticles(double x, double y, double z, double yOffset, float randomDivisor, Entity entity, MinecraftClient client) {
+        if (client.world != null) {
+            Direction direction = entity.getHorizontalFacing();
+            for (int i = 0; i < 90 + random.nextInt(10); i++) {
+                client.particleManager.addParticle(new BlockDustParticle(client.world, x + getRandomDouble(randomDivisor), y + yOffset, z + getRandomDouble(randomDivisor), direction.getOffsetX() + getRandomDouble(), direction.getOffsetY() + getRandomDouble(), direction.getOffsetZ() + getRandomDouble(), Blocks.GOLD_BLOCK.getDefaultState()));
             }
         }
     }

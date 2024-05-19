@@ -3,7 +3,11 @@ package net.sn0wix_.worldofdragonsmod.client;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
+import net.minecraft.client.render.RenderLayer;
+import net.minecraft.client.render.VertexConsumer;
+import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.entity.FallingBlockEntityRenderer;
+import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Identifier;
 import net.sn0wix_.worldofdragonsmod.client.events.ClientEvents;
 import net.sn0wix_.worldofdragonsmod.client.renderersAndModels.entity.GenericEntityModel;
@@ -15,7 +19,9 @@ import net.sn0wix_.worldofdragonsmod.common.WorldOfDragons;
 import net.sn0wix_.worldofdragonsmod.common.entity.ModEntities;
 import net.sn0wix_.worldofdragonsmod.client.renderersAndModels.entity.misc.explodingCubeProjectile.ExplodingCubeProjectileModel;
 import net.sn0wix_.worldofdragonsmod.client.renderersAndModels.entity.misc.explodingCubeProjectile.ExplodingCubeProjectileRenderer;
+import net.sn0wix_.worldofdragonsmod.common.entity.custom.misc.ChestEntity;
 import net.sn0wix_.worldofdragonsmod.common.networking.ModPackets;
+import software.bernie.geckolib.cache.object.BakedGeoModel;
 import software.bernie.geckolib.renderer.GeoEntityRenderer;
 
 public class WorldOfDragonsClient implements ClientModInitializer {
@@ -37,8 +43,15 @@ public class WorldOfDragonsClient implements ClientModInitializer {
         EntityRendererRegistry.register(ModEntities.BUBBAGUMP7, ctx -> new PlayerNPCRenderer(ctx, new Identifier(WorldOfDragons.MOD_ID, "textures/entity/misc/players/bubbagump7.png"), false));
         EntityRendererRegistry.register(ModEntities.BOUQUETZ, ctx -> new PlayerNPCRenderer(ctx, new Identifier(WorldOfDragons.MOD_ID, "textures/entity/misc/players/bouquetz.png"), false));
 
-        EntityRendererRegistry.register(ModEntities.IRON_CHEST_ENTITY, ctx -> new ChestEntityRenderer(ctx, new GenericEntityModel<>("misc/chests/iron_chest")));
+        EntityRendererRegistry.register(ModEntities.IRON_CHEST_ENTITY, ctx -> new ChestEntityRenderer(ctx, new GenericEntityModel<>("misc/chests/iron_chest")) {
+            @Override
+            public void actuallyRender(MatrixStack poseStack, ChestEntity animatable, BakedGeoModel model, RenderLayer renderType, VertexConsumerProvider bufferSource, VertexConsumer buffer, boolean isReRender, float partialTick, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
+                poseStack.scale(0.7f, 0.7f, 0.7f);
+                super.actuallyRender(poseStack, animatable, model, renderType, bufferSource, buffer, isReRender, partialTick, packedLight, packedOverlay, red, green, blue, alpha);
+            }
+        });
         EntityRendererRegistry.register(ModEntities.COMMON_CHEST_ENTITY, ctx -> new ChestEntityRenderer(ctx, new GenericEntityModel<>("misc/chests/common_chest")));
+        EntityRendererRegistry.register(ModEntities.GOLDEN_CHEST_ENTITY, ctx -> new ChestEntityRenderer(ctx, new GenericEntityModel<>("misc/chests/golden_chest")));
 
 
         //Mc rendering

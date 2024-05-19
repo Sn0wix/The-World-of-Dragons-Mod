@@ -30,6 +30,7 @@
   "item.worldofdragonsmod.rare_chest_generator": "§b§lRare Chest Generator",
   "item.worldofdragonsmod.common_chest": "§7§lCommon Chest",
   "item.worldofdragonsmod.iron_chest": "§f§lIron Chest",
+  "item.worldofdragonsmod.golden_chest": "§6§lGolden Chest",
   "item.worldofdragonsmod.common_loot": "§lCommon loot",
   "item.worldofdragonsmod.rare_loot": "§e§lRare loot",
   "item.worldofdragonsmod.scrap": "§6§lScrap",
@@ -85,6 +86,7 @@
 
   "entity.worldofdragonsmod.iron_chest": "Iron Chest",
   "entity.worldofdragonsmod.common_chest": "Common Chest",
+  "entity.worldofdragonsmod.golden_chest": "Golden Chest",
   "entity.worldofdragonsmod.block_wave_falling_block": "Block Wave",
 
   "death.attack.bleeding": "%1$s bled out",
