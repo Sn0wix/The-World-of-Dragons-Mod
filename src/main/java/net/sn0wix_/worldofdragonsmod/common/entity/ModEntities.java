@@ -66,13 +66,12 @@ public class ModEntities {
 
 
     //Chests
-    //TODO fix hitboxes and golden loot timing
-    public static final EntityType<ChestEntity> IRON_CHEST_ENTITY = Registry.register(Registries.ENTITY_TYPE, new Identifier(WorldOfDragons.MOD_ID, "iron_chest"),
-            getModChestEntityType((type, world) -> new ChestEntity(type, world, "animation.iron_chest.open", 91, 44, 0.7, 2), 1.7f, 1.8f));
     public static final EntityType<ChestEntity> COMMON_CHEST_ENTITY = Registry.register(Registries.ENTITY_TYPE, new Identifier(WorldOfDragons.MOD_ID, "common_chest"),
-            getModChestEntityType((type, world) -> new ChestEntity(type, world, "animation.common_chest.open", 91, 35, 0.7, 2), 1.2f, 1.2f));
+            getModChestEntityType((type, world) -> new ChestEntity(type, world, "animation.common_chest.open", 91, 35, 0.7, 2, 90), 1.2f, 1.2f));
+    public static final EntityType<ChestEntity> IRON_CHEST_ENTITY = Registry.register(Registries.ENTITY_TYPE, new Identifier(WorldOfDragons.MOD_ID, "iron_chest"),
+            getModChestEntityType((type, world) -> new ChestEntity(type, world, "animation.iron_chest.open", 91, 44, 0.6, 2, 86), 1.3f, 1.4f));
     public static final EntityType<ChestEntity> GOLDEN_CHEST_ENTITY = Registry.register(Registries.ENTITY_TYPE, new Identifier(WorldOfDragons.MOD_ID, "golden_chest"),
-            getModChestEntityType((type, world) -> new ChestEntity(type, world, "animation.golden_chest.open", 91, 35, 0.7, 2), 1.7f, 1.8f));
+            getModChestEntityType((type, world) -> new ChestEntity(type, world, "animation.golden_chest.open", 91, 45, 1, 2, 100), 1.7f, 1.7f));
 
 
     //Projectiles

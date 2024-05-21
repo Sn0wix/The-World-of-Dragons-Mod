@@ -47,10 +47,11 @@ public class ChestEntity extends Entity implements GeoEntity {
     public final Identifier LOOT_TABLE;
     private final double particleYOffset;
     private final float randomDivisor;
+    private final int numberOfParticles;
     private final AnimatableInstanceCache cache = new SingletonAnimatableInstanceCache(this);
 
 
-    public ChestEntity(EntityType<? extends Entity> entityType, World world, String animation, int maxOpenedForTicks, int dropLootAfter, double particlesYOffset, float randomDivisor) {
+    public ChestEntity(EntityType<? extends Entity> entityType, World world, String animation, int maxOpenedForTicks, int dropLootAfter, double particlesYOffset, float randomDivisor, int numberOfParticles) {
         super(entityType, world);
         this.OPEN_ANIMATION = RawAnimation.begin().thenPlayAndHold(animation);
         this.LOOT_TABLE = new Identifier(WorldOfDragons.MOD_ID, "chests/" + Registries.ENTITY_TYPE.getId(entityType).getPath());
@@ -58,6 +59,7 @@ public class ChestEntity extends Entity implements GeoEntity {
         this.dropLootAfter = maxOpenedForTicks - dropLootAfter;
         this.particleYOffset = particlesYOffset;
         this.randomDivisor = randomDivisor;
+        this.numberOfParticles = numberOfParticles;
     }
 
     @Override
@@ -154,7 +156,7 @@ public class ChestEntity extends Entity implements GeoEntity {
                 //spawn particles
                 .setParticleKeyframeHandler(event -> {
                     if (event.getKeyframeData().getEffect().equals("gold")) {
-                        ParticleSpawnUtil.spawnChestDropLootParticles(getX(), getY(), getZ(), particleYOffset, randomDivisor, this, MinecraftClient.getInstance());
+                        ParticleSpawnUtil.spawnChestDropLootParticles(getX(), getY(), getZ(), particleYOffset, randomDivisor, numberOfParticles, this, MinecraftClient.getInstance());
                     } else if (event.getKeyframeData().getEffect().equals("smoke")) {
                         ParticleSpawnUtil.spawnChestBreakParticles(getX(), getY(), getZ(), MinecraftClient.getInstance());
                     }
@@ -162,9 +164,9 @@ public class ChestEntity extends Entity implements GeoEntity {
                 //play sounds
                 .setSoundKeyframeHandler(event -> {
                     if (event.getKeyframeData().getSound().equals("attack") && MinecraftClient.getInstance().world != null) {
-                        MinecraftClient.getInstance().world.playSound(getX(), getY(), getZ(), SoundEvents.ENTITY_ZOMBIE_ATTACK_WOODEN_DOOR, SoundCategory.BLOCKS, 16f,1f, true);
+                        MinecraftClient.getInstance().world.playSound(getX(), getY(), getZ(), SoundEvents.ENTITY_ZOMBIE_ATTACK_WOODEN_DOOR, SoundCategory.BLOCKS, 16f, 1f, true);
                     } else if (event.getKeyframeData().getSound().equals("break") && MinecraftClient.getInstance().world != null) {
-                        MinecraftClient.getInstance().world.playSound(getX(), getY(), getZ(), SoundEvents.ENTITY_ZOMBIE_BREAK_WOODEN_DOOR, SoundCategory.BLOCKS, 16f,1f, true);
+                        MinecraftClient.getInstance().world.playSound(getX(), getY(), getZ(), SoundEvents.ENTITY_ZOMBIE_BREAK_WOODEN_DOOR, SoundCategory.BLOCKS, 16f, 1f, true);
                     }
                 }));
     }
