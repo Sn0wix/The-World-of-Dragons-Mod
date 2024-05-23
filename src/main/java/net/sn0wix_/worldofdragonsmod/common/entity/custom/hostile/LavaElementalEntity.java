@@ -24,8 +24,7 @@ import software.bernie.geckolib.core.animatable.instance.SingletonAnimatableInst
 import software.bernie.geckolib.core.animation.*;
 import software.bernie.geckolib.core.object.PlayState;
 
-public class LavaElementalEntity extends HostileEntity implements GeoEntity, RangedAttackMob {
-    private final AnimatableInstanceCache cache = new SingletonAnimatableInstanceCache(this);
+public class LavaElementalEntity extends GeoHostileEntity implements RangedAttackMob {
 
     public static final RawAnimation WALK = RawAnimation.begin().then("move.walk", Animation.LoopType.LOOP);
     public static final RawAnimation IDLE = RawAnimation.begin().then("move.idle", Animation.LoopType.LOOP);
@@ -108,12 +107,6 @@ public class LavaElementalEntity extends HostileEntity implements GeoEntity, Ran
         }
 
         return super.damage(source, amount);
-    }
-
-
-    @Override
-    public AnimatableInstanceCache getAnimatableInstanceCache() {
-        return cache;
     }
 
     @Override

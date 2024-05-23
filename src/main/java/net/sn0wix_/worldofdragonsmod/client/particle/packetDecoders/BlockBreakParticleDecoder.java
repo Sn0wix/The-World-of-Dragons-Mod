@@ -12,7 +12,6 @@ public class BlockBreakParticleDecoder extends ParticlePacketDecoder {
         BlockPos pos = byteBuf.readBlockPos();
         MinecraftClient.getInstance().execute(() -> {
             if (MinecraftClient.getInstance().world != null) {
-                WorldOfDragons.LOGGER.info(MinecraftClient.getInstance().world.getBlockState(pos).toString());
                 //TODO fix error no bounds for empty shape
                 //ParticleSpawnUtil.addBlockBreakParticles(MinecraftClient.getInstance().world.getBlockState(pos), MinecraftClient.getInstance().particleManager, MinecraftClient.getInstance().world, MinecraftClient.getInstance().world.getBlockState(pos).getCollisionShape(MinecraftClient.getInstance().world, pos).getBoundingBox());
             }

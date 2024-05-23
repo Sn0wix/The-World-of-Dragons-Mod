@@ -97,15 +97,15 @@ public class OrcBruteEntity extends ModOrcEntity {
                 tryDelayedAttack(this.getTarget());
             }
         }
-        //TODO 69
-        if (getTarget() != null && random.nextInt(20) == 0 && canSmashIndirectly(getTarget())) {
+
+        if (getTarget() != null && random.nextInt(100) == 0 && canSmashIndirectly(getTarget())) {
             startSmashingIf();
         }
     }
 
     @Override
     public boolean tryAttack(Entity target) {
-        if (!(random.nextInt(6) == 0 && startSmashingIf())) {
+        if (!(random.nextInt(7) == 0 && startSmashingIf())) {
             if (attackAnimTicksLeft <= 0 && !this.getWorld().isClient && attackTicksLeft <= 0) {
                 this.triggerAnim("controller", "attack");
                 this.attackTicksLeft = 8;
@@ -131,7 +131,7 @@ public class OrcBruteEntity extends ModOrcEntity {
         }
 
         if (attackTicksLeft == 0 && lastAttackedType == ATTACK_TYPE.SMASH && getWorld() instanceof ServerWorld serverWorld) {
-            BlockWaves.addWave(new BlockWave((float) (0.7 + Math.random() / 2), (int) (24 + Math.random()), getPos(), new Vec3d(getLookControl().getLookX(), getLookControl().getLookY(), getLookControl().getLookZ()), 4, 4, serverWorld, (float) (3.5 + Math.random()), this));
+            BlockWaves.addWave(new BlockWave((float) (0.7 + Math.random() / 2), (int) (24 + Math.random()), getPos(), new Vec3d(getLookControl().getLookX(), getLookControl().getLookY(), getLookControl().getLookZ()), 4, 4, serverWorld, (float) (8 + Math.random()), this));
             getWorld().playSound(this, this.getBlockPos(), SoundEvents.ENTITY_GENERIC_EXPLODE, SoundCategory.HOSTILE, 64, 10);
         }
     }

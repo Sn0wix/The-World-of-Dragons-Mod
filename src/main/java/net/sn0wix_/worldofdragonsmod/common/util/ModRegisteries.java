@@ -8,6 +8,7 @@ import net.minecraft.entity.mob.PathAwareEntity;
 import net.sn0wix_.worldofdragonsmod.common.command.GPTCommand;
 import net.sn0wix_.worldofdragonsmod.common.entity.ModEntities;
 import net.sn0wix_.worldofdragonsmod.common.entity.custom.hostile.LavaElementalEntity;
+import net.sn0wix_.worldofdragonsmod.common.entity.custom.hostile.SnapperEntity;
 import net.sn0wix_.worldofdragonsmod.common.entity.custom.misc.playerNPC.PlayerNPCEntity;
 import net.sn0wix_.worldofdragonsmod.common.entity.custom.hostile.orcs.*;
 
@@ -27,6 +28,7 @@ public class ModRegisteries {
         FabricDefaultAttributeRegistry.register(ModEntities.SLASHER_ORC, SlasherOrcEntity.setAttributes());
         FabricDefaultAttributeRegistry.register(ModEntities.ORC_MAGE, OrcMageEntity.setAttributes());
         FabricDefaultAttributeRegistry.register(ModEntities.LAVA_ELEMENTAL, LavaElementalEntity.setAttributes());
+        FabricDefaultAttributeRegistry.register(ModEntities.SNAPPER, SnapperEntity.setAttributes());
         FabricDefaultAttributeRegistry.register(ModEntities.SN0WIX_, PlayerNPCEntity.setAttributes());
         FabricDefaultAttributeRegistry.register(ModEntities.BUBBAGUMP7, PlayerNPCEntity.setAttributes());
         FabricDefaultAttributeRegistry.register(ModEntities.BOUQUETZ, PlayerNPCEntity.setAttributes());

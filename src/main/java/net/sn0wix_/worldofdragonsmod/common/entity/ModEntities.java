@@ -11,6 +11,7 @@ import net.minecraft.resource.featuretoggle.FeatureFlags;
 import net.minecraft.util.Identifier;
 import net.sn0wix_.worldofdragonsmod.common.WorldOfDragons;
 import net.sn0wix_.worldofdragonsmod.common.entity.custom.hostile.LavaElementalEntity;
+import net.sn0wix_.worldofdragonsmod.common.entity.custom.hostile.SnapperEntity;
 import net.sn0wix_.worldofdragonsmod.common.entity.custom.misc.BlockWaveFallingBlockEntity;
 import net.sn0wix_.worldofdragonsmod.common.entity.custom.misc.ChestEntity;
 import net.sn0wix_.worldofdragonsmod.common.entity.custom.misc.projectile.ExplodingCubeProjectile;
@@ -52,6 +53,9 @@ public class ModEntities {
     //Other hostile mobs
     public static final EntityType<LavaElementalEntity> LAVA_ELEMENTAL = Registry.register(Registries.ENTITY_TYPE, new Identifier(WorldOfDragons.MOD_ID, "lava_elemental"),
             FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, LavaElementalEntity::new).dimensions(EntityDimensions.fixed(3f, 4.4f)).build());
+
+    public static final EntityType<SnapperEntity> SNAPPER = Registry.register(Registries.ENTITY_TYPE, new Identifier(WorldOfDragons.MOD_ID, "snapper"),
+            FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, SnapperEntity::new).dimensions(EntityDimensions.fixed(0.8f, 1.1f)).build());
 
 
     //Player npcs

@@ -41,8 +41,6 @@ import net.sn0wix_.worldofdragonsmod.common.util.blockWaves.BlockWave;
 import org.jetbrains.annotations.Nullable;
 import org.slf4j.Logger;
 
-import java.lang.reflect.Array;
-import java.util.ArrayList;
 import java.util.function.Predicate;
 
 public class BlockWaveFallingBlockEntity extends Entity {
@@ -93,10 +91,12 @@ public class BlockWaveFallingBlockEntity extends Entity {
     }
 
     @Override
-    public void pushAwayFrom(Entity entity) {}
+    public void pushAwayFrom(Entity entity) {
+    }
 
     @Override
-    protected void pushOutOfBlocks(double x, double y, double z) {}
+    protected void pushOutOfBlocks(double x, double y, double z) {
+    }
 
     @Override
     public boolean isPushedByFluids() {
@@ -138,10 +138,10 @@ public class BlockWaveFallingBlockEntity extends Entity {
                 if (!entity.equals(owner) && !(entity instanceof BlockWaveFallingBlockEntity) && !parentWave.movedEntities.contains(entity)) {
                     parentWave.movedEntities.add(entity);
                     if (entity instanceof LivingEntity livingEntity) {
-                        livingEntity.damage(ModDamageSources.of(getWorld(), ModDamageSources.BLOCK_WAVE), damage);
+                        livingEntity.damage(ModDamageSources.of(getWorld(), ModDamageSources.BLOCK_WAVE, this), damage);
                     }
 
-                    entity.addVelocity(new Vec3d(0, 1, 0));
+                    entity.addVelocity(new Vec3d(0, 0.5, 0));
                     entity.velocityDirty = true;
                     entity.velocityModified = true;
                 }
@@ -301,6 +301,10 @@ public class BlockWaveFallingBlockEntity extends Entity {
         if (this.block.isAir()) {
             this.block = Blocks.SAND.getDefaultState();
         }
+    }
+
+    public Entity getOwner() {
+        return owner;
     }
 
     public void setHurtEntities(float fallHurtAmount, int fallHurtMax) {

@@ -61,6 +61,7 @@ dependencies {
 
 	// modImplementation "net.fabricmc.fabric-api:fabric-api-deprecated:${project.fabric_version}"
 	modImplementation 'software.bernie.geckolib:geckolib-fabric-1.20.4:4.4.2'
+	include 'software.bernie.geckolib:geckolib-fabric-1.20.4:4.4.2'
 }
 
 processResources {
