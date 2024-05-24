@@ -9,7 +9,6 @@ import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.mob.HostileEntity;
 import net.minecraft.entity.passive.*;
 import net.minecraft.world.World;
-import net.sn0wix_.worldofdragonsmod.common.entity.ai.MMEntityMoveHelper;
 import software.bernie.geckolib.core.animatable.GeoAnimatable;
 import software.bernie.geckolib.core.animation.*;
 import software.bernie.geckolib.core.object.PlayState;
@@ -27,7 +26,6 @@ public class OrcWargEntity extends ModOrcEntity {
 
     public OrcWargEntity(EntityType<? extends HostileEntity> entityType, World world) {
         super(entityType, world);
-        moveControl = new MMEntityMoveHelper(this, 90);
     }
 
     @Override

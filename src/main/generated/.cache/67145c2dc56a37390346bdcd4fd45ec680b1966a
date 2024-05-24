@@ -1,9 +1,4 @@
-// 1.20.4	2024-05-24T14:04:40.375183	The World Of Dragons Mod/Model Definitions
-b0d1f67ebf5108c4081533dd42741a5bddc22590 assets\worldofdragonsmod\models\item\armored_orc_spawn_egg.json
+// 1.20.4	2024-05-24T16:55:04.3053474	The World Of Dragons Mod/Model Definitions
 4836dfdb4d64ca1e9dd06c448ef8d6243df4d08d assets\worldofdragonsmod\models\item\common_chest.json
-d93c52b23abeaa733e5bb4fb0881d3b7d1e843cf assets\worldofdragonsmod\models\item\snapper_spawn_egg.json
 fa0ca6035342773f3954669b9c1b3807c32cf65c assets\worldofdragonsmod\models\item\golden_chest.json
-506467f0715d7061e285ea43934f14aa6959ccba assets\worldofdragonsmod\models\item\orc_brute_spawn_egg.json
-8bc79667f0bd00c6b32c8863eb8ebac271e3e755 assets\worldofdragonsmod\models\item\slasher_orc_spawn_egg.json
-c67614097a10c5527fa1187b350129525a89300f assets\worldofdragonsmod\models\item\goblin_spawn_egg.json
 f578787db586f63b54f5ed15c352f04df4cf85d2 assets\worldofdragonsmod\models\item\iron_chest.json

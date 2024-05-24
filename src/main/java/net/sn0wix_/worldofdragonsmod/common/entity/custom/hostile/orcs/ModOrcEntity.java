@@ -19,6 +19,7 @@ import net.sn0wix_.worldofdragonsmod.common.entity.ai.MMPathNavigateGround;
 import net.sn0wix_.worldofdragonsmod.common.entity.custom.hostile.GeoHostileEntity;
 import net.sn0wix_.worldofdragonsmod.common.entity.custom.misc.BlockWaveFallingBlockEntity;
 import net.sn0wix_.worldofdragonsmod.common.util.ModDamageSources;
+import net.sn0wix_.worldofdragonsmod.common.world.biome.ModBiomes;
 
 public abstract class ModOrcEntity extends GeoHostileEntity {
     private boolean infected = false;
@@ -72,7 +73,7 @@ public abstract class ModOrcEntity extends GeoHostileEntity {
     }
 
     public boolean isInfected() {
-        return infected;
+        return this.getWorld().getBiome(getBlockPos()).matchesKey(ModBiomes.INFECTED_LANDS) || infected;
     }
 
     public void setInfected(boolean infected) {
