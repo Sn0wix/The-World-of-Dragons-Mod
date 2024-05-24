@@ -32,7 +32,7 @@ public class ModRegisteries {
         FabricDefaultAttributeRegistry.register(ModEntities.SN0WIX_, PlayerNPCEntity.setAttributes());
         FabricDefaultAttributeRegistry.register(ModEntities.BUBBAGUMP7, PlayerNPCEntity.setAttributes());
         FabricDefaultAttributeRegistry.register(ModEntities.BOUQUETZ, PlayerNPCEntity.setAttributes());
-        //FabricDefaultAttributeRegistry.register(ModEntities.ORC_WARG, OrcWargEntity.setAttributes());
+        FabricDefaultAttributeRegistry.register(ModEntities.ORC_WARG, OrcWargEntity.setAttributes());
     }
 
     private static DefaultAttributeContainer.Builder createGenericEntityAttributes() {

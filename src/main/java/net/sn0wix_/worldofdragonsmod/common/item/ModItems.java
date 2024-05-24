@@ -1,6 +1,8 @@
 package net.sn0wix_.worldofdragonsmod.common.item;
 
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
+import net.minecraft.entity.EntityType;
+import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.item.*;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
@@ -11,12 +13,16 @@ import net.sn0wix_.worldofdragonsmod.common.item.custom.*;
 import net.sn0wix_.worldofdragonsmod.common.sounds.ModSounds;
 
 public class ModItems {
-    public static final Item COMMON_CHEST_GENERATOR = registerItem("common_chest_generator", new CommonChestGeneratorItem(
-            new FabricItemSettings().maxCount(1)));
 
-    public static final Item RARE_CHEST_GENERATOR = registerItem("rare_chest_generator", new RareChestGeneratorItem(
-            new FabricItemSettings().maxCount(1)));
+    //Spawn Eggs
+    public static final Item ARMORED_ORC_SPAWN_EGG = registerSpawnEgg(ModEntities.ARMORED_ORC, "058602", "777777");
+    public static final Item GOBLIN_SPAWN_EGG = registerSpawnEgg(ModEntities.GOBLIN, "058602", "744d01");
+    public static final Item ORC_BRUTE_SPAWN_EGG = registerSpawnEgg(ModEntities.ORC_BRUTE, "007317", "565656");
+    public static final Item SLASHER_ORC_SPAWN_EGG = registerSpawnEgg(ModEntities.SLASHER_ORC, "026c17", "8a8a8a");
+    public static final Item SNAPPER_SPAWN_EGG = registerSpawnEgg(ModEntities.SNAPPER, "614870", "b49741");
 
+
+    //Chests
     public static final Item COMMON_CHEST = registerItem("common_chest", new ChestItem(new FabricItemSettings().maxCount(1), ModEntities.COMMON_CHEST_ENTITY));
     public static final Item IRON_CHEST = registerItem("iron_chest", new ChestItem(new FabricItemSettings().maxCount(1), ModEntities.IRON_CHEST_ENTITY));
     public static final Item GOLDEN_CHEST = registerItem("golden_chest", new ChestItem(new FabricItemSettings().maxCount(1), ModEntities.GOLDEN_CHEST_ENTITY));
@@ -83,6 +89,13 @@ public class ModItems {
     private static Item registerItem(String name, Item item) {
         Item item1 = Registry.register(Registries.ITEM, new Identifier(WorldOfDragons.MOD_ID, name), item);
         ModItemGroup.addToGroup(item);
+        return item1;
+    }
+
+    private static Item registerSpawnEgg(EntityType<? extends MobEntity> type, String hexPrimary, String hexSecondary) {
+        Item item1 = Registry.register(Registries.ITEM, new Identifier(WorldOfDragons.MOD_ID, type.getUntranslatedName() + "_spawn_egg"),
+                new SpawnEggItem(type, Integer.valueOf(hexPrimary, 16), Integer.valueOf(hexSecondary, 16), new FabricItemSettings()));
+        ModItemGroup.addSpawnEgg(item1);
         return item1;
     }
 

@@ -11,6 +11,7 @@ import net.minecraft.entity.passive.*;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.world.World;
 
+import net.sn0wix_.worldofdragonsmod.common.entity.ai.MMEntityMoveHelper;
 import software.bernie.geckolib.core.animatable.GeoAnimatable;
 import software.bernie.geckolib.core.animation.*;
 import software.bernie.geckolib.core.object.PlayState;
@@ -30,16 +31,8 @@ public class GoblinEntity extends ModOrcEntity {
 
     @Override
     protected void initGoals() {
+        super.initGoals();
         this.goalSelector.add(2, new MeleeAttackGoal(this, 1f, false));
-        //this.goalSelector.add(8, new LookAtEntityGoal(this, PlayerEntity.class, 8.0F));
-        this.goalSelector.add(8, new LookAroundGoal(this));
-        this.goalSelector.add(7, new WanderAroundFarGoal(this, 1.0));
-
-        this.targetSelector.add(2, new ActiveTargetGoal<>(this, PlayerEntity.class, true));
-        this.targetSelector.add(3, new ActiveTargetGoal<>(this, IronGolemEntity.class, true));
-        this.targetSelector.add(3, new ActiveTargetGoal<>(this, SnowGolemEntity.class, true));
-        this.targetSelector.add(3, new ActiveTargetGoal<>(this, PigEntity.class, true));
-        this.targetSelector.add(3, new ActiveTargetGoal<>(this, WanderingTraderEntity.class, true));
     }
 
     public static DefaultAttributeContainer.Builder setAttributes() {

@@ -40,16 +40,8 @@ public class SlasherOrcEntity extends ModOrcEntity {
 
     @Override
     protected void initGoals() {
+        super.initGoals();
         this.goalSelector.add(2, new MeleeAttackGoal(this, 1f, false));
-        //this.goalSelector.add(8, new LookAtEntityGoal(this, PlayerEntity.class, 8.0F));
-        this.goalSelector.add(8, new LookAroundGoal(this));
-        this.goalSelector.add(7, new WanderAroundFarGoal(this, 1.0));
-
-        this.targetSelector.add(2, new ActiveTargetGoal<>(this, PlayerEntity.class, true));
-        this.targetSelector.add(3, new ActiveTargetGoal<>(this, IronGolemEntity.class, true));
-        this.targetSelector.add(3, new ActiveTargetGoal<>(this, SnowGolemEntity.class, true));
-        this.targetSelector.add(3, new ActiveTargetGoal<>(this, PigEntity.class, true));
-        this.targetSelector.add(3, new ActiveTargetGoal<>(this, WanderingTraderEntity.class, true));
     }
 
     public static DefaultAttributeContainer.Builder setAttributes() {
@@ -134,20 +126,20 @@ public class SlasherOrcEntity extends ModOrcEntity {
                     this.getNavigation().stop();
                     int i;
                     float f = 2f;
-                    float g = (float)this.getAttributeValue(EntityAttributes.GENERIC_ATTACK_KNOCKBACK);
+                    float g = (float) this.getAttributeValue(EntityAttributes.GENERIC_ATTACK_KNOCKBACK);
 
                     f += EnchantmentHelper.getAttackDamage(this.getMainHandStack(), ((LivingEntity) target).getGroup());
-                    g += (float)EnchantmentHelper.getKnockback(this);
+                    g += (float) EnchantmentHelper.getKnockback(this);
                     if ((i = EnchantmentHelper.getFireAspect(this)) > 0) {
                         target.setOnFireFor(i * 4);
                     }
 
                     if (target.damage(this.getDamageSources().mobAttack(this), f)) {
                         if (g > 0.0f) {
-                            ((LivingEntity)target).takeKnockback(g * 0.5f, MathHelper.sin(this.getYaw() * ((float)Math.PI / 180)), -MathHelper.cos(this.getYaw() * ((float)Math.PI / 180)));
+                            ((LivingEntity) target).takeKnockback(g * 0.5f, MathHelper.sin(this.getYaw() * ((float) Math.PI / 180)), -MathHelper.cos(this.getYaw() * ((float) Math.PI / 180)));
                             this.setVelocity(this.getVelocity().multiply(0.6, 1.0, 0.6));
                         }
-                        ((LivingEntity) target).addStatusEffect(new StatusEffectInstance(ModEffects.BLEEDING, 100, 3));
+                        ((LivingEntity) target).addStatusEffect(new StatusEffectInstance(ModEffects.BLEEDING, 100, 3, true, false, true));
                         this.applyDamageEffects(this, target);
                         this.onAttacking(target);
                     }

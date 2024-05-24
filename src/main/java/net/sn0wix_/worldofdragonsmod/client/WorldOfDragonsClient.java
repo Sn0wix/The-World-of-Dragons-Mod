@@ -6,7 +6,6 @@ import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.render.VertexConsumerProvider;
-import net.minecraft.client.render.entity.FallingBlockEntityRenderer;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Identifier;
 import net.sn0wix_.worldofdragonsmod.client.events.ClientEvents;
@@ -38,7 +37,7 @@ public class WorldOfDragonsClient implements ClientModInitializer {
         EntityRendererRegistry.register(ModEntities.ORC_MAGE, ctx -> new GeoEntityRenderer<>(ctx, new OrcModel<>("orc_mage")));
         EntityRendererRegistry.register(ModEntities.LAVA_ELEMENTAL, ctx -> new GeoEntityRenderer<>(ctx, new GenericEntityModel<>("hostile/lava_elemental")));
         EntityRendererRegistry.register(ModEntities.SNAPPER, ctx -> new GeoEntityRenderer<>(ctx, new GenericEntityModel<>("hostile/snapper")));
-        //EntityRendererRegistry.register(ModEntities.ORC_WARG, ctx -> new GeoEntityRenderer<>(ctx, new OrcModel<>("orc_warg")));
+        EntityRendererRegistry.register(ModEntities.ORC_WARG, ctx -> new GeoEntityRenderer<>(ctx, new OrcModel<>("orc_warg")));
 
         //Player npcs
         EntityRendererRegistry.register(ModEntities.SN0WIX_, ctx -> new PlayerNPCRenderer(ctx, new Identifier(WorldOfDragons.MOD_ID, "textures/entity/misc/players/sn0wix_.png"), true));

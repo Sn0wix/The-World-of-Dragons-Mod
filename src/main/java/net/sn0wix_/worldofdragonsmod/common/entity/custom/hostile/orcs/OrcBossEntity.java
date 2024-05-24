@@ -32,16 +32,8 @@ public class OrcBossEntity extends ModOrcEntity {
 
     @Override
     protected void initGoals() {
+        super.initGoals();
         this.goalSelector.add(2, new MeleeAttackGoal(this, 1f, false));
-        //this.goalSelector.add(8, new LookAtEntityGoal(this, PlayerEntity.class, 8.0F));
-        this.goalSelector.add(8, new LookAroundGoal(this));
-        this.goalSelector.add(7, new WanderAroundFarGoal(this, 1.0));
-
-        this.targetSelector.add(2, new ActiveTargetGoal<>(this, PlayerEntity.class, true));
-        this.targetSelector.add(3, new ActiveTargetGoal<>(this, IronGolemEntity.class, true));
-        this.targetSelector.add(3, new ActiveTargetGoal<>(this, SnowGolemEntity.class, true));
-        this.targetSelector.add(3, new ActiveTargetGoal<>(this, PigEntity.class, true));
-        this.targetSelector.add(3, new ActiveTargetGoal<>(this, WanderingTraderEntity.class, true));
     }
 
     public static DefaultAttributeContainer.Builder setAttributes() {

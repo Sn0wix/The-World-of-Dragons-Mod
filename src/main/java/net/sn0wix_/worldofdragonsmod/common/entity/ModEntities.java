@@ -46,8 +46,8 @@ public class ModEntities {
     public static final EntityType<OrcMageEntity> ORC_MAGE = Registry.register(Registries.ENTITY_TYPE, new Identifier(WorldOfDragons.MOD_ID, "orc_mage"),
             FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, OrcMageEntity::new).dimensions(EntityDimensions.fixed(1.1f, 2.6f)).build());
 
-    /*public static final EntityType<OrcWargEntity> ORC_WARG = Registry.register(Registries.ENTITY_TYPE, new Identifier(WorldOfDragonsMod.MOD_ID, "orc_warg"),
-            FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, OrcWargEntity::new).dimensions(EntityDimensions.fixed(1.3f, 2.2f)).build());*/
+    public static final EntityType<OrcWargEntity> ORC_WARG = Registry.register(Registries.ENTITY_TYPE, new Identifier(WorldOfDragons.MOD_ID, "orc_warg"),
+            FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, OrcWargEntity::new).dimensions(EntityDimensions.fixed(1.4f, 1.5f)).build());
 
 
     //Other hostile mobs

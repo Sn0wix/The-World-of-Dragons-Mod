@@ -42,8 +42,8 @@ public class ArmoredOrcEntity extends ModOrcEntity {
     private ATTACK_TYPE lastAttackedType = ATTACK_TYPE.NONE;
     private int ticksToCharge = 0;
     private final HashMap<Entity, Integer> enitiesThrownBack = new HashMap<>();
-    MeleeAttackGoal attackGoal;
-    MeleeAttackGoal attackGoalCharge;
+    private MeleeAttackGoal attackGoal;
+    private MeleeAttackGoal attackGoalCharge;
     public static final TrackedData<Boolean> CHARGING = DataTracker.registerData(ArmoredOrcEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
 
     public ArmoredOrcEntity(EntityType<? extends HostileEntity> entityType, World world) {
@@ -52,16 +52,8 @@ public class ArmoredOrcEntity extends ModOrcEntity {
 
     @Override
     protected void initGoals() {
+        super.initGoals();
         this.goalSelector.add(2, this.attackGoal = new MeleeAttackGoal(this, 1f, false));
-        this.goalSelector.add(8, new LookAtEntityGoal(this, PlayerEntity.class, 8.0F));
-        this.goalSelector.add(8, new LookAroundGoal(this));
-        this.goalSelector.add(7, new WanderAroundFarGoal(this, 1.0));
-
-        this.targetSelector.add(2, new ActiveTargetGoal<>(this, PlayerEntity.class, true));
-        this.targetSelector.add(3, new ActiveTargetGoal<>(this, IronGolemEntity.class, true));
-        this.targetSelector.add(3, new ActiveTargetGoal<>(this, SnowGolemEntity.class, true));
-        this.targetSelector.add(3, new ActiveTargetGoal<>(this, PigEntity.class, true));
-        this.targetSelector.add(3, new ActiveTargetGoal<>(this, WanderingTraderEntity.class, true));
     }
 
     public static DefaultAttributeContainer.Builder setAttributes() {

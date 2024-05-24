@@ -15,6 +15,7 @@ import java.util.ArrayList;
 
 public class ModItemGroup {
     private static final ArrayList<Item> ITEMS = new ArrayList<>(64);
+    private static final ArrayList<Item> SPAWN_EGGS = new ArrayList<>(16);
 
     public static final ItemGroup WORLD_OF_DRAGONS_ITEM_GROUP = Registry.register(Registries.ITEM_GROUP, new Identifier(WorldOfDragons.MOD_ID,
             "world_of_dragons_item_group"), FabricItemGroup.builder()
@@ -25,6 +26,18 @@ public class ModItemGroup {
             "world_of_dragons_admin_item_group"), FabricItemGroup.builder()
             .displayName(Text.translatable("itemGroup.worldofdragonsmod.admin_item_group"))
             .icon(() -> new ItemStack(Items.COMMAND_BLOCK)).entries(ModItemGroup::addItemsToAdminGroup).build());
+
+    public static final ItemGroup WORLD_OF_DRAGONS_SPAWN_EGGS = Registry.register(Registries.ITEM_GROUP, new Identifier(WorldOfDragons.MOD_ID,
+            "world_of_dragons_spawn_eggs"), FabricItemGroup.builder()
+            .displayName(Text.translatable("itemGroup.worldofdragonsmod.world_of_dragons_spawn_eggs"))
+            .icon(() -> new ItemStack(ModItems.GOBLIN_SPAWN_EGG)).entries(ModItemGroup::addSpawnEggs).build());
+
+
+    private static void addSpawnEggs(ItemGroup.DisplayContext displayContext, ItemGroup.Entries entries) {
+        SPAWN_EGGS.forEach(entries::add);
+        SPAWN_EGGS.clear();
+        SPAWN_EGGS.trimToSize();
+    }
 
     private static void addEntries(ItemGroup.DisplayContext displayContext, ItemGroup.Entries entries) {
         ITEMS.forEach(entries::add);
@@ -51,5 +64,9 @@ public class ModItemGroup {
 
     public static void addToGroup(Item item) {
         ITEMS.add(item);
+    }
+
+    public static void addSpawnEgg(Item item) {
+        SPAWN_EGGS.add(item);
     }
 }
