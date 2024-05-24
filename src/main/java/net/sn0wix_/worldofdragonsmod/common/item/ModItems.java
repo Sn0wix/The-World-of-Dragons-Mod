@@ -19,6 +19,7 @@ public class ModItems {
     public static final Item GOBLIN_SPAWN_EGG = registerSpawnEgg(ModEntities.GOBLIN, "058602", "744d01");
     public static final Item ORC_BRUTE_SPAWN_EGG = registerSpawnEgg(ModEntities.ORC_BRUTE, "007317", "565656");
     public static final Item SLASHER_ORC_SPAWN_EGG = registerSpawnEgg(ModEntities.SLASHER_ORC, "026c17", "8a8a8a");
+    public static final Item ORC_WARG_SPAWN_EGG = registerSpawnEgg(ModEntities.ORC_WARG, "027423", "028728");
     public static final Item SNAPPER_SPAWN_EGG = registerSpawnEgg(ModEntities.SNAPPER, "614870", "b49741");
 
 
