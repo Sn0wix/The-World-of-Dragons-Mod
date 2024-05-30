@@ -35,14 +35,10 @@ public class ModItemGroup {
 
     private static void addSpawnEggs(ItemGroup.DisplayContext displayContext, ItemGroup.Entries entries) {
         SPAWN_EGGS.forEach(entries::add);
-        SPAWN_EGGS.clear();
-        SPAWN_EGGS.trimToSize();
     }
 
     private static void addEntries(ItemGroup.DisplayContext displayContext, ItemGroup.Entries entries) {
         ITEMS.forEach(entries::add);
-        ITEMS.clear();
-        ITEMS.trimToSize();
     }
 
     private static void addItemsToAdminGroup(ItemGroup.DisplayContext displayContext, ItemGroup.Entries entries) {

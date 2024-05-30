@@ -13,7 +13,6 @@ import net.minecraft.entity.mob.HostileEntity;
 import net.minecraft.entity.passive.*;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.world.World;
-import net.sn0wix_.worldofdragonsmod.common.WorldOfDragons;
 import software.bernie.geckolib.core.animation.*;
 
 public class SnapperEntity extends GeoHostileEntity {

@@ -12,6 +12,7 @@ import net.minecraft.world.gen.feature.PlacedFeature;
 import net.sn0wix_.worldofdragonsmod.common.WorldOfDragons;
 
 public class ModBiomes {
+    //Rename to death island
     public static final RegistryKey<Biome> INFECTED_LANDS = RegistryKey.of(RegistryKeys.BIOME, new Identifier(WorldOfDragons.MOD_ID, "infected_lands"));
 
     public static void bootstrap(Registerable<Biome> context) {

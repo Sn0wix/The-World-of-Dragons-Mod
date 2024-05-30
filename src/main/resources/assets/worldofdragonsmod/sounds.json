@@ -1,88 +1,8 @@
 {
-  "boss_final_2": {
-    "sounds": [
-      {
-        "name": "worldofdragonsmod:boss_final_1",
-        "stream": true
-      }
-    ]
-  },
-  "boss_fire": {
-    "sounds": [
-      {
-        "name": "worldofdragonsmod:boss_fire",
-        "stream": true
-      }
-    ]
-  },
-  "boss_1": {
-    "sounds": [
-      {
-        "name": "worldofdragonsmod:boss_1",
-        "stream": true
-      }
-    ]
-  },
-  "boss_2": {
-    "sounds": [
-      {
-        "name": "worldofdragonsmod:boss_2",
-        "stream": true
-      }
-    ]
-  },
-  "boss_3": {
-    "sounds": [
-      {
-        "name": "worldofdragonsmod:boss_3",
-        "stream": true
-      }
-    ]
-  },
-  "death": {
-    "sounds": [
-      {
-        "name": "worldofdragonsmod:death",
-        "stream": true
-      }
-    ]
-  },
   "desert": {
     "sounds": [
       {
         "name": "worldofdragonsmod:desert",
-        "stream": true
-      }
-    ]
-  },
-  "elder": {
-    "sounds": [
-      {
-        "name": "worldofdragonsmod:elder",
-        "stream": true
-      }
-    ]
-  },
-  "final": {
-    "sounds": [
-      {
-        "name": "worldofdragonsmod:final",
-        "stream": true
-      }
-    ]
-  },
-  "fire": {
-    "sounds": [
-      {
-        "name": "worldofdragonsmod:fire",
-        "stream": true
-      }
-    ]
-  },
-  "ice": {
-    "sounds": [
-      {
-        "name": "worldofdragonsmod:ice",
         "stream": true
       }
     ]
@@ -103,14 +23,6 @@
       }
     ]
   },
-  "ark_desert_titan": {
-    "sounds": [
-      {
-        "name": "worldofdragonsmod:ark_desert_titan",
-        "stream": true
-      }
-    ]
-  },
   "ark_forest_titan": {
     "sounds": [
       {
@@ -123,22 +35,6 @@
     "sounds": [
       {
         "name": "worldofdragonsmod:ark_titan",
-        "stream": true
-      }
-    ]
-  },
-  "ship": {
-    "sounds": [
-      {
-        "name": "worldofdragonsmod:ship",
-        "stream": true
-      }
-    ]
-  },
-  "background": {
-    "sounds": [
-      {
-        "name": "worldofdragonsmod:background",
         "stream": true
       }
     ]
@@ -167,14 +63,6 @@
       }
     ]
   },
-  "enderguardian_theme": {
-    "sounds": [
-      {
-        "name": "worldofdragonsmod:enderguardian_theme",
-        "stream": true
-      }
-    ]
-  },
   "harbinger_theme": {
     "sounds": [
       {
@@ -195,14 +83,6 @@
     "sounds": [
       {
         "name": "worldofdragonsmod:leviathan_theme",
-        "stream": true
-      }
-    ]
-  },
-  "monstrosity_theme": {
-    "sounds": [
-      {
-        "name": "worldofdragonsmod:monstrosity_theme",
         "stream": true
       }
     ]
