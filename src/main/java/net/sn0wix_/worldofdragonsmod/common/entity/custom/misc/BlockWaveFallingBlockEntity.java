@@ -117,8 +117,8 @@ public class BlockWaveFallingBlockEntity extends Entity {
     }
 
     @Override
-    protected Entity.MoveEffect getMoveEffect() {
-        return Entity.MoveEffect.NONE;
+    protected ChestEntity.MoveEffect getMoveEffect() {
+        return ChestEntity.MoveEffect.NONE;
     }
 
     @Override

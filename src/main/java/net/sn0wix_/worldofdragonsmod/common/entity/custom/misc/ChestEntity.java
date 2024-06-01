@@ -17,7 +17,6 @@ import net.minecraft.registry.Registries;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
-import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
@@ -38,7 +37,7 @@ import software.bernie.geckolib.core.object.PlayState;
 
 import java.util.Objects;
 
-public class ChestEntity extends Entity implements GeoEntity {
+public class ChestEntity extends net.minecraft.entity.Entity implements GeoEntity {
     public static final TrackedData<Boolean> IS_OPENED = DataTracker.registerData(ChestEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
     private int openedFor = 0;
     private final int dropLootAfter;
@@ -51,7 +50,7 @@ public class ChestEntity extends Entity implements GeoEntity {
     private final AnimatableInstanceCache cache = new SingletonAnimatableInstanceCache(this);
 
 
-    public ChestEntity(EntityType<? extends Entity> entityType, World world, String animation, int maxOpenedForTicks, int dropLootAfter, double particlesYOffset, float randomDivisor, int numberOfParticles) {
+    public ChestEntity(EntityType<? extends net.minecraft.entity.Entity> entityType, World world, String animation, int maxOpenedForTicks, int dropLootAfter, double particlesYOffset, float randomDivisor, int numberOfParticles) {
         super(entityType, world);
         this.OPEN_ANIMATION = RawAnimation.begin().thenPlayAndHold(animation);
         this.LOOT_TABLE = new Identifier(WorldOfDragons.MOD_ID, "chests/" + Registries.ENTITY_TYPE.getId(entityType).getPath());
@@ -205,7 +204,7 @@ public class ChestEntity extends Entity implements GeoEntity {
     }
 
     @Override
-    public void pushAwayFrom(Entity entity) {
+    public void pushAwayFrom(net.minecraft.entity.Entity entity) {
     }
 
     @Override

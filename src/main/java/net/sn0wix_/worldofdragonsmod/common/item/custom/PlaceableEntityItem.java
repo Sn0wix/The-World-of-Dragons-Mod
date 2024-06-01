@@ -1,5 +1,6 @@
 package net.sn0wix_.worldofdragonsmod.common.item.custom;
 
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnReason;
 import net.minecraft.item.Item;
@@ -8,10 +9,10 @@ import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.ActionResult;
 import net.sn0wix_.worldofdragonsmod.common.entity.custom.misc.ChestEntity;
 
-public class ChestItem extends Item {
-    public final EntityType<ChestEntity> ENTITY_TYPE;
+public class PlaceableEntityItem<T extends Entity> extends Item {
+    public final EntityType<T> ENTITY_TYPE;
 
-    public ChestItem(Settings settings, EntityType<ChestEntity> entityType) {
+    public PlaceableEntityItem(Settings settings, EntityType<T> entityType) {
         super(settings);
         this.ENTITY_TYPE = entityType;
     }

@@ -12,7 +12,7 @@ import net.sn0wix_.worldofdragonsmod.client.events.ClientEvents;
 import net.sn0wix_.worldofdragonsmod.client.renderersAndModels.entity.GenericEntityModel;
 import net.sn0wix_.worldofdragonsmod.client.renderersAndModels.entity.hostile.OrcModel;
 import net.sn0wix_.worldofdragonsmod.client.renderersAndModels.entity.misc.BlockWaveFallingBlockEntityRenderer;
-import net.sn0wix_.worldofdragonsmod.client.renderersAndModels.entity.misc.ChestEntityRenderer;
+import net.sn0wix_.worldofdragonsmod.client.renderersAndModels.entity.misc.PlaceableEntityRenderer;
 import net.sn0wix_.worldofdragonsmod.client.renderersAndModels.entity.misc.PlayerNPCRenderer;
 import net.sn0wix_.worldofdragonsmod.common.WorldOfDragons;
 import net.sn0wix_.worldofdragonsmod.common.entity.ModEntities;
@@ -45,15 +45,18 @@ public class WorldOfDragonsClient implements ClientModInitializer {
         EntityRendererRegistry.register(ModEntities.BOUQUETZ, ctx -> new PlayerNPCRenderer(ctx, new Identifier(WorldOfDragons.MOD_ID, "textures/entity/misc/players/bouquetz.png"), false));
 
         //Chests
-        EntityRendererRegistry.register(ModEntities.IRON_CHEST_ENTITY, ctx -> new ChestEntityRenderer(ctx, new GenericEntityModel<>("misc/chests/iron_chest")) {
+        EntityRendererRegistry.register(ModEntities.IRON_CHEST_ENTITY, ctx -> new PlaceableEntityRenderer<>(ctx, new GenericEntityModel<>("misc/chests/iron_chest")) {
             @Override
             public void actuallyRender(MatrixStack poseStack, ChestEntity animatable, BakedGeoModel model, RenderLayer renderType, VertexConsumerProvider bufferSource, VertexConsumer buffer, boolean isReRender, float partialTick, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
                 poseStack.scale(0.7f, 0.7f, 0.7f);
                 super.actuallyRender(poseStack, animatable, model, renderType, bufferSource, buffer, isReRender, partialTick, packedLight, packedOverlay, red, green, blue, alpha);
             }
         });
-        EntityRendererRegistry.register(ModEntities.COMMON_CHEST_ENTITY, ctx -> new ChestEntityRenderer(ctx, new GenericEntityModel<>("misc/chests/common_chest")));
-        EntityRendererRegistry.register(ModEntities.GOLDEN_CHEST_ENTITY, ctx -> new ChestEntityRenderer(ctx, new GenericEntityModel<>("misc/chests/golden_chest")));
+        EntityRendererRegistry.register(ModEntities.COMMON_CHEST_ENTITY, ctx -> new PlaceableEntityRenderer<>(ctx, new GenericEntityModel<>("misc/chests/common_chest")));
+        EntityRendererRegistry.register(ModEntities.GOLDEN_CHEST_ENTITY, ctx -> new PlaceableEntityRenderer<>(ctx, new GenericEntityModel<>("misc/chests/golden_chest")));
+
+        //Others
+        EntityRendererRegistry.register(ModEntities.DOOR, ctx -> new PlaceableEntityRenderer<>(ctx, new GenericEntityModel<>("misc/door", false)));
 
 
         //Mc rendering

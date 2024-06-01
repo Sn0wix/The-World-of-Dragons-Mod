@@ -30,7 +30,7 @@ public class ModSounds {
     public static final SoundEvent SWAMP_DUNGEON = registerSoundEvent("swamp_dungeon");
 
 
-
+    //TODO make texture pack
     public static final SoundEvent ARK_LEVIATHAN = registerSoundEvent("ark_leviathan");
     public static final SoundEvent ARK_BOSS_ICE = registerSoundEvent("ark_boss_ice");
     public static final SoundEvent ARK_BOSS_LOW = registerSoundEvent("ark_boss_low");
@@ -45,7 +45,7 @@ public class ModSounds {
         return Registry.register(Registries.SOUND_EVENT, id, SoundEvent.of(id));
     }
 
-    public static void registerModSounds(){
+    public static void registerModSounds() {
         WorldOfDragons.LOGGER.info("Registering sounds for " + WorldOfDragons.MOD_ID);
     }
 }
