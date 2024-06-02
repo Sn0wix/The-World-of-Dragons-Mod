@@ -35,6 +35,7 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.GameRules;
 import net.minecraft.world.RaycastContext;
 import net.minecraft.world.World;
+import net.sn0wix_.worldofdragonsmod.common.WorldOfDragons;
 import net.sn0wix_.worldofdragonsmod.common.entity.ModEntities;
 import net.sn0wix_.worldofdragonsmod.common.util.ModDamageSources;
 import net.sn0wix_.worldofdragonsmod.common.util.blockWaves.BlockWave;
@@ -174,10 +175,16 @@ public class BlockWaveFallingBlockEntity extends Entity {
                 if (!blockState.isOf(Blocks.MOVING_PISTON)) {
                     if (!this.destroyedOnLanding) {
                         boolean bl5;
+
                         boolean bl3 = blockState.canReplace(new AutomaticItemPlacementContext(this.getWorld(), blockPos, Direction.DOWN, ItemStack.EMPTY, Direction.UP));
+                        if (!bl3) {
+                            blockPos = blockPos.up();
+                        }
+
                         boolean bl4 = FallingBlock.canFallThrough(this.getWorld().getBlockState(blockPos.down())) && (!bl || !bl2);
+
                         boolean bl6 = bl5 = this.block.canPlaceAt(this.getWorld(), blockPos) && !bl4;
-                        if (bl3 && bl5) {
+                        if (bl5) {
                             if (this.block.contains(Properties.WATERLOGGED) && this.getWorld().getFluidState(blockPos).getFluid() == Fluids.WATER) {
                                 this.block = this.block.with(Properties.WATERLOGGED, true);
                             }
