@@ -87,9 +87,6 @@ public class ModEntities {
     //Others
     public static final EntityType<BlockWaveFallingBlockEntity> BLOCK_WAVE_FALLING_BLOCK = Registry.register(Registries.ENTITY_TYPE, new Identifier(WorldOfDragons.MOD_ID, "block_wave_falling_block"),
             FabricEntityTypeBuilder.create(SpawnGroup.MISC, BlockWaveFallingBlockEntity::new).dimensions(EntityDimensions.fixed(0.98f, 0.98f)).trackRangeChunks(10).trackedUpdateRate(20).build());
-    public static final EntityType<DoorEntity> DOOR = Registry.register(Registries.ENTITY_TYPE, new Identifier(WorldOfDragons.MOD_ID, "door"),
-            FabricEntityTypeBuilder.create(SpawnGroup.MISC, DoorEntity::new).dimensions(EntityDimensions.fixed(0.1f, 0.1f)).build());
-
 
     //Helper methods
     public static void registerModEntities() {

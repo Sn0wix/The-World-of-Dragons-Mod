@@ -47,16 +47,8 @@ public class OrcBossEntity extends ModOrcEntity {
 
     @Override
     public void registerControllers(AnimatableManager.ControllerRegistrar controllerRegistrar) {
-        controllerRegistrar.add(new AnimationController<>(this, "controller", 2, this::predicate)
+        controllerRegistrar.add(new AnimationController<>(this, "controller", 2, state -> walkIdlePredicate(state, WALK, IDLE))
                 .triggerableAnim("stomp", ATTACK_STOMP).triggerableAnim("axe", ATTACK_AXE).triggerableAnim("super", ATTACK_SUPER)
                 .triggerableAnim("summon", ATTACK_SUMMON));
-    }
-
-    private <T extends GeoAnimatable> PlayState predicate(AnimationState<T> state) {
-        if (state.isMoving()) {
-            return state.setAndContinue(WALK);
-        }
-
-        return state.setAndContinue(IDLE);
     }
 }

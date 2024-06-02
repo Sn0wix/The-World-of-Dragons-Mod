@@ -3,29 +3,35 @@ package net.sn0wix_.worldofdragonsmod.client;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
+import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.render.VertexConsumerProvider;
+import net.minecraft.client.render.block.entity.BlockEntityRendererFactories;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Identifier;
 import net.sn0wix_.worldofdragonsmod.client.events.ClientEvents;
+import net.sn0wix_.worldofdragonsmod.client.renderersAndModels.block.entity.MassiveDoorModel;
 import net.sn0wix_.worldofdragonsmod.client.renderersAndModels.entity.GenericEntityModel;
 import net.sn0wix_.worldofdragonsmod.client.renderersAndModels.entity.hostile.OrcModel;
 import net.sn0wix_.worldofdragonsmod.client.renderersAndModels.entity.misc.BlockWaveFallingBlockEntityRenderer;
 import net.sn0wix_.worldofdragonsmod.client.renderersAndModels.entity.misc.PlaceableEntityRenderer;
 import net.sn0wix_.worldofdragonsmod.client.renderersAndModels.entity.misc.PlayerNPCRenderer;
 import net.sn0wix_.worldofdragonsmod.common.WorldOfDragons;
+import net.sn0wix_.worldofdragonsmod.common.blocks.entity.ModBlockEntities;
 import net.sn0wix_.worldofdragonsmod.common.entity.ModEntities;
 import net.sn0wix_.worldofdragonsmod.client.renderersAndModels.entity.misc.explodingCubeProjectile.ExplodingCubeProjectileModel;
 import net.sn0wix_.worldofdragonsmod.client.renderersAndModels.entity.misc.explodingCubeProjectile.ExplodingCubeProjectileRenderer;
 import net.sn0wix_.worldofdragonsmod.common.entity.custom.misc.ChestEntity;
 import net.sn0wix_.worldofdragonsmod.common.networking.ModPackets;
 import software.bernie.geckolib.cache.object.BakedGeoModel;
+import software.bernie.geckolib.renderer.GeoBlockRenderer;
 import software.bernie.geckolib.renderer.GeoEntityRenderer;
 
 public class WorldOfDragonsClient implements ClientModInitializer {
     @Override
     public void onInitializeClient() {
+        //ENTITIES
         //Geckolib
         EntityRendererRegistry.register(ModEntities.ARMORED_ORC, ctx -> new GeoEntityRenderer<>(ctx, new OrcModel<>("armored_orc")));
         EntityRendererRegistry.register(ModEntities.GOBLIN, ctx -> new GeoEntityRenderer<>(ctx, new OrcModel<>("goblin")));
@@ -55,14 +61,19 @@ public class WorldOfDragonsClient implements ClientModInitializer {
         EntityRendererRegistry.register(ModEntities.COMMON_CHEST_ENTITY, ctx -> new PlaceableEntityRenderer<>(ctx, new GenericEntityModel<>("misc/chests/common_chest")));
         EntityRendererRegistry.register(ModEntities.GOLDEN_CHEST_ENTITY, ctx -> new PlaceableEntityRenderer<>(ctx, new GenericEntityModel<>("misc/chests/golden_chest")));
 
-        //Others
-        EntityRendererRegistry.register(ModEntities.DOOR, ctx -> new PlaceableEntityRenderer<>(ctx, new GenericEntityModel<>("misc/door", false)));
-
 
         //Mc rendering
         EntityModelLayerRegistry.registerModelLayer(ExplodingCubeProjectileModel.LAYER_LOCATION, ExplodingCubeProjectileModel::getTexturedModelData);
         EntityRendererRegistry.register(ModEntities.EXPLODING_MAGMA_PROJECTILE, ctx -> new ExplodingCubeProjectileRenderer(ctx, new Identifier("minecraft", "textures/block/magma.png")));
         EntityRendererRegistry.register(ModEntities.BLOCK_WAVE_FALLING_BLOCK, BlockWaveFallingBlockEntityRenderer::new);
+
+        //Block entities
+        BlockEntityRendererFactories.register(ModBlockEntities.MASSIVE_DOOR, ctx -> new GeoBlockRenderer<>(new MassiveDoorModel()) {
+            @Override
+            public int getRenderDistance() {
+                return MinecraftClient.getInstance().options.getViewDistance().getValue() * 16;
+            }
+        });
 
         //Networking
         ModPackets.registerS2CPackets();

@@ -6,6 +6,7 @@ import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.mob.PathAwareEntity;
 import net.sn0wix_.worldofdragonsmod.common.command.GPTCommand;
+import net.sn0wix_.worldofdragonsmod.common.command.TriggerAnimCommand;
 import net.sn0wix_.worldofdragonsmod.common.entity.ModEntities;
 import net.sn0wix_.worldofdragonsmod.common.entity.custom.hostile.LavaElementalEntity;
 import net.sn0wix_.worldofdragonsmod.common.entity.custom.hostile.SnapperEntity;
@@ -43,5 +44,6 @@ public class ModRegisteries {
 
     private static void registerCommands(){
         CommandRegistrationCallback.EVENT.register(GPTCommand::register);
+        CommandRegistrationCallback.EVENT.register(TriggerAnimCommand::register);
     }
 }

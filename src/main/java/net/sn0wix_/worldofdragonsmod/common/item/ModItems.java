@@ -8,6 +8,7 @@ import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
 import net.sn0wix_.worldofdragonsmod.common.WorldOfDragons;
+import net.sn0wix_.worldofdragonsmod.common.blocks.ModBlocks;
 import net.sn0wix_.worldofdragonsmod.common.entity.ModEntities;
 import net.sn0wix_.worldofdragonsmod.common.item.custom.*;
 import net.sn0wix_.worldofdragonsmod.common.sounds.ModSounds;
@@ -20,6 +21,7 @@ public class ModItems {
     public static final Item ORC_BRUTE_SPAWN_EGG = registerSpawnEgg(ModEntities.ORC_BRUTE, "007317", "565656");
     public static final Item SLASHER_ORC_SPAWN_EGG = registerSpawnEgg(ModEntities.SLASHER_ORC, "026c17", "8a8a8a");
     public static final Item ORC_WARG_SPAWN_EGG = registerSpawnEgg(ModEntities.ORC_WARG, "027423", "028728");
+    public static final Item ORC_MAGE_SPAWN_EGG = registerSpawnEgg(ModEntities.ORC_MAGE, "078400", "ffffff");
     public static final Item SNAPPER_SPAWN_EGG = registerSpawnEgg(ModEntities.SNAPPER, "614870", "b49741");
 
 
@@ -30,7 +32,7 @@ public class ModItems {
 
 
     //Other entity items
-    public static final Item DOOR_ITEM = registerItem("door", new PlaceableEntityItem<>(new FabricItemSettings().maxCount(1), ModEntities.DOOR));
+    public static final Item MASSIVE_DOOR = registerItem("door", new BlockItem(ModBlocks.MASSIVE_DOOR, new FabricItemSettings().maxCount(1)));
 
 
     public static final Item ARMOR_UPGRADE = registerItem("armor_upgrade", new Item(new FabricItemSettings().maxCount(1)));

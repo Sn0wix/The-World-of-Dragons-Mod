@@ -31,7 +31,6 @@
   "item.worldofdragonsmod.common_chest": "§7§lCommon Chest",
   "item.worldofdragonsmod.iron_chest": "§f§lIron Chest",
   "item.worldofdragonsmod.golden_chest": "§6§lGolden Chest",
-  "item.worldofdragonsmod.door": "§8§lMassive Door Item",
   "item.worldofdragonsmod.common_loot": "§lCommon loot",
   "item.worldofdragonsmod.rare_loot": "§e§lRare loot",
   "item.worldofdragonsmod.scrap": "§6§lScrap",
@@ -63,13 +62,15 @@
   "item.worldofdragonsmod.armored_orc_spawn_egg": "§2§lArmored Orc Spawn Egg",
   "item.worldofdragonsmod.orc_brute_spawn_egg": "§2§lOrc Brute Spawn Egg",
   "item.worldofdragonsmod.slasher_orc_spawn_egg": "§2§lSlasher Orc Spawn Egg",
+  "item.worldofdragonsmod.orc_mage_spawn_egg": "§f§lOrc Mage Spawn Egg",
   "item.worldofdragonsmod.orc_warg_spawn_egg": "§2§lOrc Warg Spawn Egg",
   "item.worldofdragonsmod.snapper_spawn_egg": "§5§lSnapper Spawn Egg",
 
 
-  "block.worldofdragonsmod.xray_block": "§l§dXray Block",
   "block.worldofdragonsmod.pickup_block": "§lPickup Block",
   "block.worldofdragonsmod.charge_block": "§d§lElectric Vein",
+  "block.worldofdragonsmod.massive_door": "§8§lMassive Door",
+
 
   "itemGroup.worldofdragonsmod.world_of_dragons_item_group": "§4§lWorld of Dragons Items",
   "itemGroup.worldofdragonsmod.world_of_dragons_spawn_eggs": "§4§lWorld of Dragons Spawn Eggs",
@@ -99,7 +100,6 @@
   "entity.worldofdragonsmod.common_chest": "Common Chest",
   "entity.worldofdragonsmod.golden_chest": "Golden Chest",
   "entity.worldofdragonsmod.block_wave_falling_block": "Block Wave",
-  "entity.worldofdragonsmod.door": "Massive Door",
 
   "death.attack.bleeding": "%1$s bled out",
   "death.attack.bleeding.player": "%1$s bled out",

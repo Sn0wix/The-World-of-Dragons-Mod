@@ -20,6 +20,10 @@ import net.sn0wix_.worldofdragonsmod.common.entity.custom.hostile.GeoHostileEnti
 import net.sn0wix_.worldofdragonsmod.common.entity.custom.misc.BlockWaveFallingBlockEntity;
 import net.sn0wix_.worldofdragonsmod.common.util.ModDamageSources;
 import net.sn0wix_.worldofdragonsmod.common.world.biome.ModBiomes;
+import software.bernie.geckolib.core.animatable.GeoAnimatable;
+import software.bernie.geckolib.core.animation.AnimationState;
+import software.bernie.geckolib.core.animation.RawAnimation;
+import software.bernie.geckolib.core.object.PlayState;
 
 public abstract class ModOrcEntity extends GeoHostileEntity {
     private boolean infected = false;

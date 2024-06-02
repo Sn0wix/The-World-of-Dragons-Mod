@@ -37,7 +37,7 @@ import software.bernie.geckolib.core.object.PlayState;
 
 import java.util.Objects;
 
-public class ChestEntity extends net.minecraft.entity.Entity implements GeoEntity {
+public class ChestEntity extends Entity implements GeoEntity {
     public static final TrackedData<Boolean> IS_OPENED = DataTracker.registerData(ChestEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
     private int openedFor = 0;
     private final int dropLootAfter;

@@ -53,15 +53,9 @@ public class ArcherOrcEntity extends ModOrcEntity implements RangedAttackMob {
 
     @Override
     public void registerControllers(AnimatableManager.ControllerRegistrar controllerRegistrar) {
-        controllerRegistrar.add(new AnimationController<>(this, "controller", 2, this::predicate).triggerableAnim("attack_melee", ATTACK_MELEE)
+        controllerRegistrar.add(new AnimationController<>(this, "controller", 2, state -> walkIdlePredicate(state, WALK, IDLE))
+                .triggerableAnim("attack_melee", ATTACK_MELEE)
                 .triggerableAnim("attack_shoot", ATTACK_SHOOT));
-    }
-
-    private <T extends GeoAnimatable> PlayState predicate(AnimationState<T> state) {
-        if (state.isMoving()) {
-            return state.setAndContinue(WALK);
-        }
-        return state.setAndContinue(IDLE);
     }
 
     public static DefaultAttributeContainer.Builder setAttributes() {

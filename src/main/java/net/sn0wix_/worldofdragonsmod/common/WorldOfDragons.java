@@ -2,6 +2,7 @@ package net.sn0wix_.worldofdragonsmod.common;
 
 import net.fabricmc.api.ModInitializer;
 import net.sn0wix_.worldofdragonsmod.common.blocks.ModBlocks;
+import net.sn0wix_.worldofdragonsmod.common.blocks.entity.ModBlockEntities;
 import net.sn0wix_.worldofdragonsmod.common.effect.ModEffects;
 import net.sn0wix_.worldofdragonsmod.common.entity.ModEntities;
 import net.sn0wix_.worldofdragonsmod.common.events.ServerEvents;
@@ -23,6 +24,7 @@ public class WorldOfDragons implements ModInitializer {
     public void onInitialize() {
         ModItems.registerModItems();
         ModBlocks.registerModBlocks();
+        ModBlockEntities.registerAllBlockEntities();
         ModEffects.registerEffects();
         ModSounds.registerModSounds();
         ModRegisteries.registerModStuffs();

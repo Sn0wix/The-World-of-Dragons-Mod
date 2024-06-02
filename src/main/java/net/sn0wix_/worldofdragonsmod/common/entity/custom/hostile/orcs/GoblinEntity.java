@@ -46,16 +46,8 @@ public class GoblinEntity extends ModOrcEntity {
 
     @Override
     public void registerControllers(AnimatableManager.ControllerRegistrar controllerRegistrar) {
-        controllerRegistrar.add(new AnimationController<>(this, "controller", 2, this::predicate)
+        controllerRegistrar.add(new AnimationController<>(this, "controller", 2, state -> walkIdlePredicate(state, WALK, IDLE))
                 .triggerableAnim("attack", ATTACK).triggerableAnim("death", DEATH));
-    }
-
-    private <T extends GeoAnimatable> PlayState predicate(AnimationState<T> state) {
-        if (state.isMoving()) {
-            return state.setAndContinue(WALK);
-        }
-
-        return state.setAndContinue(IDLE);
     }
 
     @Override

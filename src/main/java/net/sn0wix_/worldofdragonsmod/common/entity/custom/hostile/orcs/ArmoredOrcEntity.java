@@ -72,7 +72,7 @@ public class ArmoredOrcEntity extends ModOrcEntity {
                 .triggerableAnim("attack", ATTACK).triggerableAnim("stab", STAB).triggerableAnim("knockback", KNOCKBACK));
     }
 
-    private <T extends GeoAnimatable> PlayState predicate(AnimationState<T> state) {
+    public  <T extends GeoAnimatable> PlayState predicate(AnimationState<T> state) {
         if (state.isMoving()) {
             return this.dataTracker.get(CHARGING) ? state.setAndContinue(CHARGE) : state.setAndContinue(WALK);
         }

@@ -1,0 +1,40 @@
+{
+  "variants": {
+    "facing=north,open=false": {
+      "model": "worldofdragonsmod:block/massive_door"
+    },
+    "facing=west,open=false": {
+      "model": "worldofdragonsmod:block/massive_door"
+    },
+    "facing=east,open=false": {
+      "model": "worldofdragonsmod:block/massive_door"
+    },
+    "facing=south,open=true": {
+      "model": "worldofdragonsmod:block/massive_door"
+    },
+    "facing=up,open=true": {
+      "model": "worldofdragonsmod:block/massive_door"
+    },
+    "facing=west,open=true": {
+      "model": "worldofdragonsmod:block/massive_door"
+    },
+    "facing=south,open=false": {
+      "model": "worldofdragonsmod:block/massive_door"
+    },
+    "facing=down,open=false": {
+      "model": "worldofdragonsmod:block/massive_door"
+    },
+    "facing=north,open=true": {
+      "model": "worldofdragonsmod:block/massive_door"
+    },
+    "facing=east,open=true": {
+      "model": "worldofdragonsmod:block/massive_door"
+    },
+    "facing=down,open=true": {
+      "model": "worldofdragonsmod:block/massive_door"
+    },
+    "facing=up,open=false": {
+      "model": "worldofdragonsmod:block/massive_door"
+    }
+  }
+}
