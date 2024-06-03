@@ -14,7 +14,7 @@ import net.sn0wix_.worldofdragonsmod.common.entity.custom.hostile.LavaElementalE
 import net.sn0wix_.worldofdragonsmod.common.entity.custom.hostile.SnapperEntity;
 import net.sn0wix_.worldofdragonsmod.common.entity.custom.misc.BlockWaveFallingBlockEntity;
 import net.sn0wix_.worldofdragonsmod.common.entity.custom.misc.ChestEntity;
-import net.sn0wix_.worldofdragonsmod.common.entity.custom.misc.DoorEntity;
+import net.sn0wix_.worldofdragonsmod.common.entity.custom.misc.egg.DragonEggEntity;
 import net.sn0wix_.worldofdragonsmod.common.entity.custom.misc.projectile.ExplodingCubeProjectile;
 import net.sn0wix_.worldofdragonsmod.common.entity.custom.misc.playerNPC.BouquetZNPC;
 import net.sn0wix_.worldofdragonsmod.common.entity.custom.misc.playerNPC.BubbaGump7NPC;
@@ -71,17 +71,22 @@ public class ModEntities {
 
 
     //Chests
-    public static final EntityType<ChestEntity> COMMON_CHEST_ENTITY = Registry.register(Registries.ENTITY_TYPE, new Identifier(WorldOfDragons.MOD_ID, "common_chest"),
+    public static final EntityType<ChestEntity> COMMON_CHEST = Registry.register(Registries.ENTITY_TYPE, new Identifier(WorldOfDragons.MOD_ID, "common_chest"),
             getModChestEntityType((type, world) -> new ChestEntity(type, world, "animation.common_chest.open", 91, 35, 0.7, 2, 90), 1.2f, 1.2f));
-    public static final EntityType<ChestEntity> IRON_CHEST_ENTITY = Registry.register(Registries.ENTITY_TYPE, new Identifier(WorldOfDragons.MOD_ID, "iron_chest"),
+    public static final EntityType<ChestEntity> IRON_CHEST = Registry.register(Registries.ENTITY_TYPE, new Identifier(WorldOfDragons.MOD_ID, "iron_chest"),
             getModChestEntityType((type, world) -> new ChestEntity(type, world, "animation.iron_chest.open", 91, 44, 0.6, 2, 86), 1.3f, 1.4f));
-    public static final EntityType<ChestEntity> GOLDEN_CHEST_ENTITY = Registry.register(Registries.ENTITY_TYPE, new Identifier(WorldOfDragons.MOD_ID, "golden_chest"),
+    public static final EntityType<ChestEntity> GOLDEN_CHEST = Registry.register(Registries.ENTITY_TYPE, new Identifier(WorldOfDragons.MOD_ID, "golden_chest"),
             getModChestEntityType((type, world) -> new ChestEntity(type, world, "animation.golden_chest.open", 91, 45, 1, 2, 100), 1.7f, 1.7f));
 
 
     //Projectiles
     public static final EntityType<ExplodingCubeProjectile> EXPLODING_MAGMA_PROJECTILE = Registry.register(Registries.ENTITY_TYPE, new Identifier(WorldOfDragons.MOD_ID, "exploding_magma_projectile"),
             FabricEntityTypeBuilder.create(SpawnGroup.CREATURE, ExplodingCubeProjectile::new).dimensions(EntityDimensions.fixed(1f, 1f)).fireImmune().build());
+
+    //Eggs
+    public static final EntityType<DragonEggEntity> SHELL_SMASHER_EGG = Registry.register(Registries.ENTITY_TYPE, new Identifier(WorldOfDragons.MOD_ID, "shell_smasher_egg"),
+            FabricEntityTypeBuilder.create(SpawnGroup.MISC, DragonEggEntity::new).dimensions(EntityDimensions.fixed(0.9f, 0.8f)).build());
+
 
 
     //Others

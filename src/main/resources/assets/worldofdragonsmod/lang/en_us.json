@@ -66,6 +66,9 @@
   "item.worldofdragonsmod.orc_warg_spawn_egg": "§2§lOrc Warg Spawn Egg",
   "item.worldofdragonsmod.snapper_spawn_egg": "§5§lSnapper Spawn Egg",
 
+  "item.worldofdragonsmod.shell_smasher_egg": "§2§lShell Smasher Egg",
+
+
 
   "block.worldofdragonsmod.pickup_block": "§lPickup Block",
   "block.worldofdragonsmod.charge_block": "§d§lElectric Vein",
@@ -73,7 +76,7 @@
 
 
   "itemGroup.worldofdragonsmod.world_of_dragons_item_group": "§4§lWorld of Dragons Items",
-  "itemGroup.worldofdragonsmod.world_of_dragons_spawn_eggs": "§4§lWorld of Dragons Spawn Eggs",
+  "itemGroup.worldofdragonsmod.world_of_dragons_eggs": "§4§lWorld of Dragons Eggs",
   "itemGroup.worldofdragonsmod.admin_item_group": "Admin Items",
 
 

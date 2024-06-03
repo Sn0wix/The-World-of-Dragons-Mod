@@ -12,29 +12,29 @@ import software.bernie.geckolib.model.GeoModel;
 import software.bernie.geckolib.model.data.EntityModelData;
 
 @Environment(EnvType.CLIENT)
-public class GenericEntityModel<T extends GeoAnimatable> extends GeoModel<T> {
+public class GenericGeoModel<T extends GeoAnimatable> extends GeoModel<T> {
     public final Identifier MODEL_RESOURCE;
     public final Identifier TEXTURE_RESOURCE;
     public final Identifier ANIMATION_RESOURCE;
     public final String HEAD_BONE_NAME;
     public final boolean USE_CUSTOM_ANIM;
-    public GenericEntityModel(String resLoc) {
+    public GenericGeoModel(String resLoc) {
         this(resLoc, resLoc, resLoc, "h_head", true);
     }
 
-    public GenericEntityModel(String resLoc, String headBoneName) {
+    public GenericGeoModel(String resLoc, String headBoneName) {
         this(resLoc, resLoc, resLoc, headBoneName, true);
     }
 
-    public GenericEntityModel(String resLoc, boolean useCustomAnim) {
+    public GenericGeoModel(String resLoc, boolean useCustomAnim) {
         this(resLoc, resLoc, resLoc, "h_head", useCustomAnim);
     }
 
-    public GenericEntityModel(String modelLoc, String textureLoc, String animLoc) {
+    public GenericGeoModel(String modelLoc, String textureLoc, String animLoc) {
         this(modelLoc, textureLoc, animLoc, "h_head", true);
     }
 
-    public GenericEntityModel(String modelLoc, String textureLoc, String animLoc, String headBoneName, boolean useCustomAnim) {
+    public GenericGeoModel(String modelLoc, String textureLoc, String animLoc, String headBoneName, boolean useCustomAnim) {
         MODEL_RESOURCE = new Identifier(WorldOfDragons.MOD_ID, "geo/" + modelLoc + ".geo.json");
         TEXTURE_RESOURCE = new Identifier(WorldOfDragons.MOD_ID, "textures/entity/" + textureLoc + ".png");
         ANIMATION_RESOURCE = new Identifier(WorldOfDragons.MOD_ID, "animations/" + animLoc + ".animation.json");

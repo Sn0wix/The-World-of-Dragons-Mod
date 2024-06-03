@@ -28,8 +28,8 @@ public class ModItemGroup {
             .icon(() -> new ItemStack(Items.COMMAND_BLOCK)).entries(ModItemGroup::addItemsToAdminGroup).build());
 
     public static final ItemGroup WORLD_OF_DRAGONS_SPAWN_EGGS = Registry.register(Registries.ITEM_GROUP, new Identifier(WorldOfDragons.MOD_ID,
-            "world_of_dragons_spawn_eggs"), FabricItemGroup.builder()
-            .displayName(Text.translatable("itemGroup.worldofdragonsmod.world_of_dragons_spawn_eggs"))
+            "world_of_dragons_eggs"), FabricItemGroup.builder()
+            .displayName(Text.translatable("itemGroup.worldofdragonsmod.world_of_dragons_eggs"))
             .icon(() -> new ItemStack(ModItems.GOBLIN_SPAWN_EGG)).entries(ModItemGroup::addSpawnEggs).build());
 
 
@@ -62,7 +62,7 @@ public class ModItemGroup {
         ITEMS.add(item);
     }
 
-    public static void addSpawnEgg(Item item) {
+    public static void addEgg(Item item) {
         SPAWN_EGGS.add(item);
     }
 }

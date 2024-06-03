@@ -1,6 +1,7 @@
 package net.sn0wix_.worldofdragonsmod.common.item;
 
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.item.*;
@@ -10,6 +11,7 @@ import net.minecraft.util.Identifier;
 import net.sn0wix_.worldofdragonsmod.common.WorldOfDragons;
 import net.sn0wix_.worldofdragonsmod.common.blocks.ModBlocks;
 import net.sn0wix_.worldofdragonsmod.common.entity.ModEntities;
+import net.sn0wix_.worldofdragonsmod.common.entity.custom.misc.egg.DragonEggEntity;
 import net.sn0wix_.worldofdragonsmod.common.item.custom.*;
 import net.sn0wix_.worldofdragonsmod.common.sounds.ModSounds;
 
@@ -26,9 +28,12 @@ public class ModItems {
 
 
     //Chests
-    public static final Item COMMON_CHEST = registerItem("common_chest", new PlaceableEntityItem<>(new FabricItemSettings().maxCount(1), ModEntities.COMMON_CHEST_ENTITY));
-    public static final Item IRON_CHEST = registerItem("iron_chest", new PlaceableEntityItem<>(new FabricItemSettings().maxCount(1), ModEntities.IRON_CHEST_ENTITY));
-    public static final Item GOLDEN_CHEST = registerItem("golden_chest", new PlaceableEntityItem<>(new FabricItemSettings().maxCount(1), ModEntities.GOLDEN_CHEST_ENTITY));
+    public static final Item COMMON_CHEST = registerItem("common_chest", new PlaceableEntityItem<>(new FabricItemSettings().maxCount(1), ModEntities.COMMON_CHEST));
+    public static final Item IRON_CHEST = registerItem("iron_chest", new PlaceableEntityItem<>(new FabricItemSettings().maxCount(1), ModEntities.IRON_CHEST));
+    public static final Item GOLDEN_CHEST = registerItem("golden_chest", new PlaceableEntityItem<>(new FabricItemSettings().maxCount(1), ModEntities.GOLDEN_CHEST));
+
+    //Dragon egg items
+    public static final Item SHELL_SMASHER_EGG = registerDragonEgg("shell_smasher_egg", ModEntities.SHELL_SMASHER_EGG);
 
 
     //Other entity items
@@ -99,10 +104,16 @@ public class ModItems {
         return item1;
     }
 
+    private static Item registerDragonEgg(String name, EntityType<? extends Entity> eggEntity) {
+        Item item1 = Registry.register(Registries.ITEM, new Identifier(WorldOfDragons.MOD_ID, name), new DragonEggItem<>(new FabricItemSettings().maxCount(1), "misc/eggs/" + name, eggEntity));
+        ModItemGroup.addEgg(item1);
+        return item1;
+    }
+
     private static Item registerSpawnEgg(EntityType<? extends MobEntity> type, String hexPrimary, String hexSecondary) {
         Item item1 = Registry.register(Registries.ITEM, new Identifier(WorldOfDragons.MOD_ID, type.getUntranslatedName() + "_spawn_egg"),
                 new SpawnEggItem(type, Integer.valueOf(hexPrimary, 16), Integer.valueOf(hexSecondary, 16), new FabricItemSettings()));
-        ModItemGroup.addSpawnEgg(item1);
+        ModItemGroup.addEgg(item1);
         return item1;
     }
 

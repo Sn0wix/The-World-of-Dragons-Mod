@@ -3,12 +3,12 @@ package net.sn0wix_.worldofdragonsmod.client.renderersAndModels.entity.hostile;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.util.Identifier;
-import net.sn0wix_.worldofdragonsmod.client.renderersAndModels.entity.GenericEntityModel;
+import net.sn0wix_.worldofdragonsmod.client.renderersAndModels.entity.GenericGeoModel;
 import net.sn0wix_.worldofdragonsmod.common.WorldOfDragons;
 import net.sn0wix_.worldofdragonsmod.common.entity.custom.hostile.orcs.ModOrcEntity;
 
 @Environment(EnvType.CLIENT)
-public class OrcModel<T extends ModOrcEntity> extends GenericEntityModel<T> {
+public class OrcModel<T extends ModOrcEntity> extends GenericGeoModel<T> {
     public final Identifier INFECTED_TEXTURE_RESOURCE;
 
     public OrcModel(String name) {

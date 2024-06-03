@@ -12,7 +12,7 @@ import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Identifier;
 import net.sn0wix_.worldofdragonsmod.client.events.ClientEvents;
 import net.sn0wix_.worldofdragonsmod.client.renderersAndModels.block.entity.MassiveDoorModel;
-import net.sn0wix_.worldofdragonsmod.client.renderersAndModels.entity.GenericEntityModel;
+import net.sn0wix_.worldofdragonsmod.client.renderersAndModels.entity.GenericGeoModel;
 import net.sn0wix_.worldofdragonsmod.client.renderersAndModels.entity.hostile.OrcModel;
 import net.sn0wix_.worldofdragonsmod.client.renderersAndModels.entity.misc.BlockWaveFallingBlockEntityRenderer;
 import net.sn0wix_.worldofdragonsmod.client.renderersAndModels.entity.misc.PlaceableEntityRenderer;
@@ -41,8 +41,8 @@ public class WorldOfDragonsClient implements ClientModInitializer {
         EntityRendererRegistry.register(ModEntities.ORC_BRUTE, ctx -> new GeoEntityRenderer<>(ctx, new OrcModel<>("orc_brute")));
         EntityRendererRegistry.register(ModEntities.SLASHER_ORC, ctx -> new GeoEntityRenderer<>(ctx, new OrcModel<>("slasher_orc")));
         EntityRendererRegistry.register(ModEntities.ORC_MAGE, ctx -> new GeoEntityRenderer<>(ctx, new OrcModel<>("orc_mage")));
-        EntityRendererRegistry.register(ModEntities.LAVA_ELEMENTAL, ctx -> new GeoEntityRenderer<>(ctx, new GenericEntityModel<>("hostile/lava_elemental")));
-        EntityRendererRegistry.register(ModEntities.SNAPPER, ctx -> new GeoEntityRenderer<>(ctx, new GenericEntityModel<>("hostile/snapper")));
+        EntityRendererRegistry.register(ModEntities.LAVA_ELEMENTAL, ctx -> new GeoEntityRenderer<>(ctx, new GenericGeoModel<>("hostile/lava_elemental")));
+        EntityRendererRegistry.register(ModEntities.SNAPPER, ctx -> new GeoEntityRenderer<>(ctx, new GenericGeoModel<>("hostile/snapper")));
         EntityRendererRegistry.register(ModEntities.ORC_WARG, ctx -> new GeoEntityRenderer<>(ctx, new OrcModel<>("orc_warg")));
 
         //Player npcs
@@ -51,15 +51,18 @@ public class WorldOfDragonsClient implements ClientModInitializer {
         EntityRendererRegistry.register(ModEntities.BOUQUETZ, ctx -> new PlayerNPCRenderer(ctx, new Identifier(WorldOfDragons.MOD_ID, "textures/entity/misc/players/bouquetz.png"), false));
 
         //Chests
-        EntityRendererRegistry.register(ModEntities.IRON_CHEST_ENTITY, ctx -> new PlaceableEntityRenderer<>(ctx, new GenericEntityModel<>("misc/chests/iron_chest")) {
+        EntityRendererRegistry.register(ModEntities.IRON_CHEST, ctx -> new PlaceableEntityRenderer<>(ctx, new GenericGeoModel<>("misc/chests/iron_chest")) {
             @Override
             public void actuallyRender(MatrixStack poseStack, ChestEntity animatable, BakedGeoModel model, RenderLayer renderType, VertexConsumerProvider bufferSource, VertexConsumer buffer, boolean isReRender, float partialTick, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
                 poseStack.scale(0.7f, 0.7f, 0.7f);
                 super.actuallyRender(poseStack, animatable, model, renderType, bufferSource, buffer, isReRender, partialTick, packedLight, packedOverlay, red, green, blue, alpha);
             }
         });
-        EntityRendererRegistry.register(ModEntities.COMMON_CHEST_ENTITY, ctx -> new PlaceableEntityRenderer<>(ctx, new GenericEntityModel<>("misc/chests/common_chest")));
-        EntityRendererRegistry.register(ModEntities.GOLDEN_CHEST_ENTITY, ctx -> new PlaceableEntityRenderer<>(ctx, new GenericEntityModel<>("misc/chests/golden_chest")));
+        EntityRendererRegistry.register(ModEntities.COMMON_CHEST, ctx -> new PlaceableEntityRenderer<>(ctx, new GenericGeoModel<>("misc/chests/common_chest")));
+        EntityRendererRegistry.register(ModEntities.GOLDEN_CHEST, ctx -> new PlaceableEntityRenderer<>(ctx, new GenericGeoModel<>("misc/chests/golden_chest")));
+
+        //Eggs
+        EntityRendererRegistry.register(ModEntities.SHELL_SMASHER_EGG, ctx -> new PlaceableEntityRenderer<>(ctx, new GenericGeoModel<>("misc/eggs/shell_smasher_egg")));
 
 
         //Mc rendering
