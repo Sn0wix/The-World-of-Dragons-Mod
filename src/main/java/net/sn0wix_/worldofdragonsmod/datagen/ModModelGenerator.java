@@ -23,5 +23,6 @@ public class ModModelGenerator extends FabricModelProvider {
         itemModelGenerator.register(ModItems.IRON_CHEST, Models.GENERATED);
         itemModelGenerator.register(ModItems.GOLDEN_CHEST, Models.GENERATED);
         itemModelGenerator.register(ModItems.MASSIVE_DOOR, Models.GENERATED);
+        itemModelGenerator.register(ModItems.HEATH_UPGRADE, Models.GENERATED);
     }
 }

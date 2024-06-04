@@ -7,54 +7,6 @@
       }
     ]
   },
-  "ark_boss_ice": {
-    "sounds": [
-      {
-        "name": "worldofdragonsmod:ark_boss_ice",
-        "stream": true
-      }
-    ]
-  },
-  "ark_boss_low": {
-    "sounds": [
-      {
-        "name": "worldofdragonsmod:ark_boss_low",
-        "stream": true
-      }
-    ]
-  },
-  "ark_forest_titan": {
-    "sounds": [
-      {
-        "name": "worldofdragonsmod:ark_forest_titan",
-        "stream": true
-      }
-    ]
-  },
-  "titan": {
-    "sounds": [
-      {
-        "name": "worldofdragonsmod:ark_titan",
-        "stream": true
-      }
-    ]
-  },
-  "ark_ending": {
-    "sounds": [
-      {
-        "name": "worldofdragonsmod:ark_ending",
-        "stream": true
-      }
-    ]
-  },
-  "ark_boss_elder": {
-    "sounds": [
-      {
-        "name": "worldofdragonsmod:ark_boss_elder",
-        "stream": true
-      }
-    ]
-  },
   "death_dungeon": {
     "sounds": [
       {
@@ -63,18 +15,18 @@
       }
     ]
   },
-  "harbinger_theme": {
+  "fallen_warrior_theme": {
     "sounds": [
       {
-        "name": "worldofdragonsmod:harbinger_theme",
+        "name": "worldofdragonsmod:fallen_warrior_theme",
         "stream": true
       }
     ]
   },
-  "ignis_theme": {
+  "nether_drake": {
     "sounds": [
       {
-        "name": "worldofdragonsmod:ignis_theme",
+        "name": "worldofdragonsmod:nether_drake",
         "stream": true
       }
     ]

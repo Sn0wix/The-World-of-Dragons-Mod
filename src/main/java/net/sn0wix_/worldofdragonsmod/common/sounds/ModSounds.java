@@ -10,11 +10,8 @@ public class ModSounds {
     //Copirighted
     public static final SoundEvent DEATH_DUNGEON = registerSoundEvent("death_dungeon");
     public static final SoundEvent DESERT = registerSoundEvent("desert");
-
-    //TODO rename: fallen warrior theme
-    public static final SoundEvent HARBINGER_THEME = registerSoundEvent("harbinger_theme");
-    //TODO rename: nether drake
-    public static final SoundEvent INGIS_THEME = registerSoundEvent("ignis_theme");
+    public static final SoundEvent FALLEN_WARRIOR_THEME = registerSoundEvent("fallen_warrior_theme");
+    public static final SoundEvent NETHER_DRAKE = registerSoundEvent("nether_drake");
     public static final SoundEvent LEVIATHAN_THEME = registerSoundEvent("leviathan_theme");
     public static final SoundEvent EARTHEN = registerSoundEvent("earthen");
     public static final SoundEvent HYDRA = registerSoundEvent("hydra");
@@ -31,13 +28,13 @@ public class ModSounds {
 
 
     //TODO make texture pack
-    public static final SoundEvent ARK_LEVIATHAN = registerSoundEvent("ark_leviathan");
+    /*public static final SoundEvent ARK_LEVIATHAN = registerSoundEvent("ark_leviathan");
     public static final SoundEvent ARK_BOSS_ICE = registerSoundEvent("ark_boss_ice");
     public static final SoundEvent ARK_BOSS_LOW = registerSoundEvent("ark_boss_low");
     public static final SoundEvent ARK_FOREST_TITAN = registerSoundEvent("ark_forest_titan");
     public static final SoundEvent ARK_TITAN = registerSoundEvent("titan");
     public static final SoundEvent ARK_ENDING = registerSoundEvent("ark_ending");
-    public static final SoundEvent ARK_BOSS_ELDER = registerSoundEvent("ark_boss_elder");
+    public static final SoundEvent ARK_BOSS_ELDER = registerSoundEvent("ark_boss_elder");*/
 
 
     private static SoundEvent registerSoundEvent(String name) {

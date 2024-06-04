@@ -43,6 +43,7 @@ public class DragonEggItem<T extends Entity> extends PlaceableEntityItem<T> impl
 
     @Override
     public Supplier<Object> getRenderProvider() {
+
         return this.renderProvider;
     }
 

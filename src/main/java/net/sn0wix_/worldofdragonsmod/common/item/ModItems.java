@@ -15,6 +15,8 @@ import net.sn0wix_.worldofdragonsmod.common.item.custom.*;
 import net.sn0wix_.worldofdragonsmod.common.sounds.ModSounds;
 
 public class ModItems {
+    //TODO rename unknown fish fish treat
+    //TODO rename armor upgrade - resistance upgrade
 
     //Spawn Eggs
     public static final Item ARMORED_ORC_SPAWN_EGG = registerSpawnEgg(ModEntities.ARMORED_ORC, "058602", "777777");
@@ -46,11 +48,12 @@ public class ModItems {
     public static final Item MASSIVE_DOOR = registerItem("door", new BlockItem(ModBlocks.MASSIVE_DOOR, new FabricItemSettings().maxCount(1)));
 
 
-    public static final Item ARMOR_UPGRADE = registerItem("armor_upgrade", new Item(new FabricItemSettings().maxCount(1)));
-    public static final Item DAMAGE_UPGRADE = registerItem("damage_upgrade", new Item(new FabricItemSettings().maxCount(1).maxDamage(4)));
-    public static final Item SPEED_UPGRADE = registerItem("speed_upgrade", new Item(new FabricItemSettings().maxCount(1)));
-    public static final Item FIRE_UPGRADE = registerItem("fire_upgrade", new Item(new FabricItemSettings().maxCount(1)));
-    public static final Item STAMINA_UPGRADE = registerItem("stamina_upgrade", new Item(new FabricItemSettings().maxCount(1)));
+    public static final Item ARMOR_UPGRADE = registerItem("armor_upgrade", new Item(new FabricItemSettings().maxCount(16)));
+    public static final Item HEATH_UPGRADE = registerItem("health_upgrade", new Item(new FabricItemSettings().maxCount(16)));
+    public static final Item DAMAGE_UPGRADE = registerItem("damage_upgrade", new Item(new FabricItemSettings().maxCount(16).maxDamage(3)));
+    public static final Item SPEED_UPGRADE = registerItem("speed_upgrade", new Item(new FabricItemSettings().maxCount(16)));
+    public static final Item FIRE_UPGRADE = registerItem("fire_upgrade", new Item(new FabricItemSettings().maxCount(16)));
+    public static final Item STAMINA_UPGRADE = registerItem("stamina_upgrade", new Item(new FabricItemSettings().maxCount(16)));
 
 
     public static final Item BIG_EMERALD = registerItem("big_emerald", new FakeEnchantedItem(new FabricItemSettings()));
@@ -72,8 +75,6 @@ public class ModItems {
     public static final Item WITHERED_MEAT = registerItem("withered_meat", new Item(new FabricItemSettings()));
     public static final Item BUNDLE_OF_SEA_WHEAT = registerItem("bundle_of_sea_wheat", new Item(new FabricItemSettings()));
     public static final Item POWDERED_SAND = registerItem("powdered_sand", new Item(new FabricItemSettings()));
-    public static final Item COMMON_LOOT = registerItem("common_loot", new Item(new FabricItemSettings()));
-    public static final Item RARE_LOOT = registerItem("rare_loot", new Item(new FabricItemSettings()));
     public static final Item FISH_SNACK = registerItem("fish_snack", new Item(new FabricItemSettings()));
     public static final Item BOTTLE_OF_MIST = registerItem("bottle_of_mist", new Item(new FabricItemSettings().maxCount(16)));
     public static final Item PROCESSED_MEAT = registerItem("processed_meat", new Item(new FabricItemSettings()));
