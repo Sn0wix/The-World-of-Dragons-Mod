@@ -33,6 +33,13 @@ public class ModItems {
 
     //Dragon egg items
     public static final Item SHELL_SMASHER_EGG = registerDragonEgg("shell_smasher_egg", ModEntities.SHELL_SMASHER_EGG);
+    //TODO fix: item not rendering
+    public static final Item FINFLAPPER_EGG = registerDragonEgg("finflapper_egg", ModEntities.FINFLAPPER_EGG);
+    public static final Item NAGA_EGG = registerDragonEgg("naga_egg", ModEntities.NAGA_EGG);
+    public static final Item RALAK_EGG = registerDragonEgg("ralak_egg", ModEntities.RALAK_EGG);
+    public static final Item SANDSPITTER_EGG = registerDragonEgg("sandspitter_egg", ModEntities.SANDSPITTER_EGG);
+    public static final Item SKYSERPENT_EGG = registerDragonEgg("skyserpent_egg", ModEntities.SKYSERPENT_EGG);
+    public static final Item VOLCANIC_WINGWALKER_EGG = registerDragonEgg("volcanic_wingwalker_egg", ModEntities.VOLCANIC_WINGWALKER_EGG);
 
 
     //Other entity items

@@ -2,8 +2,8 @@
   "credit": "Made with Blockbench",
   "parent": "builtin/entity",
   "texture_size": [
-    128,
-    128
+    32,
+    32
   ],
   "display": {
     "thirdperson_righthand": {
@@ -43,7 +43,7 @@
       ],
       "translation": [
         -9,
-        -2.75,
+        -1.5,
         2
       ],
       "scale": [
@@ -84,7 +84,7 @@
       ],
       "translation": [
         0,
-        -6,
+        -4.5,
         0
       ],
       "scale": [
@@ -108,7 +108,7 @@
       ],
       "translation": [
         0,
-        -6,
+        -5.75,
         0
       ]
     }

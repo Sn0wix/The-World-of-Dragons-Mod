@@ -23,7 +23,6 @@ import net.sn0wix_.worldofdragonsmod.common.entity.ModEntities;
 import net.sn0wix_.worldofdragonsmod.client.renderersAndModels.entity.misc.explodingCubeProjectile.ExplodingCubeProjectileModel;
 import net.sn0wix_.worldofdragonsmod.client.renderersAndModels.entity.misc.explodingCubeProjectile.ExplodingCubeProjectileRenderer;
 import net.sn0wix_.worldofdragonsmod.common.entity.custom.misc.ChestEntity;
-import net.sn0wix_.worldofdragonsmod.common.entity.custom.misc.DragonEggEntity;
 import net.sn0wix_.worldofdragonsmod.common.networking.ModPackets;
 import software.bernie.geckolib.cache.object.BakedGeoModel;
 import software.bernie.geckolib.renderer.GeoBlockRenderer;
@@ -64,6 +63,12 @@ public class WorldOfDragonsClient implements ClientModInitializer {
 
         //Eggs
         EntityRendererRegistry.register(ModEntities.SHELL_SMASHER_EGG, ctx -> new PlaceableEntityRenderer<>(ctx, new GenericGeoModel<>("misc/eggs/shell_smasher_egg")));
+        EntityRendererRegistry.register(ModEntities.FINFLAPPER_EGG, ctx -> new PlaceableEntityRenderer<>(ctx, new GenericGeoModel<>("misc/eggs/finflapper_egg")));
+        EntityRendererRegistry.register(ModEntities.NAGA_EGG, ctx -> new PlaceableEntityRenderer<>(ctx, new GenericGeoModel<>("misc/eggs/naga_egg")));
+        EntityRendererRegistry.register(ModEntities.RALAK_EGG, ctx -> new PlaceableEntityRenderer<>(ctx, new GenericGeoModel<>("misc/eggs/ralak_egg")));
+        EntityRendererRegistry.register(ModEntities.SANDSPITTER_EGG, ctx -> new PlaceableEntityRenderer<>(ctx, new GenericGeoModel<>("misc/eggs/sandspitter_egg")));
+        EntityRendererRegistry.register(ModEntities.SKYSERPENT_EGG, ctx -> new PlaceableEntityRenderer<>(ctx, new GenericGeoModel<>("misc/eggs/skyserpent_egg")));
+        EntityRendererRegistry.register(ModEntities.VOLCANIC_WINGWALKER_EGG, ctx -> new PlaceableEntityRenderer<>(ctx, new GenericGeoModel<>("misc/eggs/volcanic_wingwalker_egg")));
 
 
         //Mc rendering

@@ -84,15 +84,42 @@ public class ModEntities {
     public static final EntityType<ExplodingCubeProjectile> EXPLODING_MAGMA_PROJECTILE = Registry.register(Registries.ENTITY_TYPE, new Identifier(WorldOfDragons.MOD_ID, "exploding_magma_projectile"),
             FabricEntityTypeBuilder.create(SpawnGroup.CREATURE, ExplodingCubeProjectile::new).dimensions(EntityDimensions.fixed(1f, 1f)).fireImmune().build());
 
+
     //Eggs
+    //TODO item translation keys
     public static final EntityType<DragonEggEntity> SHELL_SMASHER_EGG = Registry.register(Registries.ENTITY_TYPE, new Identifier(WorldOfDragons.MOD_ID, "shell_smasher_egg"),
             FabricEntityTypeBuilder.create(SpawnGroup.MISC, (EntityType.EntityFactory<DragonEggEntity>) (type, world) ->
                     new DragonEggEntity(type, world, ModItems.SHELL_SMASHER_EGG)).dimensions(EntityDimensions.fixed(0.9f, 0.8f)).build());
+
+    public static final EntityType<DragonEggEntity> FINFLAPPER_EGG = Registry.register(Registries.ENTITY_TYPE, new Identifier(WorldOfDragons.MOD_ID, "finflapper_egg"),
+            FabricEntityTypeBuilder.create(SpawnGroup.MISC, (EntityType.EntityFactory<DragonEggEntity>) (type, world) ->
+                    new DragonEggEntity(type, world, ModItems.FINFLAPPER_EGG)).dimensions(EntityDimensions.fixed(0.7f, 1)).build());
+
+    public static final EntityType<DragonEggEntity> NAGA_EGG = Registry.register(Registries.ENTITY_TYPE, new Identifier(WorldOfDragons.MOD_ID, "naga_egg"),
+            FabricEntityTypeBuilder.create(SpawnGroup.MISC, (EntityType.EntityFactory<DragonEggEntity>) (type, world) ->
+                    new DragonEggEntity(type, world, ModItems.NAGA_EGG)).dimensions(EntityDimensions.fixed(0.7f, 1)).build());
+
+    public static final EntityType<DragonEggEntity> RALAK_EGG = Registry.register(Registries.ENTITY_TYPE, new Identifier(WorldOfDragons.MOD_ID, "ralak_egg"),
+            FabricEntityTypeBuilder.create(SpawnGroup.MISC, (EntityType.EntityFactory<DragonEggEntity>) (type, world) ->
+                    new DragonEggEntity(type, world, ModItems.RALAK_EGG)).dimensions(EntityDimensions.fixed(0.8f, 0.8f)).build());
+
+    public static final EntityType<DragonEggEntity> SANDSPITTER_EGG = Registry.register(Registries.ENTITY_TYPE, new Identifier(WorldOfDragons.MOD_ID, "sandspitter_egg"),
+            FabricEntityTypeBuilder.create(SpawnGroup.MISC, (EntityType.EntityFactory<DragonEggEntity>) (type, world) ->
+                    new DragonEggEntity(type, world, ModItems.SANDSPITTER_EGG)).dimensions(EntityDimensions.fixed(0.6f, 0.7f)).build());
+
+    public static final EntityType<DragonEggEntity> SKYSERPENT_EGG = Registry.register(Registries.ENTITY_TYPE, new Identifier(WorldOfDragons.MOD_ID, "skyserpent_egg"),
+            FabricEntityTypeBuilder.create(SpawnGroup.MISC, (EntityType.EntityFactory<DragonEggEntity>) (type, world) ->
+                    new DragonEggEntity(type, world, ModItems.SKYSERPENT_EGG)).dimensions(EntityDimensions.fixed(0.8f, 1)).build());
+
+    public static final EntityType<DragonEggEntity> VOLCANIC_WINGWALKER_EGG = Registry.register(Registries.ENTITY_TYPE, new Identifier(WorldOfDragons.MOD_ID, "volcanic_wingwalker_egg"),
+            FabricEntityTypeBuilder.create(SpawnGroup.MISC, (EntityType.EntityFactory<DragonEggEntity>) (type, world) ->
+                    new DragonEggEntity(type, world, ModItems.VOLCANIC_WINGWALKER_EGG)).dimensions(EntityDimensions.fixed(1.2f, 1.7f)).build());
 
 
     //Others
     public static final EntityType<BlockWaveFallingBlockEntity> BLOCK_WAVE_FALLING_BLOCK = Registry.register(Registries.ENTITY_TYPE, new Identifier(WorldOfDragons.MOD_ID, "block_wave_falling_block"),
             FabricEntityTypeBuilder.create(SpawnGroup.MISC, BlockWaveFallingBlockEntity::new).dimensions(EntityDimensions.fixed(0.98f, 0.98f)).trackRangeChunks(10).trackedUpdateRate(20).build());
+
 
     //Helper methods
     public static void registerModEntities() {

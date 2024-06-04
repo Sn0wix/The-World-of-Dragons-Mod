@@ -23,7 +23,7 @@ public abstract class BipedEntityModelMixin<T extends LivingEntity> {
 
     @Inject(method = "positionLeftArm", at = @At("RETURN"))
     private void injectPositionLeftArm(T entity, CallbackInfo ci) {
-        if (entity.getMainHandStack().getItem() instanceof DragonEggItem<?> || entity.getOffHandStack().getItem() instanceof DragonEggItem<?>) {
+        if (entity.getMainHandStack().getItem() instanceof DragonEggItem<?>) {
             this.leftArm.yaw = (float) Math.toRadians(2.4114);
             this.leftArm.pitch = (float) Math.toRadians(-51.2829);
             this.leftArm.roll = (float) Math.toRadians(11.3003);
@@ -32,17 +32,10 @@ public abstract class BipedEntityModelMixin<T extends LivingEntity> {
 
     @Inject(method = "positionRightArm", at = @At("RETURN"))
     private void injectPositionRightArm(T entity, CallbackInfo ci) {
-        if (entity.getMainHandStack().getItem() instanceof DragonEggItem<?> || entity.getOffHandStack().getItem() instanceof DragonEggItem<?>) {
+        if (entity.getMainHandStack().getItem() instanceof DragonEggItem<?>) {
             this.rightArm.yaw = (float) Math.toRadians(2.4114);
             this.rightArm.pitch = (float) Math.toRadians(-51.2829);
             this.rightArm.roll = (float) Math.toRadians(-11.3003);
-        }
-    }
-
-    @Inject(method = "animateArms", at = @At("HEAD"), cancellable = true)
-    private void injectAnimateArms(T entity, float animationProgress, CallbackInfo ci) {
-        if (entity.getMainHandStack().getItem() instanceof DragonEggItem<?> || entity.getOffHandStack().getItem() instanceof DragonEggItem<?>) {
-            ci.cancel();
         }
     }
 }

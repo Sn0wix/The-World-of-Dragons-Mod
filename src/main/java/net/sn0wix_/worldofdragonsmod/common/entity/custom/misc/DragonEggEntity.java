@@ -8,6 +8,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.world.World;
+import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib.animatable.GeoEntity;
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
 import software.bernie.geckolib.core.animatable.instance.SingletonAnimatableInstanceCache;
@@ -32,6 +33,12 @@ public class DragonEggEntity extends Entity implements GeoEntity {
         getWorld().spawnEntity(new ItemEntity(getWorld(), getX(), getY(), getZ(), new ItemStack(item)));
         this.discard();
         return super.damage(source, amount);
+    }
+
+    @Nullable
+    @Override
+    public ItemStack getPickBlockStack() {
+        return new ItemStack(item);
     }
 
     @Override

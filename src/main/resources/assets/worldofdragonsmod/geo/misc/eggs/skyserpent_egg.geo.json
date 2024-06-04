@@ -1,0 +1,26 @@
+{
+	"format_version": "1.12.0",
+	"minecraft:geometry": [
+		{
+			"description": {
+				"identifier": "geometry.skyserpent_egg",
+				"texture_width": 128,
+				"texture_height": 128,
+				"visible_bounds_width": 2,
+				"visible_bounds_height": 2.5,
+				"visible_bounds_offset": [0, 0.75, 0]
+			},
+			"bones": [
+				{
+					"name": "egg",
+					"pivot": [0, 0, 0],
+					"cubes": [
+						{"origin": [-5, 0, -5], "size": [10, 1, 10], "uv": [30, 26]},
+						{"origin": [-5, 14, -5], "size": [10, 1, 10], "uv": [0, 25]},
+						{"origin": [-6, 1, -6], "size": [12, 13, 12], "uv": [0, 0]}
+					]
+				}
+			]
+		}
+	]
+}

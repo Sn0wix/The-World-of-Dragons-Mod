@@ -67,8 +67,12 @@
   "item.worldofdragonsmod.snapper_spawn_egg": "§5§lSnapper Spawn Egg",
 
   "item.worldofdragonsmod.shell_smasher_egg": "§2§lShell Smasher Egg",
-
-
+  "item.worldofdragonsmod.finflapper_egg": "§9§lFinnflapper Egg",
+  "item.worldofdragonsmod.naga_egg": "§2§lNaga Egg",
+  "item.worldofdragonsmod.ralak_egg": "§2§lRalak Egg",
+  "item.worldofdragonsmod.sandspitter_egg": "§6§lSandspitter Egg",
+  "item.worldofdragonsmod.skyserpent_egg": "§f§lSkyserpent Egg",
+  "item.worldofdragonsmod.volcanic_wingwalker_egg": "§8§lVolcanic Wingwalker Egg",
 
   "block.worldofdragonsmod.pickup_block": "§lPickup Block",
   "block.worldofdragonsmod.charge_block": "§d§lElectric Vein",
