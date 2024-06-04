@@ -6,6 +6,7 @@
     "JukeboxBlockEntityMixin"
   ],
   "client": [
+    "BipedEntityModelMixin"
   ],
   "injectors": {
     "defaultRequire": 1

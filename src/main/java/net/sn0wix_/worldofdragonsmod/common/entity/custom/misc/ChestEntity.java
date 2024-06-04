@@ -50,7 +50,7 @@ public class ChestEntity extends Entity implements GeoEntity {
     private final AnimatableInstanceCache cache = new SingletonAnimatableInstanceCache(this);
 
 
-    public ChestEntity(EntityType<? extends net.minecraft.entity.Entity> entityType, World world, String animation, int maxOpenedForTicks, int dropLootAfter, double particlesYOffset, float randomDivisor, int numberOfParticles) {
+    public ChestEntity(EntityType<? extends Entity> entityType, World world, String animation, int maxOpenedForTicks, int dropLootAfter, double particlesYOffset, float randomDivisor, int numberOfParticles) {
         super(entityType, world);
         this.OPEN_ANIMATION = RawAnimation.begin().thenPlayAndHold(animation);
         this.LOOT_TABLE = new Identifier(WorldOfDragons.MOD_ID, "chests/" + Registries.ENTITY_TYPE.getId(entityType).getPath());

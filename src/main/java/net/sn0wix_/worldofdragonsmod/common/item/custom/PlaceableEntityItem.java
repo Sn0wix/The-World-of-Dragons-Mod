@@ -7,7 +7,6 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemUsageContext;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.ActionResult;
-import net.sn0wix_.worldofdragonsmod.common.entity.custom.misc.ChestEntity;
 
 public class PlaceableEntityItem<T extends Entity> extends Item {
     public final EntityType<T> ENTITY_TYPE;
@@ -21,9 +20,15 @@ public class PlaceableEntityItem<T extends Entity> extends Item {
     public ActionResult useOnBlock(ItemUsageContext context) {
         if (!context.getWorld().isClient() && context.getPlayer() != null) {
             try {
-                ENTITY_TYPE.spawn((ServerWorld) context.getWorld(), context.getBlockPos().up(), SpawnReason.SPAWN_EGG).setYaw(context.getPlayer().getHorizontalFacing().getOpposite().asRotation());
+                Entity entity = ENTITY_TYPE.create((ServerWorld) context.getWorld(), context.getStack().getNbt(), null, context.getBlockPos().up(), SpawnReason.SPAWN_EGG, true, false);
+                entity.setYaw(context.getPlayer().getHorizontalFacing().getOpposite().asRotation());
+                context.getWorld().spawnEntity(entity);
+
+                if (!context.getPlayer().isCreative()) {
+                    context.getStack().decrement(1);
+                }
                 return ActionResult.SUCCESS;
-            }catch (NullPointerException e) {
+            } catch (NullPointerException e) {
                 e.printStackTrace();
             }
 

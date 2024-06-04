@@ -14,12 +14,13 @@ import net.sn0wix_.worldofdragonsmod.common.entity.custom.hostile.LavaElementalE
 import net.sn0wix_.worldofdragonsmod.common.entity.custom.hostile.SnapperEntity;
 import net.sn0wix_.worldofdragonsmod.common.entity.custom.misc.BlockWaveFallingBlockEntity;
 import net.sn0wix_.worldofdragonsmod.common.entity.custom.misc.ChestEntity;
-import net.sn0wix_.worldofdragonsmod.common.entity.custom.misc.egg.DragonEggEntity;
+import net.sn0wix_.worldofdragonsmod.common.entity.custom.misc.DragonEggEntity;
 import net.sn0wix_.worldofdragonsmod.common.entity.custom.misc.projectile.ExplodingCubeProjectile;
 import net.sn0wix_.worldofdragonsmod.common.entity.custom.misc.playerNPC.BouquetZNPC;
 import net.sn0wix_.worldofdragonsmod.common.entity.custom.misc.playerNPC.BubbaGump7NPC;
 import net.sn0wix_.worldofdragonsmod.common.entity.custom.misc.playerNPC.Sn0wix_NPC;
 import net.sn0wix_.worldofdragonsmod.common.entity.custom.hostile.orcs.*;
+import net.sn0wix_.worldofdragonsmod.common.item.ModItems;
 
 public class ModEntities {
     //Orcs
@@ -85,8 +86,8 @@ public class ModEntities {
 
     //Eggs
     public static final EntityType<DragonEggEntity> SHELL_SMASHER_EGG = Registry.register(Registries.ENTITY_TYPE, new Identifier(WorldOfDragons.MOD_ID, "shell_smasher_egg"),
-            FabricEntityTypeBuilder.create(SpawnGroup.MISC, DragonEggEntity::new).dimensions(EntityDimensions.fixed(0.9f, 0.8f)).build());
-
+            FabricEntityTypeBuilder.create(SpawnGroup.MISC, (EntityType.EntityFactory<DragonEggEntity>) (type, world) ->
+                    new DragonEggEntity(type, world, ModItems.SHELL_SMASHER_EGG)).dimensions(EntityDimensions.fixed(0.9f, 0.8f)).build());
 
 
     //Others
@@ -99,6 +100,6 @@ public class ModEntities {
     }
 
     private static EntityType<ChestEntity> getModChestEntityType(EntityType.EntityFactory<ChestEntity> factory, float... dimensions) {
-        return new EntityType<>(factory, SpawnGroup.MISC, true, true, false, true, ImmutableSet.of(), EntityDimensions.fixed(dimensions[0], dimensions[1]), 5, 3, FeatureFlags.VANILLA_FEATURES);
+        return new EntityType<>(factory, SpawnGroup.MISC, true, true, true, true, ImmutableSet.of(), EntityDimensions.fixed(dimensions[0], dimensions[1]), 5, 3, FeatureFlags.VANILLA_FEATURES);
     }
 }

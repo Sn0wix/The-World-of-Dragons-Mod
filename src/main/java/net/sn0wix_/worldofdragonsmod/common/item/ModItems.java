@@ -11,7 +11,6 @@ import net.minecraft.util.Identifier;
 import net.sn0wix_.worldofdragonsmod.common.WorldOfDragons;
 import net.sn0wix_.worldofdragonsmod.common.blocks.ModBlocks;
 import net.sn0wix_.worldofdragonsmod.common.entity.ModEntities;
-import net.sn0wix_.worldofdragonsmod.common.entity.custom.misc.egg.DragonEggEntity;
 import net.sn0wix_.worldofdragonsmod.common.item.custom.*;
 import net.sn0wix_.worldofdragonsmod.common.sounds.ModSounds;
 

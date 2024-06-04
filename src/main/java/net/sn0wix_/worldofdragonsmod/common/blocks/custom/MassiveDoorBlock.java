@@ -35,11 +35,8 @@ public class MassiveDoorBlock extends BlockWithEntity {
         }
 
         boolean bl = world.isReceivingRedstonePower(pos);
-        if (bl != state.get(OPEN)) {
-            if (state.get(OPEN) != bl) {
-                state = state.with(OPEN, bl);
-            }
-            world.setBlockState(pos, state.with(OPEN, bl), Block.NOTIFY_LISTENERS);
+        if (bl && !state.get(OPEN)) {
+            world.setBlockState(pos, state.with(OPEN, true), Block.NOTIFY_LISTENERS);
         }
     }
 
