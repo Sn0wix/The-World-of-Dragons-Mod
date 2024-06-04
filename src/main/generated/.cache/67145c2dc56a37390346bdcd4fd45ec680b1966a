@@ -1,6 +1,8 @@
-// 1.20.4	2024-06-04T20:41:26.7040235	The World Of Dragons Mod/Model Definitions
-4836dfdb4d64ca1e9dd06c448ef8d6243df4d08d assets\worldofdragonsmod\models\item\common_chest.json
+// 1.20.4	2024-06-04T21:18:45.9543664	The World Of Dragons Mod/Model Definitions
 13b9807b0569f6f2c0928512ad9f42208b382fa4 assets\worldofdragonsmod\models\item\door.json
+4836dfdb4d64ca1e9dd06c448ef8d6243df4d08d assets\worldofdragonsmod\models\item\common_chest.json
+197d8f2bfee374fdd38815b0a2193e45189257a0 assets\worldofdragonsmod\models\item\resistance_upgrade.json
+0cf12392f6080587caf18f8bef2b7be2e6fb4a4d assets\worldofdragonsmod\models\item\fish_treat.json
 fa0ca6035342773f3954669b9c1b3807c32cf65c assets\worldofdragonsmod\models\item\golden_chest.json
 f578787db586f63b54f5ed15c352f04df4cf85d2 assets\worldofdragonsmod\models\item\iron_chest.json
 e124640bcd9c89f5a388df7c34e1b4329c7ad761 assets\worldofdragonsmod\models\item\health_upgrade.json

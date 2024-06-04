@@ -8,6 +8,7 @@ import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.block.entity.BlockEntityRendererFactories;
+import net.minecraft.client.render.entity.FlyingItemEntityRenderer;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Identifier;
 import net.sn0wix_.worldofdragonsmod.client.events.ClientEvents;
@@ -75,6 +76,7 @@ public class WorldOfDragonsClient implements ClientModInitializer {
         EntityModelLayerRegistry.registerModelLayer(ExplodingCubeProjectileModel.LAYER_LOCATION, ExplodingCubeProjectileModel::getTexturedModelData);
         EntityRendererRegistry.register(ModEntities.EXPLODING_MAGMA_PROJECTILE, ctx -> new ExplodingCubeProjectileRenderer(ctx, new Identifier("minecraft", "textures/block/magma.png")));
         EntityRendererRegistry.register(ModEntities.BLOCK_WAVE_FALLING_BLOCK, BlockWaveFallingBlockEntityRenderer::new);
+        EntityRendererRegistry.register(ModEntities.THE_ROCK_PROJECTILE, FlyingItemEntityRenderer::new);
 
         //Block entities
         BlockEntityRendererFactories.register(ModBlockEntities.MASSIVE_DOOR, ctx -> new GeoBlockRenderer<>(new MassiveDoorModel()) {

@@ -20,6 +20,7 @@ import net.sn0wix_.worldofdragonsmod.common.entity.custom.misc.playerNPC.Bouquet
 import net.sn0wix_.worldofdragonsmod.common.entity.custom.misc.playerNPC.BubbaGump7NPC;
 import net.sn0wix_.worldofdragonsmod.common.entity.custom.misc.playerNPC.Sn0wix_NPC;
 import net.sn0wix_.worldofdragonsmod.common.entity.custom.hostile.orcs.*;
+import net.sn0wix_.worldofdragonsmod.common.entity.custom.misc.projectile.RockProjectile;
 import net.sn0wix_.worldofdragonsmod.common.item.ModItems;
 
 public class ModEntities {
@@ -85,6 +86,9 @@ public class ModEntities {
     public static final EntityType<ExplodingCubeProjectile> EXPLODING_MAGMA_PROJECTILE = Registry.register(Registries.ENTITY_TYPE, new Identifier(WorldOfDragons.MOD_ID, "exploding_magma_projectile"),
             FabricEntityTypeBuilder.create(SpawnGroup.CREATURE, ExplodingCubeProjectile::new).dimensions(EntityDimensions.fixed(1f, 1f)).fireImmune().build());
 
+    //TODO add translation
+    public static final EntityType<RockProjectile> THE_ROCK_PROJECTILE = Registry.register(Registries.ENTITY_TYPE, new Identifier(WorldOfDragons.MOD_ID, "rock"),
+            FabricEntityTypeBuilder.create(SpawnGroup.MISC, (EntityType.EntityFactory<RockProjectile>) RockProjectile::new).dimensions(EntityDimensions.fixed(0.25f, 0.25f)).trackRangeChunks(4).trackedUpdateRate(10).fireImmune().build());
 
     //Eggs
     //TODO item translation keys

@@ -1,5 +1,5 @@
 {
-  "item.worldofdragonsmod.armor_upgrade": "§8§lArmor Upgrade",
+  "item.worldofdragonsmod.resistance_upgrade": "§8§lResistance Upgrade",
   "item.worldofdragonsmod.health_upgrade": "§a§lHealth Upgrade",
   "item.worldofdragonsmod.damage_upgrade": "§c§lDamage Upgrade",
   "item.worldofdragonsmod.speed_upgrade": "§b§lSpeed Upgrade",
@@ -15,7 +15,7 @@
   "item.worldofdragonsmod.lava_rock": "§6§lLava Rock",
   "item.worldofdragonsmod.frozen_fish": "§b§lFrozen Fish",
   "item.worldofdragonsmod.slab_of_meat": "§c§lSlab Of Meat",
-  "item.worldofdragonsmod.unknown_fish": "§f§lUnknown Fish",
+  "item.worldofdragonsmod.fish_treat": "§f§lFish Treat",
   "item.worldofdragonsmod.frozen_meat": "§b§lFrozen Meat",
   "item.worldofdragonsmod.rock": "§7§lRock",
   "item.worldofdragonsmod.blood": "§4§lBlood",

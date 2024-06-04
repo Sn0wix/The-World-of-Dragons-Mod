@@ -15,9 +15,6 @@ import net.sn0wix_.worldofdragonsmod.common.item.custom.*;
 import net.sn0wix_.worldofdragonsmod.common.sounds.ModSounds;
 
 public class ModItems {
-    //TODO rename unknown fish fish treat
-    //TODO rename armor upgrade - resistance upgrade
-
     //Spawn Eggs
     public static final Item ARMORED_ORC_SPAWN_EGG = registerSpawnEgg(ModEntities.ARMORED_ORC, "058602", "777777");
     public static final Item GOBLIN_SPAWN_EGG = registerSpawnEgg(ModEntities.GOBLIN, "058602", "744d01");
@@ -48,7 +45,7 @@ public class ModItems {
     public static final Item MASSIVE_DOOR = registerItem("door", new BlockItem(ModBlocks.MASSIVE_DOOR, new FabricItemSettings().maxCount(1)));
 
 
-    public static final Item ARMOR_UPGRADE = registerItem("armor_upgrade", new Item(new FabricItemSettings().maxCount(16)));
+    public static final Item RESISTANCE_UPGRADE = registerItem("resistance_upgrade", new Item(new FabricItemSettings().maxCount(16)));
     public static final Item HEATH_UPGRADE = registerItem("health_upgrade", new Item(new FabricItemSettings().maxCount(16)));
     public static final Item DAMAGE_UPGRADE = registerItem("damage_upgrade", new Item(new FabricItemSettings().maxCount(16).maxDamage(3)));
     public static final Item SPEED_UPGRADE = registerItem("speed_upgrade", new Item(new FabricItemSettings().maxCount(16)));
@@ -61,9 +58,9 @@ public class ModItems {
     public static final Item CHARGE_BATTERY = registerItem("charge_battery", new ChargeBatteryItem(ModToolMaterial.ELECTRIC, 0.0f, 1.8f, new FabricItemSettings().maxCount(1)));
     public static final Item BOTTLE_OF_ELECTRIC_CHARGE = registerItem("bottle_of_electric_charge", new Item(new FabricItemSettings().maxCount(16)));
     public static final Item SLAB_OF_MEAT = registerItem("slab_of_meat", new Item(new FabricItemSettings()));
-    public static final Item UNKNOWN_FISH = registerItem("unknown_fish", new Item(new FabricItemSettings()));
+    public static final Item FISH_TREAT = registerItem("fish_treat", new Item(new FabricItemSettings()));
     public static final Item FROZEN_MEAT = registerItem("frozen_meat", new Item(new FabricItemSettings()));
-    public static final Item ROCK = registerItem("rock", new Item(new FabricItemSettings()));
+    public static final Item THE_ROCK = registerItem("rock", new ThrowableRockItem(new FabricItemSettings()));
     public static final Item BLOOD = registerItem("blood", new Item(new FabricItemSettings()));
     public static final Item BURNT_MEAT = registerItem("burnt_meat", new Item(new FabricItemSettings()));
     public static final Item METALLIC_SUBSTANCE = registerItem("metallic_substance", new Item(new FabricItemSettings()));

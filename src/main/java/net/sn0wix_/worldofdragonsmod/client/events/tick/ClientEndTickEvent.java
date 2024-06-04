@@ -11,7 +11,7 @@ public class ClientEndTickEvent implements ClientTickEvents.EndTick {
     public static final Random RANDOM = new Random();
 
 
-    //TODO test
+    //TODO test and fix
     @Override
     public void onEndTick(MinecraftClient client) {
         if (client.world != null && client.world.getPlayers().size() > 1) {

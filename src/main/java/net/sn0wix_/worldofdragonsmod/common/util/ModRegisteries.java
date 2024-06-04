@@ -2,9 +2,17 @@ package net.sn0wix_.worldofdragonsmod.common.util;
 
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
+import net.minecraft.block.DispenserBlock;
+import net.minecraft.block.dispenser.ProjectileDispenserBehavior;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.mob.PathAwareEntity;
+import net.minecraft.entity.projectile.ProjectileEntity;
+import net.minecraft.entity.projectile.thrown.SnowballEntity;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.Util;
+import net.minecraft.util.math.Position;
+import net.minecraft.world.World;
 import net.sn0wix_.worldofdragonsmod.common.command.GPTCommand;
 import net.sn0wix_.worldofdragonsmod.common.command.TriggerAnimCommand;
 import net.sn0wix_.worldofdragonsmod.common.entity.ModEntities;
@@ -12,11 +20,19 @@ import net.sn0wix_.worldofdragonsmod.common.entity.custom.hostile.LavaElementalE
 import net.sn0wix_.worldofdragonsmod.common.entity.custom.hostile.SnapperEntity;
 import net.sn0wix_.worldofdragonsmod.common.entity.custom.misc.playerNPC.PlayerNPCEntity;
 import net.sn0wix_.worldofdragonsmod.common.entity.custom.hostile.orcs.*;
+import net.sn0wix_.worldofdragonsmod.common.item.ModItems;
 
 public class ModRegisteries {
     public static void registerModStuffs() {
         registerAttributes();
         registerCommands();
+
+        DispenserBlock.registerBehavior(ModItems.THE_ROCK, new ProjectileDispenserBehavior(){
+            @Override
+            protected ProjectileEntity createProjectile(World world, Position position, ItemStack stack) {
+                return Util.make(new SnowballEntity(world, position.getX(), position.getY(), position.getZ()), entity -> entity.setItem(stack));
+            }
+        });
     }
 
     private static void registerAttributes() {
