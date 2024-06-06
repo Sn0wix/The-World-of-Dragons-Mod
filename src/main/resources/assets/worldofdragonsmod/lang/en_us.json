@@ -107,6 +107,8 @@
   "entity.worldofdragonsmod.golden_chest": "Golden Chest",
   "entity.worldofdragonsmod.block_wave_falling_block": "Block Wave",
 
+  "entity.worldofdragonsmod.shell_smasher": "Shell Smasher",
+
   "death.attack.bleeding": "%1$s bled out",
   "death.attack.bleeding.player": "%1$s bled out",
 

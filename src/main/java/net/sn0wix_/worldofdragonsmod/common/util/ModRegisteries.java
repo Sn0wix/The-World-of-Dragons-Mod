@@ -16,6 +16,7 @@ import net.minecraft.world.World;
 import net.sn0wix_.worldofdragonsmod.common.command.GPTCommand;
 import net.sn0wix_.worldofdragonsmod.common.command.TriggerAnimCommand;
 import net.sn0wix_.worldofdragonsmod.common.entity.ModEntities;
+import net.sn0wix_.worldofdragonsmod.common.entity.custom.dragons.ShellSmasherEntity;
 import net.sn0wix_.worldofdragonsmod.common.entity.custom.hostile.LavaElementalEntity;
 import net.sn0wix_.worldofdragonsmod.common.entity.custom.hostile.SnapperEntity;
 import net.sn0wix_.worldofdragonsmod.common.entity.custom.misc.playerNPC.PlayerNPCEntity;
@@ -27,7 +28,15 @@ public class ModRegisteries {
         registerAttributes();
         registerCommands();
 
+        //TODO fix
         DispenserBlock.registerBehavior(ModItems.THE_ROCK, new ProjectileDispenserBehavior(){
+            @Override
+            protected ProjectileEntity createProjectile(World world, Position position, ItemStack stack) {
+                return Util.make(new SnowballEntity(world, position.getX(), position.getY(), position.getZ()), entity -> entity.setItem(stack));
+            }
+        });
+
+        DispenserBlock.registerBehavior(ModItems.LAVA_ROCK, new ProjectileDispenserBehavior(){
             @Override
             protected ProjectileEntity createProjectile(World world, Position position, ItemStack stack) {
                 return Util.make(new SnowballEntity(world, position.getX(), position.getY(), position.getZ()), entity -> entity.setItem(stack));
@@ -36,6 +45,8 @@ public class ModRegisteries {
     }
 
     private static void registerAttributes() {
+        FabricDefaultAttributeRegistry.register(ModEntities.SHELL_SMASHER, ShellSmasherEntity.setAttributes());
+
         FabricDefaultAttributeRegistry.register(ModEntities.GOBLIN, GoblinEntity.setAttributes());
         FabricDefaultAttributeRegistry.register(ModEntities.ARMORED_ORC, ArmoredOrcEntity.setAttributes());
         FabricDefaultAttributeRegistry.register(ModEntities.ARCHER_ORC, ArcherOrcEntity.setAttributes());
@@ -44,8 +55,10 @@ public class ModRegisteries {
         FabricDefaultAttributeRegistry.register(ModEntities.ORC_BRUTE, OrcBruteEntity.setAttributes());
         FabricDefaultAttributeRegistry.register(ModEntities.SLASHER_ORC, SlasherOrcEntity.setAttributes());
         FabricDefaultAttributeRegistry.register(ModEntities.ORC_MAGE, OrcMageEntity.setAttributes());
+
         FabricDefaultAttributeRegistry.register(ModEntities.LAVA_ELEMENTAL, LavaElementalEntity.setAttributes());
         FabricDefaultAttributeRegistry.register(ModEntities.SNAPPER, SnapperEntity.setAttributes());
+
         FabricDefaultAttributeRegistry.register(ModEntities.SN0WIX_, PlayerNPCEntity.setAttributes());
         FabricDefaultAttributeRegistry.register(ModEntities.BUBBAGUMP7, PlayerNPCEntity.setAttributes());
         FabricDefaultAttributeRegistry.register(ModEntities.BOUQUETZ, PlayerNPCEntity.setAttributes());

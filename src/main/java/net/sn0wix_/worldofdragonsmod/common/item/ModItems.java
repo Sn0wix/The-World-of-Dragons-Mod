@@ -11,6 +11,7 @@ import net.minecraft.util.Identifier;
 import net.sn0wix_.worldofdragonsmod.common.WorldOfDragons;
 import net.sn0wix_.worldofdragonsmod.common.blocks.ModBlocks;
 import net.sn0wix_.worldofdragonsmod.common.entity.ModEntities;
+import net.sn0wix_.worldofdragonsmod.common.entity.custom.dragons.TameableDragonEntity;
 import net.sn0wix_.worldofdragonsmod.common.item.custom.*;
 import net.sn0wix_.worldofdragonsmod.common.sounds.ModSounds;
 
@@ -59,7 +60,7 @@ public class ModItems {
     public static final Item SLAB_OF_MEAT = registerItem("slab_of_meat", new Item(new FabricItemSettings()));
     public static final Item FISH_TREAT = registerItem("fish_treat", new Item(new FabricItemSettings()));
     public static final Item FROZEN_MEAT = registerItem("frozen_meat", new Item(new FabricItemSettings()));
-    public static final Item THE_ROCK = registerItem("rock", new ThrowableRockItem(new FabricItemSettings()));
+    public static final Item THE_ROCK = registerItem("rock", new ThrowableRockItem(new FabricItemSettings(), false));
     public static final Item BLOOD = registerItem("blood", new Item(new FabricItemSettings()));
     public static final Item BURNT_MEAT = registerItem("burnt_meat", new Item(new FabricItemSettings()));
     public static final Item METALLIC_SUBSTANCE = registerItem("metallic_substance", new Item(new FabricItemSettings()));
@@ -67,7 +68,7 @@ public class ModItems {
     public static final Item CONDUCTIVE_METAL = registerItem("conductive_metal", new Item(new FabricItemSettings()));
     public static final Item GHOST_GEL = registerItem("ghost_gel", new Item(new FabricItemSettings()));
     public static final Item MEAT = registerItem("meat", new Item(new FabricItemSettings()));
-    public static final Item LAVA_ROCK = registerItem("lava_rock", new Item(new FabricItemSettings()));
+    public static final Item LAVA_ROCK = registerItem("lava_rock", new ThrowableRockItem(new FabricItemSettings(), true));
     public static final Item WITHERED_MEAT = registerItem("withered_meat", new Item(new FabricItemSettings()));
     public static final Item BUNDLE_OF_SEA_WHEAT = registerItem("bundle_of_sea_wheat", new Item(new FabricItemSettings()));
     public static final Item POWDERED_SAND = registerItem("powdered_sand", new Item(new FabricItemSettings()));

@@ -3,11 +3,14 @@ package net.sn0wix_.worldofdragonsmod.common.entity.custom.misc;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.ItemEntity;
+import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.world.World;
+import net.sn0wix_.worldofdragonsmod.common.entity.custom.dragons.TameableDragonEntity;
 import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib.animatable.GeoEntity;
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
@@ -17,10 +20,12 @@ import software.bernie.geckolib.core.animation.AnimatableManager;
 public class DragonEggEntity extends Entity implements GeoEntity {
     private final AnimatableInstanceCache cache = new SingletonAnimatableInstanceCache(this);
     public final Item item;
+    public final EntityType<? extends TameableDragonEntity> DRAGON_ENTITY_TYPE;
 
-    public DragonEggEntity(EntityType<? extends Entity> type, World world, Item item) {
+    public DragonEggEntity(EntityType<? extends Entity> type, World world, Item item, EntityType<? extends TameableDragonEntity> dragon) {
         super(type, world);
         this.item = item;
+        this.DRAGON_ENTITY_TYPE = dragon;
     }
 
     @Override
@@ -30,7 +35,15 @@ public class DragonEggEntity extends Entity implements GeoEntity {
 
     @Override
     public boolean damage(DamageSource source, float amount) {
-        getWorld().spawnEntity(new ItemEntity(getWorld(), getX(), getY(), getZ(), new ItemStack(item)));
+        if (!getWorld().isClient()) {
+            //TODO add proper hatching system
+            if (DRAGON_ENTITY_TYPE == null) {
+                getWorld().spawnEntity(new ItemEntity(getWorld(), getX(), getY(), getZ(), new ItemStack(item)));
+            } else {
+                DRAGON_ENTITY_TYPE.spawn((ServerWorld) getWorld(), getBlockPos(), SpawnReason.SPAWN_EGG);
+            }
+        }
+
         this.discard();
         return super.damage(source, amount);
     }

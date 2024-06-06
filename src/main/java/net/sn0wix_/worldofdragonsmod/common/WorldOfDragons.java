@@ -16,8 +16,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import software.bernie.geckolib.GeckoLib;
 
-
-//https://discord.com/api/webhooks/1243529983100584009/W4ObhXhemWprFwcmYGPZBHbAk31AppydbVRa0qh21nD9Bi5peQjiFGDOY2p_yUgQYMJd/github
 public class WorldOfDragons implements ModInitializer {
     public static final Logger LOGGER = LoggerFactory.getLogger(WorldOfDragons.MOD_ID);
     public static final String MOD_ID = "worldofdragonsmod";

@@ -14,6 +14,7 @@ import net.minecraft.util.Identifier;
 import net.sn0wix_.worldofdragonsmod.client.events.ClientEvents;
 import net.sn0wix_.worldofdragonsmod.client.renderersAndModels.block.entity.MassiveDoorModel;
 import net.sn0wix_.worldofdragonsmod.client.renderersAndModels.entity.GenericGeoModel;
+import net.sn0wix_.worldofdragonsmod.client.renderersAndModels.entity.dragons.DragonEntityRenderer;
 import net.sn0wix_.worldofdragonsmod.client.renderersAndModels.entity.hostile.OrcModel;
 import net.sn0wix_.worldofdragonsmod.client.renderersAndModels.entity.misc.BlockWaveFallingBlockEntityRenderer;
 import net.sn0wix_.worldofdragonsmod.client.renderersAndModels.entity.misc.PlaceableEntityRenderer;
@@ -32,8 +33,10 @@ import software.bernie.geckolib.renderer.GeoEntityRenderer;
 public class WorldOfDragonsClient implements ClientModInitializer {
     @Override
     public void onInitializeClient() {
-        //ENTITIES
+        //Entities
         //Geckolib
+        EntityRendererRegistry.register(ModEntities.SHELL_SMASHER, ctx -> new DragonEntityRenderer<>(ctx, "shell_smasher"));
+
         EntityRendererRegistry.register(ModEntities.ARMORED_ORC, ctx -> new GeoEntityRenderer<>(ctx, new OrcModel<>("armored_orc")));
         EntityRendererRegistry.register(ModEntities.GOBLIN, ctx -> new GeoEntityRenderer<>(ctx, new OrcModel<>("goblin")));
         EntityRendererRegistry.register(ModEntities.ARCHER_ORC, ctx -> new GeoEntityRenderer<>(ctx, new OrcModel<>("archer_orc")));
@@ -43,8 +46,9 @@ public class WorldOfDragonsClient implements ClientModInitializer {
         EntityRendererRegistry.register(ModEntities.SLASHER_ORC, ctx -> new GeoEntityRenderer<>(ctx, new OrcModel<>("slasher_orc")));
         EntityRendererRegistry.register(ModEntities.ORC_MAGE, ctx -> new GeoEntityRenderer<>(ctx, new OrcModel<>("orc_mage")));
         EntityRendererRegistry.register(ModEntities.LAVA_ELEMENTAL, ctx -> new GeoEntityRenderer<>(ctx, new GenericGeoModel<>("hostile/lava_elemental")));
-        EntityRendererRegistry.register(ModEntities.SNAPPER, ctx -> new GeoEntityRenderer<>(ctx, new GenericGeoModel<>("hostile/snapper")));
         EntityRendererRegistry.register(ModEntities.ORC_WARG, ctx -> new GeoEntityRenderer<>(ctx, new OrcModel<>("orc_warg")));
+
+        EntityRendererRegistry.register(ModEntities.SNAPPER, ctx -> new GeoEntityRenderer<>(ctx, new GenericGeoModel<>("hostile/snapper")));
 
         //Player npcs
         EntityRendererRegistry.register(ModEntities.SN0WIX_, ctx -> new PlayerNPCRenderer(ctx, new Identifier(WorldOfDragons.MOD_ID, "textures/entity/misc/players/sn0wix_.png"), true));
@@ -77,6 +81,7 @@ public class WorldOfDragonsClient implements ClientModInitializer {
         EntityRendererRegistry.register(ModEntities.EXPLODING_MAGMA_PROJECTILE, ctx -> new ExplodingCubeProjectileRenderer(ctx, new Identifier("minecraft", "textures/block/magma.png")));
         EntityRendererRegistry.register(ModEntities.BLOCK_WAVE_FALLING_BLOCK, BlockWaveFallingBlockEntityRenderer::new);
         EntityRendererRegistry.register(ModEntities.THE_ROCK_PROJECTILE, FlyingItemEntityRenderer::new);
+        EntityRendererRegistry.register(ModEntities.THE_LAVA_ROCK_PROJECTILE, FlyingItemEntityRenderer::new);
 
         //Block entities
         BlockEntityRendererFactories.register(ModBlockEntities.MASSIVE_DOOR, ctx -> new GeoBlockRenderer<>(new MassiveDoorModel()) {

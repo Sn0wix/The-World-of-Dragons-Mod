@@ -11,12 +11,24 @@ import net.sn0wix_.worldofdragonsmod.common.item.ModItems;
 import org.jetbrains.annotations.Nullable;
 
 public class RockProjectile extends SnowballEntity {
-    public RockProjectile(EntityType<? extends SnowballEntity> entityType, World world) {
+    public final boolean isLava;
+
+    public RockProjectile(EntityType<? extends SnowballEntity> entityType, World world, boolean isLava) {
         super(entityType, world);
+        this.isLava = isLava;
     }
 
-    public RockProjectile(World world, PlayerEntity user) {
+    public RockProjectile(World world, PlayerEntity user, boolean isLava) {
         super(world, user);
+        this.isLava = isLava;
+    }
+
+    @Override
+    public void tick() {
+        super.tick();
+        if (isLava) {
+            setOnFire(true);
+        }
     }
 
     @Override
@@ -24,17 +36,20 @@ public class RockProjectile extends SnowballEntity {
         super.onEntityHit(entityHitResult);
         Entity entity = entityHitResult.getEntity();
         entity.damage(this.getDamageSources().thrown(this, this.getOwner()), 1);
+        if (isLava) {
+            entity.setOnFireFor(2);
+        }
     }
 
     @Override
     public ItemStack getStack() {
-        return new ItemStack(ModItems.THE_ROCK);
+        return new ItemStack(isLava ? ModItems.LAVA_ROCK : ModItems.THE_ROCK);
     }
 
     @Nullable
     @Override
     public ItemStack getPickBlockStack() {
-        return new ItemStack(ModItems.THE_ROCK);
+        return new ItemStack(isLava ? ModItems.LAVA_ROCK : ModItems.THE_ROCK);
     }
 }
 
