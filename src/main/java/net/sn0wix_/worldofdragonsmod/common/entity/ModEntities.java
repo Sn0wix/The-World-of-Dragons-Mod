@@ -2,6 +2,7 @@ package net.sn0wix_.worldofdragonsmod.common.entity;
 
 import com.google.common.collect.ImmutableSet;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityDimensions;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnGroup;
@@ -22,6 +23,8 @@ import net.sn0wix_.worldofdragonsmod.common.entity.custom.misc.playerNPC.Sn0wix_
 import net.sn0wix_.worldofdragonsmod.common.entity.custom.hostile.orcs.*;
 import net.sn0wix_.worldofdragonsmod.common.entity.custom.misc.projectile.RockProjectile;
 import net.sn0wix_.worldofdragonsmod.common.item.ModItems;
+
+import java.util.ArrayList;
 
 public class ModEntities {
     //Orcs
@@ -82,16 +85,13 @@ public class ModEntities {
 
 
     //Projectiles
-    //TODO add throwable rock
     public static final EntityType<ExplodingCubeProjectile> EXPLODING_MAGMA_PROJECTILE = Registry.register(Registries.ENTITY_TYPE, new Identifier(WorldOfDragons.MOD_ID, "exploding_magma_projectile"),
             FabricEntityTypeBuilder.create(SpawnGroup.CREATURE, ExplodingCubeProjectile::new).dimensions(EntityDimensions.fixed(1f, 1f)).fireImmune().build());
-
-    //TODO add translation
-    public static final EntityType<RockProjectile> THE_ROCK_PROJECTILE = Registry.register(Registries.ENTITY_TYPE, new Identifier(WorldOfDragons.MOD_ID, "rock"),
-            FabricEntityTypeBuilder.create(SpawnGroup.MISC, (EntityType.EntityFactory<RockProjectile>) RockProjectile::new).dimensions(EntityDimensions.fixed(0.25f, 0.25f)).trackRangeChunks(4).trackedUpdateRate(10).fireImmune().build());
+    public static final EntityType<RockProjectile> THE_ROCK_PROJECTILE = (Registry.register(Registries.ENTITY_TYPE, new Identifier(WorldOfDragons.MOD_ID, "rock"),
+            FabricEntityTypeBuilder.create(SpawnGroup.MISC, (EntityType.EntityFactory<RockProjectile>) RockProjectile::new).dimensions(EntityDimensions.fixed(0.25f, 0.25f)).trackRangeChunks(4).trackedUpdateRate(10).fireImmune().build()));
 
     //Eggs
-    //TODO item translation keys
+    //add item translation keys
     public static final EntityType<DragonEggEntity> SHELL_SMASHER_EGG = Registry.register(Registries.ENTITY_TYPE, new Identifier(WorldOfDragons.MOD_ID, "shell_smasher_egg"),
             FabricEntityTypeBuilder.create(SpawnGroup.MISC, (EntityType.EntityFactory<DragonEggEntity>) (type, world) ->
                     new DragonEggEntity(type, world, ModItems.SHELL_SMASHER_EGG)).dimensions(EntityDimensions.fixed(0.9f, 0.8f)).build());
