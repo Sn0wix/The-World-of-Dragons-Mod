@@ -31,7 +31,7 @@ public class ShellSmasherEntity extends TameableDragonEntity {
                 .add(EntityAttributes.GENERIC_MAX_HEALTH, 40)
                 .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 4)
                 .add(EntityAttributes.GENERIC_ATTACK_SPEED, 1)
-                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.3)
+                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.25)
                 .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 32)
                 .add(EntityAttributes.GENERIC_KNOCKBACK_RESISTANCE, 0.6);
     }
@@ -41,8 +41,6 @@ public class ShellSmasherEntity extends TameableDragonEntity {
     public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
         controllers.add(new AnimationController<>(this, "moveIdle", 2, this::genericMovementPredicate));
     }
-
-    //Movement
 
 
 

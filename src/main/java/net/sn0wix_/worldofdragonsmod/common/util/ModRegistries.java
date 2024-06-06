@@ -21,25 +21,25 @@ import net.sn0wix_.worldofdragonsmod.common.entity.custom.hostile.LavaElementalE
 import net.sn0wix_.worldofdragonsmod.common.entity.custom.hostile.SnapperEntity;
 import net.sn0wix_.worldofdragonsmod.common.entity.custom.misc.playerNPC.PlayerNPCEntity;
 import net.sn0wix_.worldofdragonsmod.common.entity.custom.hostile.orcs.*;
+import net.sn0wix_.worldofdragonsmod.common.entity.custom.misc.projectile.RockProjectile;
 import net.sn0wix_.worldofdragonsmod.common.item.ModItems;
 
-public class ModRegisteries {
+public class ModRegistries {
     public static void registerModStuffs() {
         registerAttributes();
         registerCommands();
 
-        //TODO fix
-        DispenserBlock.registerBehavior(ModItems.THE_ROCK, new ProjectileDispenserBehavior(){
+        DispenserBlock.registerBehavior(ModItems.THE_ROCK, new ProjectileDispenserBehavior() {
             @Override
             protected ProjectileEntity createProjectile(World world, Position position, ItemStack stack) {
-                return Util.make(new SnowballEntity(world, position.getX(), position.getY(), position.getZ()), entity -> entity.setItem(stack));
+                return Util.make(new RockProjectile(world, position.getX(), position.getY(), position.getZ(), false), entity -> entity.setItem(stack));
             }
         });
 
-        DispenserBlock.registerBehavior(ModItems.LAVA_ROCK, new ProjectileDispenserBehavior(){
+        DispenserBlock.registerBehavior(ModItems.LAVA_ROCK, new ProjectileDispenserBehavior() {
             @Override
             protected ProjectileEntity createProjectile(World world, Position position, ItemStack stack) {
-                return Util.make(new SnowballEntity(world, position.getX(), position.getY(), position.getZ()), entity -> entity.setItem(stack));
+                return Util.make(new RockProjectile(world, position.getX(), position.getY(), position.getZ(), true), entity -> entity.setItem(stack));
             }
         });
     }
@@ -71,7 +71,7 @@ public class ModRegisteries {
                 .add(EntityAttributes.GENERIC_ATTACK_KNOCKBACK, 0.1);
     }
 
-    private static void registerCommands(){
+    private static void registerCommands() {
         CommandRegistrationCallback.EVENT.register(GPTCommand::register);
         CommandRegistrationCallback.EVENT.register(TriggerAnimCommand::register);
     }

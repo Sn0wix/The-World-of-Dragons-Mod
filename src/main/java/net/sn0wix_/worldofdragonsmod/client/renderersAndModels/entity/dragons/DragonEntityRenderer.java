@@ -18,7 +18,7 @@ public class DragonEntityRenderer<T extends TameableDragonEntity> extends GeoEnt
 
     @Override
     public float getMotionAnimThreshold(T animatable) {
-        return 0.010f;
+        return 0.012f;
     }
 
     @Override

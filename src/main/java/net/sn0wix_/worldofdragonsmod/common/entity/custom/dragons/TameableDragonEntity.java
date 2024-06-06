@@ -1,13 +1,19 @@
 package net.sn0wix_.worldofdragonsmod.common.entity.custom.dragons;
 
-import net.minecraft.entity.EntityType;
+import net.minecraft.entity.*;
 import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
+import net.minecraft.entity.passive.AbstractHorseEntity;
 import net.minecraft.entity.passive.PassiveEntity;
 import net.minecraft.entity.passive.TameableEntity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.server.world.ServerWorld;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.Arm;
+import net.minecraft.util.Hand;
+import net.minecraft.util.math.*;
 import net.minecraft.world.EntityView;
 import net.minecraft.world.World;
 import net.sn0wix_.worldofdragonsmod.common.entity.ai.MMEntityMoveHelper;
@@ -65,6 +71,63 @@ public abstract class TameableDragonEntity extends TameableEntity implements Geo
         dataTracker.startTracking(IS_SLEEPING, false);
     }
 
+
+    //Movement
+    @Override
+    public ActionResult interactMob(PlayerEntity player, Hand hand) {
+        if (!this.hasPassengers() && dataTracker.get(HAS_SADDLE)) {
+            player.startRiding(this);
+        }
+
+        return super.interactMob(player, hand);
+    }
+
+
+    //Dismounting
+    @Nullable
+    private Vec3d locateSafeDismountingPos(Vec3d offset, LivingEntity passenger) {
+        double d = this.getX() + offset.x;
+        double e = this.getBoundingBox().minY;
+        double f = this.getZ() + offset.z;
+        BlockPos.Mutable mutable = new BlockPos.Mutable();
+        block0: for (EntityPose entityPose : passenger.getPoses()) {
+            mutable.set(d, e, f);
+            double g = this.getBoundingBox().maxY + 0.75;
+            do {
+                double h = this.getWorld().getDismountHeight(mutable);
+                if ((double)mutable.getY() + h > g) continue block0;
+                if (Dismounting.canDismountInBlock(h)) {
+                    Box box = passenger.getBoundingBox(entityPose);
+                    Vec3d vec3d = new Vec3d(d, (double)mutable.getY() + h, f);
+                    if (Dismounting.canPlaceEntityAt(this.getWorld(), passenger, box.offset(vec3d))) {
+                        passenger.setPose(entityPose);
+                        return vec3d;
+                    }
+                }
+                mutable.move(Direction.UP);
+            } while ((double)mutable.getY() < g);
+        }
+        return null;
+    }
+
+    @Override
+    public Vec3d updatePassengerForDismount(LivingEntity passenger) {
+        Vec3d vec3d = AbstractHorseEntity.getPassengerDismountOffset(this.getWidth(), passenger.getWidth(), this.getYaw() + (passenger.getMainArm() == Arm.RIGHT ? 90.0f : -90.0f));
+        Vec3d vec3d2 = this.locateSafeDismountingPos(vec3d, passenger);
+        if (vec3d2 != null) {
+            return vec3d2;
+        }
+        Vec3d vec3d3 = AbstractHorseEntity.getPassengerDismountOffset(this.getWidth(), passenger.getWidth(), this.getYaw() + (passenger.getMainArm() == Arm.LEFT ? 90.0f : -90.0f));
+        Vec3d vec3d4 = this.locateSafeDismountingPos(vec3d3, passenger);
+        if (vec3d4 != null) {
+            return vec3d4;
+        }
+        return this.getPos();
+    }
+
+
+
+    //Other and helper methods
     @Nullable
     @Override
     public abstract ItemStack getPickBlockStack();
@@ -83,5 +146,10 @@ public abstract class TameableDragonEntity extends TameableEntity implements Geo
     @Override
     public AnimatableInstanceCache getAnimatableInstanceCache() {
         return cache;
+    }
+
+    @Override
+    public boolean isPushable() {
+        return !this.hasPassengers();
     }
 }

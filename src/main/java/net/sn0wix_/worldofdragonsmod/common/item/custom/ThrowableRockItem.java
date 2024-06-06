@@ -23,10 +23,9 @@ public class ThrowableRockItem extends SnowballItem {
     public boolean postHit(ItemStack stack, LivingEntity target, LivingEntity attacker) {
         if (isLava) {
             target.setOnFireFor(2);
-            //TODO
-            /*if (attacker.isPlayer() && (PlayerEntity) attacker) {
-                itemStack.decrement(1);
-            }*/
+            if (!(attacker instanceof PlayerEntity player && player.isCreative())) {
+                stack.decrement(1);
+            }
         }
         return isLava;
     }
@@ -35,7 +34,7 @@ public class ThrowableRockItem extends SnowballItem {
     public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
         ItemStack itemStack = user.getStackInHand(hand);
         world.playSound(null, user.getX(), user.getY(), user.getZ(), SoundEvents.ENTITY_SNOWBALL_THROW, SoundCategory.NEUTRAL, 0.5f, 0.4f / (world.getRandom().nextFloat() * 0.4f + 0.8f));
-        user.getItemCooldownManager().set(this, 5);
+        user.getItemCooldownManager().set(this, 10);
         if (!world.isClient) {
             RockProjectile rock = new RockProjectile(world, user, isLava);
             rock.setItem(itemStack);

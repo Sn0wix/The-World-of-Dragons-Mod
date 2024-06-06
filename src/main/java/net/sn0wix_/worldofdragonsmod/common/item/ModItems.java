@@ -11,7 +11,6 @@ import net.minecraft.util.Identifier;
 import net.sn0wix_.worldofdragonsmod.common.WorldOfDragons;
 import net.sn0wix_.worldofdragonsmod.common.blocks.ModBlocks;
 import net.sn0wix_.worldofdragonsmod.common.entity.ModEntities;
-import net.sn0wix_.worldofdragonsmod.common.entity.custom.dragons.TameableDragonEntity;
 import net.sn0wix_.worldofdragonsmod.common.item.custom.*;
 import net.sn0wix_.worldofdragonsmod.common.sounds.ModSounds;
 
@@ -75,7 +74,7 @@ public class ModItems {
     public static final Item FISH_SNACK = registerItem("fish_snack", new Item(new FabricItemSettings()));
     public static final Item BOTTLE_OF_MIST = registerItem("bottle_of_mist", new Item(new FabricItemSettings().maxCount(16)));
     public static final Item PROCESSED_MEAT = registerItem("processed_meat", new Item(new FabricItemSettings()));
-    public static final Item LEACH = registerItem("leach", new Item(new FabricItemSettings()));
+    public static final Item LEECH = registerItem("leech", new Item(new FabricItemSettings()));
 
 
     public static final Item SCRAP = registerItem("scrap", new Item(new FabricItemSettings()));

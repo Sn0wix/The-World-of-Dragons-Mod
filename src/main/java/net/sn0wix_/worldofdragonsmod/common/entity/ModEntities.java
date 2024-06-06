@@ -28,7 +28,7 @@ import net.sn0wix_.worldofdragonsmod.common.item.ModItems;
 public class ModEntities {
     //Dragons
     public static final EntityType<ShellSmasherEntity> SHELL_SMASHER = Registry.register(Registries.ENTITY_TYPE, new Identifier(WorldOfDragons.MOD_ID, "shell_smasher"),
-            FabricEntityTypeBuilder.create(SpawnGroup.CREATURE, ShellSmasherEntity::new).dimensions(EntityDimensions.fixed(2.5f, 1.7f)).build());
+            FabricEntityTypeBuilder.create(SpawnGroup.CREATURE, ShellSmasherEntity::new).dimensions(EntityDimensions.fixed(2.5f, 1.8f)).build());
 
 
     //Orcs

@@ -11,7 +11,7 @@ import net.sn0wix_.worldofdragonsmod.common.item.ModItems;
 import net.sn0wix_.worldofdragonsmod.common.networking.ModPackets;
 import net.sn0wix_.worldofdragonsmod.common.particle.ModParticles;
 import net.sn0wix_.worldofdragonsmod.common.sounds.ModSounds;
-import net.sn0wix_.worldofdragonsmod.common.util.ModRegisteries;
+import net.sn0wix_.worldofdragonsmod.common.util.ModRegistries;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import software.bernie.geckolib.GeckoLib;
@@ -27,7 +27,7 @@ public class WorldOfDragons implements ModInitializer {
         ModBlockEntities.registerAllBlockEntities();
         ModEffects.registerEffects();
         ModSounds.registerModSounds();
-        ModRegisteries.registerModStuffs();
+        ModRegistries.registerModStuffs();
         ModEntities.registerModEntities();
         ModParticles.registerParticles();
         ModPackets.registerC2SPackets();

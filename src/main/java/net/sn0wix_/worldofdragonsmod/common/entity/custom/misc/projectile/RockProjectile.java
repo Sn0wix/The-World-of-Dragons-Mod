@@ -23,6 +23,11 @@ public class RockProjectile extends SnowballEntity {
         this.isLava = isLava;
     }
 
+    public RockProjectile(World world, double x, double y, double z, boolean isLava) {
+        super(world, x, y, z);
+        this.isLava = isLava;
+    }
+
     @Override
     public void tick() {
         super.tick();
