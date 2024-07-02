@@ -3,12 +3,14 @@ package net.sn0wix_.worldofdragonsmod.client.renderersAndModels.entity.dragons;
 import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.render.entity.EntityRendererFactory;
 import net.minecraft.client.util.math.MatrixStack;
+import net.minecraft.entity.passive.TameableEntity;
 import net.sn0wix_.worldofdragonsmod.client.renderersAndModels.entity.GenericGeoModel;
-import net.sn0wix_.worldofdragonsmod.common.entity.custom.dragons.TameableDragonEntity;
+import net.sn0wix_.worldofdragonsmod.common.entity.custom.dragons.ShellSmasherEntity;
+import software.bernie.geckolib.animatable.GeoEntity;
 import software.bernie.geckolib.cache.object.GeoBone;
 import software.bernie.geckolib.renderer.GeoEntityRenderer;
 
-public class DragonEntityRenderer<T extends TameableDragonEntity> extends GeoEntityRenderer<T> {
+public class DragonEntityRenderer<T extends TameableEntity & GeoEntity> extends GeoEntityRenderer<T> {
     public static final String ARMOR_BONE_PREFIX = "armor";
     public static final String SADDLE_BONE_PREFIX = "saddle";
 
@@ -23,11 +25,11 @@ public class DragonEntityRenderer<T extends TameableDragonEntity> extends GeoEnt
 
     @Override
     public void renderCubesOfBone(MatrixStack poseStack, GeoBone bone, VertexConsumer buffer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
-        if (bone.getName().contains(ARMOR_BONE_PREFIX) && !animatable.getDataTracker().get(TameableDragonEntity.HAS_ARMOR)) {
+        if (bone.getName().contains(ARMOR_BONE_PREFIX) && !animatable.getDataTracker().get(ShellSmasherEntity.HAS_ARMOR)) {
             return;
         }
 
-        if (bone.getName().contains(SADDLE_BONE_PREFIX) && !animatable.getDataTracker().get(TameableDragonEntity.HAS_SADDLE)) {
+        if (bone.getName().contains(SADDLE_BONE_PREFIX) && !animatable.getDataTracker().get(ShellSmasherEntity.HAS_SADDLE)) {
             return;
         }
 

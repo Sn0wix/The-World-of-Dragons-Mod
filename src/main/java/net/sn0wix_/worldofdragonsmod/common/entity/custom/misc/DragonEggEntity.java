@@ -5,24 +5,27 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.entity.ItemEntity;
 import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.damage.DamageSource;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.world.World;
-import net.sn0wix_.worldofdragonsmod.common.entity.custom.dragons.TameableDragonEntity;
+import net.sn0wix_.worldofdragonsmod.common.entity.custom.dragons.ControllableDragonEntity;
 import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib.animatable.GeoEntity;
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
 import software.bernie.geckolib.core.animatable.instance.SingletonAnimatableInstanceCache;
 import software.bernie.geckolib.core.animation.AnimatableManager;
 
+import java.util.Objects;
+
 public class DragonEggEntity extends Entity implements GeoEntity {
     private final AnimatableInstanceCache cache = new SingletonAnimatableInstanceCache(this);
     public final Item item;
-    public final EntityType<? extends TameableDragonEntity> DRAGON_ENTITY_TYPE;
+    public final EntityType<? extends ControllableDragonEntity> DRAGON_ENTITY_TYPE;
 
-    public DragonEggEntity(EntityType<? extends Entity> type, World world, Item item, EntityType<? extends TameableDragonEntity> dragon) {
+    public DragonEggEntity(EntityType<? extends Entity> type, World world, Item item, EntityType<? extends ControllableDragonEntity> dragon) {
         super(type, world);
         this.item = item;
         this.DRAGON_ENTITY_TYPE = dragon;
@@ -39,8 +42,8 @@ public class DragonEggEntity extends Entity implements GeoEntity {
             //TODO add proper hatching system
             if (DRAGON_ENTITY_TYPE == null) {
                 getWorld().spawnEntity(new ItemEntity(getWorld(), getX(), getY(), getZ(), new ItemStack(item)));
-            } else {
-                DRAGON_ENTITY_TYPE.spawn((ServerWorld) getWorld(), getBlockPos(), SpawnReason.SPAWN_EGG);
+            } else if (source.getAttacker() instanceof PlayerEntity player){
+                Objects.requireNonNull(DRAGON_ENTITY_TYPE.spawn((ServerWorld) getWorld(), getBlockPos(), SpawnReason.SPAWN_EGG)).setOwner(player);
             }
         }
 
