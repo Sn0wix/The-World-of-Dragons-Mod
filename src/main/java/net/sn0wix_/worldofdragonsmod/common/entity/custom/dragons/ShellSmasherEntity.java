@@ -17,10 +17,7 @@ import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Arm;
 import net.minecraft.util.Hand;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Box;
-import net.minecraft.util.math.Direction;
-import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.math.*;
 import net.minecraft.world.EntityView;
 import net.minecraft.world.World;
 import net.sn0wix_.worldofdragonsmod.common.entity.ai.MMEntityMoveHelper;
@@ -232,6 +229,18 @@ public class ShellSmasherEntity extends ControllableDragonEntity implements GeoE
             dataTracker.set(IS_SLEEPING, true);
         }
         return true;
+    }
+
+    @Override
+    protected void removePassenger(Entity passenger) {
+        super.removePassenger(passenger);
+        initGoals();
+    }
+
+    @Override
+    protected void addPassenger(Entity passenger) {
+        super.addPassenger(passenger);
+        goalSelector.getGoals().clear();
     }
 
     @Override

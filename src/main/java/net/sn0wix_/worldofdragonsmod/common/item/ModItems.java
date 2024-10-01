@@ -15,6 +15,9 @@ import net.sn0wix_.worldofdragonsmod.common.item.custom.*;
 import net.sn0wix_.worldofdragonsmod.common.sounds.ModSounds;
 
 public class ModItems {
+    //Items to delete
+    public static final Item JONAS_COIN = registerItem("jonas_coin", new Item(new FabricItemSettings()));
+
     //Spawn Eggs
     public static final Item ARMORED_ORC_SPAWN_EGG = registerSpawnEgg(ModEntities.ARMORED_ORC, "058602", "777777");
     public static final Item GOBLIN_SPAWN_EGG = registerSpawnEgg(ModEntities.GOBLIN, "058602", "744d01");

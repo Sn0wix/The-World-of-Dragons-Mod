@@ -26,5 +26,6 @@ public class ModModelGenerator extends FabricModelProvider {
         itemModelGenerator.register(ModItems.HEATH_UPGRADE, Models.GENERATED);
         itemModelGenerator.register(ModItems.FISH_TREAT, Models.GENERATED);
         itemModelGenerator.register(ModItems.RESISTANCE_UPGRADE, Models.GENERATED);
+        itemModelGenerator.register(ModItems.JONAS_COIN, Models.GENERATED);
     }
 }
